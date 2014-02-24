@@ -26,7 +26,7 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -46,12 +46,21 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="container">
-        <div id="game"></div>
+        <div id="game">
+            <!-- TODO menu generique lu a partir d'un fichier JSON -->
+            <div id="menu" data-sound="mon_fichier">
+
+			    <button type="button" class="btn btn-primary btn-lg btn-block" id="jouer_musique" data-sound="mon_fichier">Jouer une musique aleatoire</button>
+			    <button type="button" class="btn btn-default btn-lg btn-block" id="charger_musique" data-sound="mon_fichier">Charger une musique</button>
+			    <button type="button" class="btn btn-default btn-lg btn-block" id="about" data-sound="mon_fichier">A propos</button>
+            </div>
+        </div>
     </div> <!-- /container -->
         <script src="library/jquery-2.1.0.min.js"></script>
         <script src="library/bootstrap-3.1.1/js/bootstrap.min.js"></script>
         <script src="library/jQuery.jPlayer.2.5.0/jquery.jplayer.min.js"></script>
         <script src="js/key_event.js"></script>
+        <script src="js/level_generation.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

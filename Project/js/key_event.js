@@ -9,6 +9,10 @@ function KeyEvent(){
                     event.preventDefault();
                     help();
                     break;
+                case 113:
+					event.preventDefault();
+					re_read();
+					break;
                 //key up
                 case 38:
                     event.preventDefault();
@@ -40,11 +44,17 @@ function KeyEvent(){
                     cancel();
                     break;
             }
+            console.log(event.keyCode);
+            
         });
 
     }
 
 
+	function re_read(){
+		console.log("re read");
+	}
+	
     function cancel(){
         console.log("cancel");
     }
