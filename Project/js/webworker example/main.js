@@ -1,6 +1,6 @@
 //Création d'une zone d'affichage
 var elem=document.createElement("output");
-elem.value = "Chargement du jeu ...;
+elem.value = "Chargement du jeu ...";
 document.body.appendChild(elem);
 
 //Création d'un worker
