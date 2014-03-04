@@ -1,9 +1,15 @@
 'use strict';
 
+//Creation du jeu
+var game = new Game("file://super_music.ogg");
 
-var keyEvent = new KeyEvent();
-keyEvent.initialize();
+//Creation de l'ecoute des touches
+var keyEvent = new KeyPressed();
+keyEvent.constructeur();
 
-var tmp = generation_level(1000);
-console.log(tmp);
-
+//lancement du jeu
+window.requestAnimationFrame(function (/* time */ time) {
+    // time ~= +new Date // the unix time
+    game.run_game();
+});
+//Autre version: setInterval( game, ONE_FRAME_TIME );, voir http://www.playmycode.com/blog/2011/08/building-a-game-mainloop-in-javascript/

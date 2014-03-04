@@ -1,18 +1,59 @@
-'use strict';
-function KeyEvent(){
+var KeyPressed = function () {
+    "use strict";
 
-    this.initialize = function (){
-        $( "body" ).keypress(function( event ) {
-            switch(event.keyCode){
+    if (KeyPressed.prototype.instance) {
+        return KeyPressed.prototype.instance;
+    }
+    KeyPressed.prototype.instance = this;
+
+    function re_read() {
+        console.log("re read");
+    }
+
+    function cancel() {
+        console.log("cancel");
+    }
+
+    function help() {
+        console.log("help");
+    }
+
+    function key_up() {
+        console.log("keyup: 1");
+        Game().set_user_input(1);
+    }
+
+    function key_right() {
+        console.log("keyright: 2");
+        Game().set_user_input(2);
+    }
+
+    function key_down() {
+        console.log("keydown: 3");
+        Game().set_user_input(3);
+    }
+
+    function key_left() {
+        console.log("keyleft: 4");
+        Game().set_user_input(4);
+    }
+
+    function validate() {
+        console.log("validate");
+    }
+
+    this.constructeur = function () {
+        $("body").keypress(function (event) {
+            switch (event.keyCode) {
                 //F1
                 case 112:
                     event.preventDefault();
                     help();
                     break;
                 case 113:
-					event.preventDefault();
-					re_read();
-					break;
+                    event.preventDefault();
+                    re_read();
+                    break;
                 //key up
                 case 38:
                     event.preventDefault();
@@ -44,43 +85,10 @@ function KeyEvent(){
                     cancel();
                     break;
             }
-            console.log(event.keyCode);
-            
+            // console.log(event.keyCode);
+
         });
 
-    }
+    };
 
-
-	function re_read(){
-		console.log("re read");
-	}
-	
-    function cancel(){
-        console.log("cancel");
-    }
-
-    function help(){
-        console.log("help");
-    }
-
-    function key_up(){
-        console.log("keyup");
-    }
-
-    function key_right(){
-        console.log("keyright");
-    }
-
-    function key_down(){
-        console.log("keydown");
-    }
-
-    function key_left(){
-        console.log("keyleft");
-    }
-
-    function validate(){
-        console.log("validate");
-    }
-
-}
+};
