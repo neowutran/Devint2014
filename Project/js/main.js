@@ -1,6 +1,12 @@
 var Main = function () {
     'use strict';
 
+    //Ceci est un singleton
+    if (Main.prototype.instance) {
+        return Main.prototype.instance;
+    }
+    Main.prototype.instance = this;
+
     this.launchGame = function () {
         $("#music").bind('durationchange', function (event) {
 
@@ -16,10 +22,8 @@ var Main = function () {
             //Jouer music
             event.target.play();
 
-//lancement du jeu
-            window.requestAnimationFrame(function (/* time */ time) {
-                // time ~= +new Date // the unix time
-                game.run_game();
+            window.requestAnimationFrame(function (time){
+              Main().animationLoop(0);
             });
         });
 
@@ -27,6 +31,16 @@ var Main = function () {
 
 
     };
+
+    this.animationLoop = function(time){
+
+            //lancement du jeu
+
+           // time += new Date(); // the unix time
+            Game().run_game();
+            this.animationLoop(time);
+    };
+
 
 };
 

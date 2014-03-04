@@ -68,11 +68,10 @@ var Game = function (duration = null) {
 
     //@romain, ceci est une methode en publique
     this.run_game = function () {
-
+        console.log("plop ");
         calculate_frame();
         show_frame();
         frame++;
-
     };
 
     this.set_user_input = function (new_user_input) {
