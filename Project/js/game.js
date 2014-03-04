@@ -2,7 +2,7 @@
 //var ONE_FRAME_TIME = 1000 / 40 ;
 
 //@romain ceci est une classe avec pour constructeur un parametre "level"
-var Game = function (music = null) {
+var Game = function (duration = null) {
     "use strict";
 
     //Ceci est un singleton
@@ -18,7 +18,7 @@ var Game = function (music = null) {
     var user_input = -1,
         frame = 0,
         frame_delay_between_input = 10,
-        level = musicToLevel(music),
+        level = generation_level(duration),
     //
         current_delay = 0,
 
@@ -78,6 +78,7 @@ var Game = function (music = null) {
     this.set_user_input = function (new_user_input) {
         user_input = new_user_input;
         console.log("game: " + user_input);
+        console.log("level: " + level);
     };
 
 

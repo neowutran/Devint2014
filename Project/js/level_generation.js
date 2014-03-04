@@ -5,8 +5,10 @@ function computeDelay(min, max) {
 }
 
 function generation_level(time) {
-    /*INITIALISATION */
     'use strict';
+
+    console.log("time :"+ time);
+    /*INITIALISATION */
     var stringtmp,
         distance = 60,
         pattern = [],
