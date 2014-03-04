@@ -1,3 +1,6 @@
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
+
 var KeyPressed = function () {
     "use strict";
 
@@ -42,53 +45,51 @@ var KeyPressed = function () {
         console.log("validate");
     }
 
-    this.constructeur = function () {
-        $("body").keypress(function (event) {
-            switch (event.keyCode) {
-                //F1
-                case 112:
-                    event.preventDefault();
-                    help();
-                    break;
-                case 113:
-                    event.preventDefault();
-                    re_read();
-                    break;
-                //key up
-                case 38:
-                    event.preventDefault();
-                    key_up();
-                    break;
-                //key right
-                case 39:
-                    event.preventDefault();
-                    key_right();
-                    break;
-                //key down
-                case 40:
-                    event.preventDefault();
-                    key_down();
-                    break;
-                //key left
-                case 37:
-                    event.preventDefault();
-                    key_left();
-                    break;
-                //enter
-                case 13:
-                    event.preventDefault();
-                    validate();
-                    break;
-                //escape
-                case 27:
-                    event.preventDefault();
-                    cancel();
-                    break;
-            }
-            // console.log(event.keyCode);
+    $("body").keypress(function (event) {
+        switch (event.keyCode) {
+            //F1
+            case 112:
+                event.preventDefault();
+                help();
+                break;
+            case 113:
+                event.preventDefault();
+                re_read();
+                break;
+            //key up
+            case 38:
+                event.preventDefault();
+                key_up();
+                break;
+            //key right
+            case 39:
+                event.preventDefault();
+                key_right();
+                break;
+            //key down
+            case 40:
+                event.preventDefault();
+                key_down();
+                break;
+            //key left
+            case 37:
+                event.preventDefault();
+                key_left();
+                break;
+            //enter
+            case 13:
+                event.preventDefault();
+                validate();
+                break;
+            //escape
+            case 27:
+                event.preventDefault();
+                cancel();
+                break;
+        }
+        // console.log(event.keyCode);
 
-        });
+    });
 
-    };
 
 };

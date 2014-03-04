@@ -11,7 +11,7 @@ var Main = function () {
 
 //Creation de l'ecoute des touches
             var keyEvent = new KeyPressed();
-            keyEvent.constructeur();
+          //  keyEvent.constructeur();
 
             //Jouer music
             event.target.play();

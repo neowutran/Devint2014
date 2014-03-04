@@ -25,6 +25,11 @@
          "distance":0,
          "direction":1,
          "id":1
+      },
+      {
+		"distance": 3,
+		"direction": 2,
+		"id":2
       }
    ]
 }
