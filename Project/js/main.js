@@ -36,11 +36,39 @@ var Main = function () {
 
                     music = event.target;
                     //Jouer music
-                    music.play();
+                    $("#music").bind('ended', function(){
+                        Main().endGame();
+                    });
 
+                    music.play();
                     gameIntervalId = setInterval( function(){
                         game.run_game();
                     }, configuration.ms_before_next_frame );
+
+                    $(window).on("blur focus", function(e) {
+                        var prevType = $(this).data("prevType");
+
+                        if (prevType !== e.type) {   //  reduce double fire issues
+                            switch (e.type) {
+                                case "blur":
+                                    clearInterval(gameIntervalId);
+                                    music.pause();
+                                    break;
+                                case "focus":
+                                    music.play();
+                                    gameIntervalId = setInterval( function(){
+                                        game.run_game();
+                                    }, configuration.ms_before_next_frame );
+                                    break;
+                            }
+                        }
+
+                        $(this).data("prevType", e.type);
+                    });
+
+
+
+
                 }
             });
 

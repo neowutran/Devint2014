@@ -83,7 +83,7 @@ var Game = function (duration) {
             current_delay--;
         }
 
-        if(!(frame in level)){
+        if(!(level.hasOwnProperty(frame.toString()))){
             Main().endGame();
         }
 
