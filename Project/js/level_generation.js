@@ -47,7 +47,7 @@ function generation_level(time) {
                 stringtmp = '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
             }
             else {
-                stringtmp = '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern) + ",";
+                stringtmp = ',"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
             }
             JSONlevel = JSONlevel + stringtmp;
             pattern = [];

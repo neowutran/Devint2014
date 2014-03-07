@@ -15,7 +15,7 @@ var Game = function (duration = null) {
     var user_input = -1,
         frame = 0,
         frame_delay_between_input = 10,
-        level = JSON.parse(generation_level(duration)),
+        level = generation_level(duration),
         current_delay = 0,
         obstacles = [],
         sound1 = new Audio("sounds/1.wav"),
@@ -54,6 +54,7 @@ var Game = function (duration = null) {
 
     //@romain ceci est une methode en private
     function calculate_frame() {
+        console.log(level);
         if (current_delay === 0) {
             var obstacles = [];
             switch (user_input) {
