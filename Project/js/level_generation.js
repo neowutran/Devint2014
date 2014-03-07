@@ -18,12 +18,12 @@ function generation_level(time) {
         cmp = 0,
         j,
         rand = Math.floor((Math.random() * 4) + 1),
-        item,
-        configuration; // Random between 1 and 4 .
-		$.getJSON("/js/config.json", function(data ){
+        item;
+        //configuration;    //TODO pour le fichier de config.
+		/*$.getJSON("config.json", function(data ){
 			configuration = data;
             console.log("test");
-		});
+		});*/
 
     while (i <= time) {
 
