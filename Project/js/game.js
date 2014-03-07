@@ -15,7 +15,7 @@ var Game = function (duration = null) {
     var user_input = -1,
         frame = 0,
         frame_delay_between_input = 10,
-        level = generation_level(duration),
+        level = JSON.parse(generation_level(duration)),
         current_delay = 0,
         obstacles = [],
         sound1 = new Audio("sounds/1.wav"),
@@ -38,7 +38,11 @@ var Game = function (duration = null) {
 
     function removeListObstacles(listObstacles) {
         listObstacles.forEach(function (element, index, array) {
-            obstacles.remove(element);
+
+            index = obstacles.indexOf(element);
+            if( index !== -1){
+                obstacles.splice(index, 1);
+            }
         });
     }
 
@@ -46,7 +50,7 @@ var Game = function (duration = null) {
 
         var listObstacles = getObstacles(direction);
         if (listObstacles.length === 0) {
-            current_delay = frame_delay_between_input;
+         //   current_delay = frame_delay_between_input;
         }
         removeListObstacles(listObstacles);
 
@@ -54,7 +58,6 @@ var Game = function (duration = null) {
 
     //@romain ceci est une methode en private
     function calculate_frame() {
-        console.log(level);
         if (current_delay === 0) {
             var obstacles = [];
             switch (user_input) {
@@ -112,7 +115,10 @@ var Game = function (duration = null) {
             }
             if (element.distance === 0) {
                 pv--;
-                obstacles.remove(element);
+                index = obstacles.indexOf(element);
+                if( index !== -1){
+                    obstacles.splice(index, 1);
+                }
                 if (pv === 0) {
                     console.log("PERDU");
                 }

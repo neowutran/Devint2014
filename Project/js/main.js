@@ -22,9 +22,9 @@ var Main = function () {
             //Jouer music
             event.target.play();
 
-          //  setInterval( function(){
+            setInterval( function(){
                 game.run_game();
-           // }, 1000/40 );
+            }, 1000/40 );
             /*
             window.requestAnimationFrame(function (time){
               Main().animationLoop(0);
