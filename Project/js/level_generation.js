@@ -38,7 +38,7 @@ function generation_level(time) {
             pattern.push(item);
             distance--;
             if (distance < 0) {
-                distance = computeDelay(configuration.distanceMin, configuration.distanceMax);
+                distance = computeDelay(40, 160);
                 id++;
                 rand = Math.floor((Math.random() * 4) + 1); // Random between 1 and 4 .
             }
