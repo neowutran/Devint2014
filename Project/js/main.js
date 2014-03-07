@@ -7,6 +7,9 @@ var Main = function () {
     }
     Main.prototype.instance = this;
 
+    var gameIntervalId,
+        music;
+
     this.launchGame = function () {
         $("#music").bind('durationchange', function (event) {
 
@@ -17,12 +20,12 @@ var Main = function () {
 
 //Creation de l'ecoute des touches
             var keyEvent = new KeyPressed();
-          //  keyEvent.constructeur();
 
+            music = event.target;
             //Jouer music
-            event.target.play();
+            music.play();
 
-            setInterval( function(){
+            gameIntervalId = setInterval( function(){
                 game.run_game();
             }, 1000/40 );
             /*
@@ -35,6 +38,11 @@ var Main = function () {
 //Autre version: setInterval( game, ONE_FRAME_TIME );, voir http://www.playmycode.com/blog/2011/08/building-a-game-mainloop-in-javascript/
 
 
+    };
+
+    this.endGame = function(){
+        clearInterval(gameIntervalId);
+        music.pause();
     };
 
     /*

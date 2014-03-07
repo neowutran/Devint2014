@@ -18,10 +18,10 @@ var Game = function (duration = null) {
         level = JSON.parse(generation_level(duration)),
         current_delay = 0,
         obstacles = [],
-        sound1 = new Audio("sounds/1.wav"),
-        sound2 = new Audio("sounds/2.wav"),
-        sound3 = new Audio("sounds/3.wav"),
-        sound4 = new Audio("sounds/4.wav"),
+        sound1 = new Audio("js/sounds/1.wav"),
+        sound2 = new Audio("js/sounds/2.wav"),
+        sound3 = new Audio("js/sounds/3.wav"),
+        sound4 = new Audio("js/sounds/4.wav"),
 
     //nombre de chance de collision avant echec de la partie
         pv = 3;
@@ -88,25 +88,30 @@ var Game = function (duration = null) {
             current_delay--;
         }
 
-        console.log("test");
-        console.log(level);
-        console.log(level[frame]);
+        if(!(frame in level)){
+            Main().endGame();
+        }
 
         level[frame].forEach(function (element, index, array) {
             if (element.distance === 1) {
+                console.log("dispo: "+element.direction);
                 obstacles.push(element);
                 switch (element.direction) {
                     case 1:
                         sound1.play();
+                        sound1 = new Audio("js/sounds/1.wav");
                         break;
                     case 2:
                         sound2.play();
+                        sound1 = new Audio("js/sounds/2.wav");
                         break;
                     case 3:
                         sound3.play();
+                        sound1 = new Audio("js/sounds/3.wav");
                         break;
                     case 4:
                         sound4.play();
+                        sound1 = new Audio("js/sounds/4.wav");
                         break;
                     default :
                         //Impossible
@@ -114,6 +119,7 @@ var Game = function (duration = null) {
                 }
             }
             if (element.distance === 0) {
+                console.log("impact: "+element.direction);
                 pv--;
                 index = obstacles.indexOf(element);
                 if( index !== -1){
@@ -121,6 +127,7 @@ var Game = function (duration = null) {
                 }
                 if (pv === 0) {
                     console.log("PERDU");
+                    Main().endGame();
                 }
             }
         });
@@ -132,7 +139,6 @@ var Game = function (duration = null) {
 
     //@romain, ceci est une methode en publique
     this.run_game = function () {
-        console.log("frame: " + frame);
         calculate_frame();
         show_frame();
         frame++;
