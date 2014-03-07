@@ -20,8 +20,9 @@ function generation_level(time) {
         rand = Math.floor((Math.random() * 4) + 1),
         item,
         configuration; // Random between 1 and 4 .
-		$.getJSON("config.json", function(data ){
+		$.getJSON("/js/config.json", function(data ){
 			configuration = data;
+            console.log("test");
 		});
 
     while (i <= time) {

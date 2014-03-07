@@ -22,9 +22,14 @@ var Main = function () {
             //Jouer music
             event.target.play();
 
+            setInterval( function(){
+                game.run_game();
+            }, 1000/40 );
+            /*
             window.requestAnimationFrame(function (time){
               Main().animationLoop(0);
             });
+            */
         });
 
 //Autre version: setInterval( game, ONE_FRAME_TIME );, voir http://www.playmycode.com/blog/2011/08/building-a-game-mainloop-in-javascript/
@@ -32,6 +37,7 @@ var Main = function () {
 
     };
 
+    /*
     this.animationLoop = function(time){
 
             //lancement du jeu
@@ -40,6 +46,7 @@ var Main = function () {
             Game().run_game();
             this.animationLoop(time);
     };
+    */
 
 
 };
