@@ -16,6 +16,7 @@ var Main = function () {
     };
 
     this.launchGame = function () {
+
         $("#music").bind('durationchange', function (event) {
 
             $.ajax({
