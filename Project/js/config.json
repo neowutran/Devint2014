@@ -1,6 +1,12 @@
 {
-
-	"distanceMin" : 40,
-	"distanceMax" : 160
-
+    "distanceMin" : 40,
+	"distanceMax" : 160,
+    "frame_before_impact": 40,
+    "frame_delay_between_wrong_input":20,
+    "max_pv": 3,
+    "bip_1": "js/sounds/1.wav",
+    "bip_2": "js/sounds/2.wav",
+    "bip_3": "js/sounds/3.wav",
+    "bip_4": "js/sounds/4.wav",
+    "ms_before_next_frame": 25
 }

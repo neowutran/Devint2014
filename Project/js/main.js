@@ -8,26 +8,42 @@ var Main = function () {
     Main.prototype.instance = this;
 
     var gameIntervalId,
-        music;
+        music,
+        configuration;
+
+    this.getConfiguration = function(){
+        return configuration;
+    };
 
     this.launchGame = function () {
         $("#music").bind('durationchange', function (event) {
 
-            console.log(event.currentTarget.duration);
+            $.ajax({
+                dataType: "json",
+                mimeType: "application/json",
+                url: 'js/config.json',
+                success: function(data) {
 
-            //Creation du jeu
-            var game = new Game(event.currentTarget.duration);
+                    configuration = data;
+                    console.log(event.currentTarget.duration);
+
+                    //Creation du jeu
+                    var game = new Game(event.currentTarget.duration);
 
 //Creation de l'ecoute des touches
-            var keyEvent = new KeyPressed();
+                    var keyEvent = new KeyPressed();
 
-            music = event.target;
-            //Jouer music
-            music.play();
+                    music = event.target;
+                    //Jouer music
+                    music.play();
 
-            gameIntervalId = setInterval( function(){
-                game.run_game();
-            }, 1000/40 );
+                    gameIntervalId = setInterval( function(){
+                        game.run_game();
+                    }, configuration.ms_before_next_frame );
+                }
+            });
+
+
             /*
             window.requestAnimationFrame(function (time){
               Main().animationLoop(0);

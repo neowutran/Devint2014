@@ -2,7 +2,7 @@
 //var ONE_FRAME_TIME = 1000 / 40 ;
 
 //@romain ceci est une classe avec pour constructeur un parametre "level"
-var Game = function (duration = null) {
+var Game = function (duration) {
     "use strict";
 
     //Ceci est un singleton
@@ -14,21 +14,19 @@ var Game = function (duration = null) {
     //@romain Ce sont des attribut de classes en private
     var user_input = -1,
         frame = 0,
-        frame_delay_between_input = 10,
         level = JSON.parse(generation_level(duration)),
         current_delay = 0,
         obstacles = [],
-        sound1 = new Audio("js/sounds/1.wav"),
-        sound2 = new Audio("js/sounds/2.wav"),
-        sound3 = new Audio("js/sounds/3.wav"),
-        sound4 = new Audio("js/sounds/4.wav"),
-
+        sound1 = new Audio(Main().getConfiguration().bip_1),
+        sound2 = new Audio(Main().getConfiguration().bip_2),
+        sound3 = new Audio(Main().getConfiguration().bip_3),
+        sound4 = new Audio(Main().getConfiguration().bip_4),
     //nombre de chance de collision avant echec de la partie
-        pv = 3;
+        pv = Main().getConfiguration().max_pv;
 
     function getObstacles(direction) {
         var newObstacles = [];
-        obstacles.forEach(function (element, index, array) {
+        obstacles.forEach(function (element) {
             if (element.direction === direction) {
                 newObstacles.push(element);
             }
@@ -37,9 +35,8 @@ var Game = function (duration = null) {
     }
 
     function removeListObstacles(listObstacles) {
-        listObstacles.forEach(function (element, index, array) {
-
-            index = obstacles.indexOf(element);
+        listObstacles.forEach(function (element) {
+            var index = obstacles.indexOf(element);
             if( index !== -1){
                 obstacles.splice(index, 1);
             }
@@ -47,13 +44,11 @@ var Game = function (duration = null) {
     }
 
     function removeObstacles(direction) {
-
         var listObstacles = getObstacles(direction);
         if (listObstacles.length === 0) {
-         //   current_delay = frame_delay_between_input;
+            current_delay = Main().getConfiguration().frame_delay_between_wrong_input;
         }
         removeListObstacles(listObstacles);
-
     }
 
     //@romain ceci est une methode en private
@@ -92,26 +87,26 @@ var Game = function (duration = null) {
             Main().endGame();
         }
 
-        level[frame].forEach(function (element, index, array) {
-            if (element.distance === 1) {
+        level[frame].forEach(function (element) {
+            if (element.distance === Main().getConfiguration().frame_before_impact) {
                 console.log("dispo: "+element.direction);
                 obstacles.push(element);
                 switch (element.direction) {
                     case 1:
                         sound1.play();
-                        sound1 = new Audio("js/sounds/1.wav");
+                        sound1 = new Audio(Main().getConfiguration().bip_1);
                         break;
                     case 2:
                         sound2.play();
-                        sound1 = new Audio("js/sounds/2.wav");
+                        sound2 = new Audio(Main().getConfiguration().bip_2);
                         break;
                     case 3:
                         sound3.play();
-                        sound1 = new Audio("js/sounds/3.wav");
+                        sound3 = new Audio(Main().getConfiguration().bip_3);
                         break;
                     case 4:
                         sound4.play();
-                        sound1 = new Audio("js/sounds/4.wav");
+                        sound4 = new Audio(Main().getConfiguration().bip_4);
                         break;
                     default :
                         //Impossible
@@ -121,7 +116,7 @@ var Game = function (duration = null) {
             if (element.distance === 0) {
                 console.log("impact: "+element.direction);
                 pv--;
-                index = obstacles.indexOf(element);
+                var index = obstacles.indexOf(element);
                 if( index !== -1){
                     obstacles.splice(index, 1);
                 }
@@ -146,10 +141,7 @@ var Game = function (duration = null) {
 
     this.set_user_input = function (new_user_input) {
         user_input = new_user_input;
-        console.log("game: " + user_input);
-        console.log("level: " + level);
     };
-
 
 };
 
