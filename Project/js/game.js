@@ -24,6 +24,7 @@ var Game = function (duration) {
     //nombre de chance de collision avant echec de la partie
         pv = Main().getConfiguration().max_pv;
 
+    console.log(level);
     function getObstacles(direction) {
         var newObstacles = [];
         obstacles.forEach(function (element) {
@@ -89,7 +90,7 @@ var Game = function (duration) {
 
         level[frame].forEach(function (element) {
             if (element.distance === Main().getConfiguration().frame_before_impact) {
-                console.log("dispo: "+element.direction);
+                //console.log("dispo: "+element.direction);
                 obstacles.push(element);
                 switch (element.direction) {
                     case 1:
@@ -114,7 +115,7 @@ var Game = function (duration) {
                 }
             }
             if (element.distance === 0) {
-                console.log("impact: "+element.direction);
+                //console.log("impact: "+element.direction);
                 pv--;
                 var index = obstacles.indexOf(element);
                 if( index !== -1){
@@ -134,9 +135,11 @@ var Game = function (duration) {
 
     //@romain, ceci est une methode en publique
     this.run_game = function () {
+     //   console.log("debut frame: "+frame);
         calculate_frame();
         show_frame();
         frame++;
+       // console.log("fin frame: "+frame);
     };
 
     this.set_user_input = function (new_user_input) {
