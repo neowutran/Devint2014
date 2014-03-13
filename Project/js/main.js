@@ -13,25 +13,33 @@ var Main = function () {
             console.log(event.currentTarget.duration);
 
             //Creation du jeu
-            var game = new Game(event.currentTarget.duration);
-
-//Creation de l'ecoute des touches
-            var keyEvent = new KeyPressed();
-          //  keyEvent.constructeur();
+            var game = new Game(event.currentTarget.duration),
+            //Creation de l'ecoute des touches
+                keyEvent = new KeyPressed(),
+                timer;
 
             //Jouer music
             event.target.play();
 
+            /*
             window.requestAnimationFrame(function (time){
               Main().animationLoop(0);
             });
+            */
+
+            timer = setInterval( function(){
+                Game().run_game();
+            }, 1000/40 );
+
         });
 
-//Autre version: setInterval( game, ONE_FRAME_TIME );, voir http://www.playmycode.com/blog/2011/08/building-a-game-mainloop-in-javascript/
+
+//Autre version: , voir http://www.playmycode.com/blog/2011/08/building-a-game-mainloop-in-javascript/
 
 
     };
 
+    /*
     this.animationLoop = function(time){
 
             //lancement du jeu
@@ -40,6 +48,7 @@ var Main = function () {
             Game().run_game();
             this.animationLoop(time);
     };
+    */
 
 
 };
