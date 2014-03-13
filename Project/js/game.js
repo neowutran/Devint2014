@@ -2,7 +2,7 @@
 //var ONE_FRAME_TIME = 1000 / 40 ;
 
 //@romain ceci est une classe avec pour constructeur un parametre "level"
-var Game = function (duration = null) {
+var Game = function (duration) {
     "use strict";
 
     //Ceci est un singleton
@@ -11,42 +11,69 @@ var Game = function (duration = null) {
     }
     Game.prototype.instance = this;
 
-    //@romain, ceci est un attribut de classe en public
-    //this.bite = "bite";
-
     //@romain Ce sont des attribut de classes en private
     var user_input = -1,
         frame = 0,
-        frame_delay_between_input = 10,
-        level = generation_level(duration),
-    //
+        level = JSON.parse(generation_level(duration)),
         current_delay = 0,
-
+        obstacles = [],
+        sound1 = new Audio(Main().getConfiguration().bip_1),
+        sound2 = new Audio(Main().getConfiguration().bip_2),
+        sound3 = new Audio(Main().getConfiguration().bip_3),
+        sound4 = new Audio(Main().getConfiguration().bip_4),
     //nombre de chance de collision avant echec de la partie
-        pv = 3;
+        pv = Main().getConfiguration().max_pv;
 
+    console.log(level);
+    function getObstacles(direction) {
+        var newObstacles = [];
+        obstacles.forEach(function (element) {
+            if (element.direction === direction) {
+                newObstacles.push(element);
+            }
+        });
+        return newObstacles;
+    }
+
+    function removeListObstacles(listObstacles) {
+        listObstacles.forEach(function (element) {
+            var index = obstacles.indexOf(element);
+            if( index !== -1){
+                obstacles.splice(index, 1);
+            }
+        });
+    }
+
+    function removeObstacles(direction) {
+        var listObstacles = getObstacles(direction);
+        if (listObstacles.length === 0) {
+            current_delay = Main().getConfiguration().frame_delay_between_wrong_input;
+        }
+        removeListObstacles(listObstacles);
+    }
 
     //@romain ceci est une methode en private
     function calculate_frame() {
         if (current_delay === 0) {
+            var obstacles = [];
             switch (user_input) {
                 case 0:
                     //Pas d'input, ne rien faire
                     break;
                 case 1:
-                    //TODO action: direction 1
+                    removeObstacles(1);
                     user_input = -1;
                     break;
                 case 2:
-                    //TODO action: direction 2
+                    removeObstacles(2);
                     user_input = -1;
                     break;
                 case 3:
-                    //TODO action: direction 3
+                    removeObstacles(3);
                     user_input = -1;
                     break;
                 case 4:
-                    //TODO action: direction 4
+                    removeObstacles(4);
                     user_input = -1;
                     break;
                 default :
@@ -57,9 +84,49 @@ var Game = function (duration = null) {
             current_delay--;
         }
 
-        //TODO lire la description du lvl pour la frame courante
-        // ...
+        if(!(level.hasOwnProperty(frame.toString()))){
+            Main().endGame();
+        }
 
+        level[frame].forEach(function (element) {
+            if (element.distance === Main().getConfiguration().frame_before_impact) {
+                //console.log("dispo: "+element.direction);
+                obstacles.push(element);
+                switch (element.direction) {
+                    case 1:
+                        sound1.play();
+                        sound1 = new Audio(Main().getConfiguration().bip_1);
+                        break;
+                    case 2:
+                        sound2.play();
+                        sound2 = new Audio(Main().getConfiguration().bip_2);
+                        break;
+                    case 3:
+                        sound3.play();
+                        sound3 = new Audio(Main().getConfiguration().bip_3);
+                        break;
+                    case 4:
+                        sound4.play();
+                        sound4 = new Audio(Main().getConfiguration().bip_4);
+                        break;
+                    default :
+                        //Impossible
+                        break;
+                }
+            }
+            if (element.distance === 0) {
+                //console.log("impact: "+element.direction);
+                pv--;
+                var index = obstacles.indexOf(element);
+                if( index !== -1){
+                    obstacles.splice(index, 1);
+                }
+                if (pv === 0) {
+                    console.log("PERDU");
+                    Main().endGame();
+                }
+            }
+        });
     }
 
     function show_frame() {
@@ -68,18 +135,16 @@ var Game = function (duration = null) {
 
     //@romain, ceci est une methode en publique
     this.run_game = function () {
-        console.log("plop ");
+     //   console.log("debut frame: "+frame);
         calculate_frame();
         show_frame();
         frame++;
+       // console.log("fin frame: "+frame);
     };
 
     this.set_user_input = function (new_user_input) {
         user_input = new_user_input;
-        console.log("game: " + user_input);
-        console.log("level: " + level);
     };
-
 
 };
 
