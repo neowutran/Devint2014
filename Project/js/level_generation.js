@@ -18,7 +18,7 @@ function generation_level(time) {
         cmp = 0,
         j,
         rand = Math.floor((Math.random() * 4) + 1),
-        portee,
+        portee=1,
         item;
         //configuration;    //TODO pour le fichier de config.
 		/*$.getJSON("config.json", function(data ){
@@ -30,12 +30,8 @@ function generation_level(time) {
 
         for (j = 0; j < 40; j++) {						//40 frames per secondes.
 
-            if(distance<=0){
-                portee=0;
-            }
-            else{
-                portee=1;
-            }
+
+
 
 
             item = {
@@ -46,25 +42,40 @@ function generation_level(time) {
 
             pattern.push(item);
             distance--;
+
             if (distance < 0) {
+
                 distance = computeDelay(40, 160);
                 id++;
                 rand = Math.floor((Math.random() * 4) + 1); // Random between 1 and 4 .
             }
 
-            if(distance===0){
-            if (i >= time) {
-               stringtmp = '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
-            }
-            else {
-               stringtmp = "";
-               if(JSONlevel !== ""){
-                   stringtmp = ",";
-               }
-               stringtmp += '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
+            //TODO comprendre pourquoi on a toujours pas de 0 dans "distance" ...
+            if(distance < 0){
+                console.log("PD");
+
             }
 
-            JSONlevel = JSONlevel + stringtmp;
+
+            if(distance<=1){
+                if(distance<=0){
+                    portee=1;
+                }
+                else{
+                    portee=0;
+                }
+                if (i >= time) {
+                   stringtmp = '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
+                }
+                else {
+                   stringtmp = "";
+                   if(JSONlevel !== ""){
+                       stringtmp = ",";
+                   }
+                   stringtmp += '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
+                }
+
+                JSONlevel = JSONlevel + stringtmp;
             }
             pattern = [];
 

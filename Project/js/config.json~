@@ -1,7 +1,7 @@
 {
-    "distanceMin" : 70,
+    "distanceMin" : 40,
 	"distanceMax" : 160,
-    "frame_before_impact": 1,
+    "frame_before_impact": 40,
     "frame_delay_between_wrong_input":20,
     "max_pv": 1000,
     "bip_1": "js/sounds/re3.ogg",
