@@ -24,7 +24,8 @@ var Game = function (duration) {
     //nombre de chance de collision avant echec de la partie
         pv = Main().getConfiguration().max_pv;
 
-    console.log(level);
+    $("#log").html(JSON.stringify(level));
+
     function getObstacles(direction) {
         var newObstacles = [];
         obstacles.forEach(function (element) {
@@ -85,29 +86,29 @@ var Game = function (duration) {
         }
 
         if(!(level.hasOwnProperty(frame.toString()))){
-            Main().endGame();
+            return;
         }
 
         level[frame].forEach(function (element) {
             if (element.distance === Main().getConfiguration().frame_before_impact) {
-                //console.log("dispo: "+element.direction);
+                console.log("dispo: "+element.direction);
                 obstacles.push(element);
                 switch (element.direction) {
                     case 1:
-                        sound1.play();
                         sound1 = new Audio(Main().getConfiguration().bip_1);
+                        sound1.play();
                         break;
                     case 2:
-                        sound2.play();
                         sound2 = new Audio(Main().getConfiguration().bip_2);
+                        sound2.play();
                         break;
                     case 3:
-                        sound3.play();
                         sound3 = new Audio(Main().getConfiguration().bip_3);
+                        sound3.play();
                         break;
                     case 4:
-                        sound4.play();
                         sound4 = new Audio(Main().getConfiguration().bip_4);
+                        sound4.play();
                         break;
                     default :
                         //Impossible
@@ -115,7 +116,7 @@ var Game = function (duration) {
                 }
             }
             if (element.distance === 0) {
-                //console.log("impact: "+element.direction);
+                console.log("impact: "+element.direction);
                 pv--;
                 var index = obstacles.indexOf(element);
                 if( index !== -1){
@@ -135,7 +136,7 @@ var Game = function (duration) {
 
     //@romain, ceci est une methode en publique
     this.run_game = function () {
-     //   console.log("debut frame: "+frame);
+        //console.log("debut frame: "+frame);
         calculate_frame();
         show_frame();
         frame++;

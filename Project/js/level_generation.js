@@ -78,7 +78,7 @@ function generation_level(time) {
 
 
     JSONlevel = "{" + JSONlevel + "}";
-    console.log(JSONlevel);
+    //console.log(JSONlevel);
     return JSONlevel;
 
 }
