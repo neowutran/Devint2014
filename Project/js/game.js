@@ -63,27 +63,31 @@ var Game = function (duration) {
                     break;
                 case 1:
 					console.log("case 1");
+                    $("#north").css("color","black");
                     removeObstacles(1);
                     user_input = 0;	//Pourquoi ?
                     break;
                 case 2:
 					console.log("case 2");
+                    $("#east").css("color","black");
                     removeObstacles(2);
                     user_input = 0;
                     break;
                 case 3:
 					console.log("case 3");
+                    $("#south").css("color","black");
                     removeObstacles(3);
                     user_input = 0;
                     break;
                 case 4:
 					console.log("case 4");
+                    $("#ouest").css("color","black");
                     removeObstacles(4);
                     user_input = 0;
                     break;
                 default :
                     //Impossible
-					console.log("bug?" + user_input); 
+					console.log("bug?" + user_input);
                     break;
             }
         } else {
@@ -100,18 +104,22 @@ var Game = function (duration) {
                 obstacles.push(element);
                 switch (element.direction) {
                     case 1:
+                        $("#north").css("color","red");
                         sound1 = new Audio(Main().getConfiguration().bip_1);
                         sound1.play();
                         break;
                     case 2:
+                        $("#east").css("color","red");
                         sound2 = new Audio(Main().getConfiguration().bip_2);
                         sound2.play();
                         break;
                     case 3:
+                        $("#south").css("color","red");
                         sound3 = new Audio(Main().getConfiguration().bip_3);
                         sound3.play();
                         break;
                     case 4:
+                        $("#west").css("color","red");
                         sound4 = new Audio(Main().getConfiguration().bip_4);
                         sound4.play();
                         break;
@@ -124,11 +132,30 @@ var Game = function (duration) {
                 console.log("impact: "+element.direction);
                 pv--;
 				console.log("pv : "+pv);
+                $("#pv").html(pv);
+                switch(element.direction){
+                    case 1:
+                        $("#north").css("color","black");
+                        break;
+                    case 2:
+                        $("#east").css("color","black");
+                        break;
+                    case 3:
+                        $("#south").css("color","black");
+                        break;
+                    case 4:
+                        $("#west").css("color","black");
+                        break;
+                    default :
+                        console.log("impossible");
+                        break;
+                }
                 var index = obstacles.indexOf(element);
                 if( index !== -1){
                     obstacles.splice(index, 1);
                 }
                 if (pv === 0) {
+                    $("#player").css("color","red");
                     console.log("PERDU");
                     Main().endGame();
                 }

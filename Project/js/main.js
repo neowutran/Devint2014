@@ -41,6 +41,7 @@ var Main = function () {
                         Main().endGame();
                     });
 
+                    music.volume = 0.3;
                     music.play();
                     gameIntervalId = setInterval( function(){
                         game.run_game();
