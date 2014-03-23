@@ -12,7 +12,7 @@ var Game = function (duration) {
     Game.prototype.instance = this;
 
     //@romain Ce sont des attribut de classes en private
-    var user_input = -1,
+    var user_input = 0,
         frame = 0,
         level = JSON.parse(generation_level(duration)),
         current_delay = 0,
@@ -64,26 +64,26 @@ var Game = function (duration) {
                 case 1:
 					console.log("case 1");
                     removeObstacles(1);
-                    user_input = -1;	//Pourquoi ?
+                    user_input = 0;	//Pourquoi ?
                     break;
                 case 2:
 					console.log("case 2");
                     removeObstacles(2);
-                    user_input = -1;
+                    user_input = 0;
                     break;
                 case 3:
 					console.log("case 3");
                     removeObstacles(3);
-                    user_input = -1;
+                    user_input = 0;
                     break;
                 case 4:
 					console.log("case 4");
                     removeObstacles(4);
-                    user_input = -1;
+                    user_input = 0;
                     break;
                 default :
                     //Impossible
-					console.log("bug?" + user_input); //Ici bug il rentre souvent là dedans et ca fout le bordel TODO a arranger.
+					console.log("bug?" + user_input); 
                     break;
             }
         } else {
