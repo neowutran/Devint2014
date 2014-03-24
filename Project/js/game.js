@@ -38,15 +38,30 @@ var Game = function (duration) {
 
     function removeListObstacles(listObstacles) {
         listObstacles.forEach(function (element) {
+            //console.log("suppression de "+JSON.stringify(element));
             var index = obstacles.indexOf(element);
             if( index !== -1){
+          //      console.log("obstacles:"+JSON.stringify(obstacles));
                 obstacles.splice(index, 1);
+            //    console.log("obstacles:"+JSON.stringify(obstacles));
             }
         });
     }
 
+    function inArray(element){
+        var isInArray = false;
+        obstacles.forEach(function(elem){
+           if(element.id === elem.id){
+               isInArray = true;
+           }
+        });
+        return isInArray;
+    }
+
     function removeObstacles(direction) {
+        //console.log("Suppression obstacle");
         var listObstacles = getObstacles(direction);
+        //console.log("obstacle: "+JSON.stringify(listObstacles));
         if (listObstacles.length === 0) {
             current_delay = Main().getConfiguration().frame_delay_between_wrong_input;
         }
@@ -56,7 +71,7 @@ var Game = function (duration) {
     //@romain ceci est une methode en private
     function calculate_frame() {
       //  if (current_delay === 0) {
-            var obstacles = [];
+//            var obstacles = [];
             switch (user_input) {
                 case 0:
                     //Pas d'input, ne rien faire
@@ -124,8 +139,10 @@ var Game = function (duration) {
                         break;
                 }
             }
-            if (element.distance === 0) {
-                console.log("impact: frame="+frame);
+            //console.log("list obstacles");
+            //console.log(JSON.stringify(obstacles));
+            if (element.distance === 0 && inArray(element)) {
+                //console.log("impact: frame="+frame);
                 pv--;
                 $("#pv").html(pv);
                 switch(element.direction){
@@ -145,10 +162,7 @@ var Game = function (duration) {
                         console.log("impossible");
                         break;
                 }
-                var index = obstacles.indexOf(element);
-                if( index !== -1){
-                    obstacles.splice(index, 1);
-                }
+                removeObstacles(element.direction);
                 if (pv === 0) {
                     $("#player").css("color","red");
                     console.log("PERDU");
