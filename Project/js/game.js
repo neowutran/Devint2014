@@ -55,33 +55,29 @@ var Game = function (duration) {
 
     //@romain ceci est une methode en private
     function calculate_frame() {
-        if (current_delay === 0) {
+      //  if (current_delay === 0) {
             var obstacles = [];
             switch (user_input) {
                 case 0:
                     //Pas d'input, ne rien faire
                     break;
                 case 1:
-					console.log("case 1");
                     $("#north").css("color","black");
                     removeObstacles(1);
                     user_input = 0;	//Pourquoi ?
                     break;
                 case 2:
-					console.log("case 2");
                     $("#east").css("color","black");
                     removeObstacles(2);
                     user_input = 0;
                     break;
                 case 3:
-					console.log("case 3");
                     $("#south").css("color","black");
                     removeObstacles(3);
                     user_input = 0;
                     break;
                 case 4:
-					console.log("case 4");
-                    $("#ouest").css("color","black");
+                    $("#west").css("color","black");
                     removeObstacles(4);
                     user_input = 0;
                     break;
@@ -90,9 +86,9 @@ var Game = function (duration) {
 					console.log("bug?" + user_input);
                     break;
             }
-        } else {
-            current_delay--;
-        }
+       // } else {
+        //    current_delay--;
+        //}
 
         if(!(level.hasOwnProperty(frame.toString()))){
             return;
@@ -129,9 +125,8 @@ var Game = function (duration) {
                 }
             }
             if (element.distance === 0) {
-                console.log("impact: "+element.direction);
+                console.log("impact: frame="+frame);
                 pv--;
-				console.log("pv : "+pv);
                 $("#pv").html(pv);
                 switch(element.direction){
                     case 1:
