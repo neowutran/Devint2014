@@ -45,7 +45,7 @@ function generation_level(time) {
 
             if (distance < 0) {
 
-                distance = computeDelay(40, 160);
+                distance = computeDelay(100, 180);
                 id++;
                 rand = Math.floor((Math.random() * 4) + 1); // Random between 1 and 4 .
             }
@@ -57,12 +57,12 @@ function generation_level(time) {
             }
 
 
-            if(distance<=1){
+            if(distance>=60){
                 if(distance<=0){
                     portee=1;
                 }
                 else{
-                    portee=0;
+                    portee=1;
                 }
                 if (i >= time) {
                    stringtmp = '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
@@ -76,6 +76,9 @@ function generation_level(time) {
                 }
 
                 JSONlevel = JSONlevel + stringtmp;
+            }
+            if(distance===0){
+                portee=0;
             }
             pattern = [];
 
