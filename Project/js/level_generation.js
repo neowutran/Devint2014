@@ -50,20 +50,11 @@ function generation_level(time) {
                 rand = Math.floor((Math.random() * 4) + 1); // Random between 1 and 4 .
             }
 
-            //TODO comprendre pourquoi on a toujours pas de 0 dans "distance" ...
-            if(distance < 0){
-                console.log("PD");
 
-            }
+            if(distance===60){
 
-
-            if(distance>=60){
-                if(distance<=0){
-                    portee=1;
-                }
-                else{
-                    portee=1;
-                }
+                portee=1;
+                
                 if (i >= time) {
                    stringtmp = '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
                 }
