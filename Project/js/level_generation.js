@@ -1,6 +1,6 @@
 function computeDelay(min, max) {
     'use strict';
-    return Math.floor((Math.random() * (max - min)) + 1);
+    return Math.floor(min + (Math.random() * (max - min)));
 
 }
 
@@ -17,6 +17,7 @@ function generation_level(time) {
         id = 0,
         cmp = 0,
         j,
+        tmp=distance,
         rand = Math.floor((Math.random() * 4) + 1),
         portee=1,
         item;
@@ -33,6 +34,22 @@ function generation_level(time) {
 
 
 
+            if (distance < 0) {
+
+                distance = computeDelay(60, 180);
+                tmp = distance;
+                id++;
+                rand = Math.floor((Math.random() * 4) + 1); // Random between 1 and 4 .
+                console.log(distance);
+            }
+
+
+            if(distance===tmp){
+                portee=1;
+            }
+            else if(distance===0){
+                portee=0;
+            }
 
             item = {
                 "distance": portee,
@@ -41,20 +58,10 @@ function generation_level(time) {
             };
 
             pattern.push(item);
-            distance--;
-
-            if (distance < 0) {
-
-                distance = computeDelay(100, 180);
-                id++;
-                rand = Math.floor((Math.random() * 4) + 1); // Random between 1 and 4 .
-            }
 
 
-            if(distance===60){
+            if(distance===tmp || distance===0){
 
-                portee=1;
-                
                 if (i >= time) {
                    stringtmp = '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
                 }
@@ -68,10 +75,10 @@ function generation_level(time) {
 
                 JSONlevel = JSONlevel + stringtmp;
             }
-            if(distance===0){
-                portee=0;
-            }
+
             pattern = [];
+
+            distance--;
 
             cmp++;
         }
