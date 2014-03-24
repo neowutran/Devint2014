@@ -31,15 +31,17 @@ var Main = function () {
                     //Creation du jeu
                     var game = new Game(event.currentTarget.duration);
 
-//Creation de l'ecoute des touches
+                    //Creation de l'ecoute des touches
                     var keyEvent = new KeyPressed();
 
                     music = event.target;
+
                     //Jouer music
                     $("#music").bind('ended', function(){
                         Main().endGame();
                     });
 
+                    music.volume = 0.3;
                     music.play();
                     gameIntervalId = setInterval( function(){
                         game.run_game();

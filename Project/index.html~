@@ -44,26 +44,17 @@
       </div>
     </div>
 
-
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="container">
-        <div id="log">
-        </div>
         <div id="game">
             <!-- TODO menu generique lu a partir d'un fichier JSON -->
             <div id="menu" data-sound="mon_fichier">
+
 			    <button type="button" class="btn btn-primary btn-lg btn-block" id="jouer_musique" data-sound="mon_fichier">Jouer une musique aleatoire</button>
 			    <button type="button" class="btn btn-default btn-lg btn-block" id="charger_musique" data-sound="mon_fichier">Charger une musique</button>
 			    <button type="button" class="btn btn-default btn-lg btn-block" id="about" data-sound="mon_fichier">A propos</button>
+                <audio id="music" preload="auto" src="music/RammsteinSonne.ogg"></audio>
             </div>
-            <audio id="music" preload="auto" src="music/RammsteinSonne.ogg"></audio>
-            <div id="affichage">
-                -<span id="north">#</span>-<br>
-                <span id="west">#</span><span id="player">#</span><span id="east">#</span><br>
-                -<span id="south">#</span>-<br>
-            </div>
-            <br>
-            pv: <span id="pv"></span>
         </div>
     </div> <!-- /container -->
         <script src="library/jquery-2.1.0.min.js"></script>

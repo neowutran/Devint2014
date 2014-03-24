@@ -12,7 +12,7 @@ var Game = function (duration) {
     Game.prototype.instance = this;
 
     //@romain Ce sont des attribut de classes en private
-    var user_input = 0,
+    var user_input = -1,
         frame = 0,
         level = JSON.parse(generation_level(duration)),
         current_delay = 0,
@@ -24,8 +24,7 @@ var Game = function (duration) {
     //nombre de chance de collision avant echec de la partie
         pv = Main().getConfiguration().max_pv;
 
-    $("#log").html(JSON.stringify(level));
-
+    console.log(level);
     function getObstacles(direction) {
         var newObstacles = [];
         obstacles.forEach(function (element) {
@@ -38,30 +37,15 @@ var Game = function (duration) {
 
     function removeListObstacles(listObstacles) {
         listObstacles.forEach(function (element) {
-            //console.log("suppression de "+JSON.stringify(element));
             var index = obstacles.indexOf(element);
             if( index !== -1){
-          //      console.log("obstacles:"+JSON.stringify(obstacles));
                 obstacles.splice(index, 1);
-            //    console.log("obstacles:"+JSON.stringify(obstacles));
             }
         });
     }
 
-    function inArray(element){
-        var isInArray = false;
-        obstacles.forEach(function(elem){
-           if(element.id === elem.id){
-               isInArray = true;
-           }
-        });
-        return isInArray;
-    }
-
     function removeObstacles(direction) {
-        //console.log("Suppression obstacle");
         var listObstacles = getObstacles(direction);
-        //console.log("obstacle: "+JSON.stringify(listObstacles));
         if (listObstacles.length === 0) {
             current_delay = Main().getConfiguration().frame_delay_between_wrong_input;
         }
@@ -70,101 +54,80 @@ var Game = function (duration) {
 
     //@romain ceci est une methode en private
     function calculate_frame() {
-      //  if (current_delay === 0) {
-//            var obstacles = [];
+        if (current_delay === 0) {
+            var obstacles = [];
             switch (user_input) {
                 case 0:
                     //Pas d'input, ne rien faire
                     break;
                 case 1:
-                    $("#north").css("color","black");
+					console.log("case 1");
                     removeObstacles(1);
-                    user_input = 0;	//Pourquoi ?
+                    user_input = -1;	//Pourquoi ?
                     break;
                 case 2:
-                    $("#east").css("color","black");
+					console.log("case 2");
                     removeObstacles(2);
-                    user_input = 0;
+                    user_input = -1;
                     break;
                 case 3:
-                    $("#south").css("color","black");
+					console.log("case 3");
                     removeObstacles(3);
-                    user_input = 0;
+                    user_input = -1;
                     break;
                 case 4:
-                    $("#west").css("color","black");
+					console.log("case 4");
                     removeObstacles(4);
-                    user_input = 0;
+                    user_input = -1;
                     break;
                 default :
                     //Impossible
-					console.log("bug?" + user_input);
+					console.log("bug?" + user_input); //Ici bug il rentre souvent là dedans et ca fout le bordel TODO a arranger.
                     break;
             }
-       // } else {
-        //    current_delay--;
-        //}
+        } else {
+            current_delay--;
+        }
 
         if(!(level.hasOwnProperty(frame.toString()))){
-            return;
+            Main().endGame();
         }
 
         level[frame].forEach(function (element) {
             if (element.distance === Main().getConfiguration().frame_before_impact) {
-                console.log("dispo: "+element.direction);
+                //console.log("dispo: "+element.direction);
                 obstacles.push(element);
                 switch (element.direction) {
                     case 1:
-                        $("#north").css("color","red");
-                        sound1 = new Audio(Main().getConfiguration().bip_1);
                         sound1.play();
+                        sound1 = new Audio(Main().getConfiguration().bip_1);
                         break;
                     case 2:
-                        $("#east").css("color","red");
-                        sound2 = new Audio(Main().getConfiguration().bip_2);
                         sound2.play();
+                        sound2 = new Audio(Main().getConfiguration().bip_2);
                         break;
                     case 3:
-                        $("#south").css("color","red");
-                        sound3 = new Audio(Main().getConfiguration().bip_3);
                         sound3.play();
+                        sound3 = new Audio(Main().getConfiguration().bip_3);
                         break;
                     case 4:
-                        $("#west").css("color","red");
-                        sound4 = new Audio(Main().getConfiguration().bip_4);
                         sound4.play();
+                        sound4 = new Audio(Main().getConfiguration().bip_4);
                         break;
                     default :
                         //Impossible
                         break;
                 }
             }
-            //console.log("list obstacles");
-            //console.log(JSON.stringify(obstacles));
-            if (element.distance === 0 && inArray(element)) {
-                //console.log("impact: frame="+frame);
+            if (element.distance === 0) {
+                //console.log("impact: "+element.direction);
                 pv--;
-                $("#pv").html(pv);
-                switch(element.direction){
-                    case 1:
-                        $("#north").css("color","black");
-                        break;
-                    case 2:
-                        $("#east").css("color","black");
-                        break;
-                    case 3:
-                        $("#south").css("color","black");
-                        break;
-                    case 4:
-                        $("#west").css("color","black");
-                        break;
-                    default :
-                        console.log("impossible");
-                        break;
+				console.log("pv : "+pv);
+                var index = obstacles.indexOf(element);
+                if( index !== -1){
+                    obstacles.splice(index, 1);
                 }
-                removeObstacles(element.direction);
                 if (pv === 0) {
-                    $("#player").css("color","red");
                     console.log("PERDU");
                     Main().endGame();
                 }
@@ -178,7 +141,7 @@ var Game = function (duration) {
 
     //@romain, ceci est une methode en publique
     this.run_game = function () {
-        //console.log("debut frame: "+frame);
+     //   console.log("debut frame: "+frame);
         calculate_frame();
         show_frame();
         frame++;
