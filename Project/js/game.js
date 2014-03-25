@@ -22,7 +22,8 @@ var Game = function (duration) {
         sound3 = new Audio(Main().getConfiguration().bip_3),
         sound4 = new Audio(Main().getConfiguration().bip_4),
     //nombre de chance de collision avant echec de la partie
-        pv = Main().getConfiguration().max_pv;
+        pv = Main().getConfiguration().max_pv,
+        score = 0;
 
     $("#log").html(JSON.stringify(level));
 
@@ -64,14 +65,14 @@ var Game = function (duration) {
         //console.log("obstacle: "+JSON.stringify(listObstacles));
         if (listObstacles.length === 0) {
             current_delay = Main().getConfiguration().frame_delay_between_wrong_input;
+            score -= 200;
         }
         removeListObstacles(listObstacles);
     }
 
     //@romain ceci est une methode en private
     function calculate_frame() {
-      //  if (current_delay === 0) {
-//            var obstacles = [];
+        if (current_delay === 0) {
             switch (user_input) {
                 case 0:
                     //Pas d'input, ne rien faire
@@ -101,9 +102,12 @@ var Game = function (duration) {
 					console.log("bug?" + user_input);
                     break;
             }
-       // } else {
-        //    current_delay--;
-        //}
+        } else {
+            current_delay--;
+        }
+
+        score++;
+        $("#score").html(score);
 
         if(!(level.hasOwnProperty(frame.toString()))){
             return;
