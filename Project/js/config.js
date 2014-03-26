@@ -1,4 +1,4 @@
-{
+var config = {
     "distanceMin" : 70,
 	"distanceMax" : 160,
     "frame_before_impact": 1,
@@ -9,4 +9,4 @@
     "bip_3": "js/sounds/la3.ogg",
     "bip_4": "js/sounds/la3.ogg",
     "ms_before_next_frame": 25
-}
+};
