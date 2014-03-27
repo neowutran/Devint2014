@@ -13,14 +13,11 @@ var analyze = function () {
 	return;
 	}
 	var audioElement = document.querySelector('#audioPlayer');
-	var source = context.createMediaElementSource(audioElement);
-	source.connect(context.destination);
-
 
 	var analyser = context.createAnalyser();
-
+	var source;
 	audioElement.addEventListener("canplay", function() {
-	    var source = context.createMediaElementSource(audioElement);
+	    source = context.createMediaElementSource(audioElement);
 
 	    // Connect the output of the source to the input of the analyser
 	    source.connect(analyser);
@@ -34,9 +31,7 @@ var analyze = function () {
 
 	analyser.fftSize = 64;
 	console.log(analyser.frequencyBinCount); // fftSize/2 = 32 data points
- 
-	var frequencyData = new Uint8Array(analyser.frequencyBinCount);
-	analyser.getByteFrequencyData(frequencyData);
+ 	var beat = new Beatdetektor(); 
 
 	document.querySelector('#affichage').innerHTML="Coucou";
 	

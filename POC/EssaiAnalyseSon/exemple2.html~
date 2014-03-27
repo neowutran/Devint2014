@@ -2,13 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <script type="text/javascript" src="./analyseAudio.js"> </script>
+    <script type="text/javascript" src="./beatdetektor.js"> </script>
   </head>
   <body>
       <audio id="audioPlayer" preload="auto">
 	    <source src="machine-gun.wav"></source>
       </audio>
       <div id="affichage"><div>
-	<script type="text/javascript" src="./audio.js"> </script>
+	
 	
   </body>
 </html>
