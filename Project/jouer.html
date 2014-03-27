@@ -51,7 +51,7 @@
     </div>
     <div id="game">
         <!-- TODO menu generique lu a partir d'un fichier JSON -->
-        <audio id="music" preload="auto" src="music/RammsteinSonne.ogg"></audio>
+        <audio id="music" preload="auto" src="music/isick.ogg"></audio>
         <div id="affichage">
             -<span id="north">#</span>-<br>
             <span id="west">#</span><span id="player">#</span><span id="east">#</span><br>
@@ -59,11 +59,18 @@
         </div>
         <br>
         pv: <span id="pv"></span>
+        score: <span id="score"></span>
     </div>
 </div> <!-- /container -->
 <script src="library/jquery-2.1.0.min.js"></script>
 <script src="library/bootstrap-3.1.1/js/bootstrap.min.js"></script>
 <script src="library/jQuery.jPlayer.2.5.0/jquery.jplayer.min.js"></script>
+<script src="js/lib/webaudiox.shim.js"></script>
+<script src="js/lib/webaudiox.lineout.js"></script>
+<script src="js/lib/webaudiox.loadbuffer.js"></script>
+<script src="js/lib/webaudiox.analyser2volume.js"></script>
+<script src='js/lib/helpers/webaudiox.analyserbeatdetector.js'></script>
+<script src="js/config.js"></script>
 <script src="js/game.js"></script>
 <script src="js/sound.js"></script>
 <script src="js/key_event.js"></script>
