@@ -7,7 +7,7 @@ var Main = function () {
     }
     Main.prototype.instance = this;
 
-    var music;
+    var music,ended,animFrame;
 
     this.launchGame = function () {
 
@@ -22,12 +22,6 @@ var Main = function () {
                 ended = 0,
                 sound = new Sound(music);
 
-
-            //Jouer music
-            $("#music").bind('ended', function () {
-                ended = 1;
-                Main().endGame();
-            });
 
 
 
@@ -63,10 +57,11 @@ var Main = function () {
             var nextVolume = 0,
                 currentVolume = -1,
                 counter = 0;
+
             // loop and update
-            requestAnimationFrame(function update() {
+            animFrame = requestAnimationFrame(function update() {
                 if (ended === 0) {
-                    requestAnimationFrame(update);
+                    animFrame = requestAnimationFrame(update);
                 }
 
                 // get volume
@@ -94,7 +89,8 @@ var Main = function () {
     };
 
     this.endGame = function () {
-        music.pause();
+        cancelAnimationFrame(animFrame);
+        Sound().pause();
     };
 
 };

@@ -16,7 +16,8 @@ var Sound = function (music) {
         splitter,
         analyser,
         analyser2,
-        javascriptNode;
+        javascriptNode,
+        volumeNode;
 
     // get the context from the canvas to draw on
     var ctx = $("#canvas").get()[0].getContext("2d");
@@ -30,6 +31,12 @@ var Sound = function (music) {
     gradient.addColorStop(0.25,'#ffff00');
     gradient.addColorStop(0,'#ffffff');
 
+    this.pause = function (){
+
+        console.log("mute");
+        sourceNode.buffer = null;
+
+    };
 
     function setupAudioNodes() {
 
@@ -75,12 +82,25 @@ var Sound = function (music) {
 //        splitter.connect(context.destination,0,1);
 
         // and connect to destination
+        volumeNode = context.createGain();
+        volumeNode.connect(context.destination);
+
+        sourceNode.connect(volumeNode);
+
+
         sourceNode.connect(context.destination);
     }
 
     function playSound(buffer) {
+        // Create a volume (gain) node
+
+
+        //Set the volume
+        volumeNode.gain.value = 0.6;
         sourceNode.buffer = buffer;
-        sourceNode.volume = 0.5;
+        sourceNode.onended = function(){
+          Main().endGame();
+        };
         sourceNode.start(0);
     }
 
