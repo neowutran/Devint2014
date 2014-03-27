@@ -14,16 +14,15 @@ var Main = function () {
         $("#music").bind('durationchange', function (event) {
 
             console.log(event.currentTarget.duration);
-
-            //Creation du jeu
-            var game = new Game(event.currentTarget.duration);
-
-            //Creation de l'ecoute des touches
-            var keyEvent = new KeyPressed();
-
             music = event.target;
 
-            var ended = 0;
+            //Creation du jeu
+            var game = new Game(event.currentTarget.duration),
+                keyEvent = new KeyPressed(),
+                ended = 0,
+                sound = new Sound(music);
+
+
             //Jouer music
             $("#music").bind('ended', function () {
                 ended = 1;
@@ -31,12 +30,16 @@ var Main = function () {
             });
 
 
+
+
+
+            /*
+
             var context = new AudioContext();
             // Create lineOut
             var lineOut = new WebAudiox.LineOut(context);
             lineOut.volume = 0.3;
 
-            var analyser = context.createAnalyser();
             analyser.connect(lineOut.destination);
             lineOut.destination = analyser;
 
@@ -49,9 +52,9 @@ var Main = function () {
                 source.start(0);
                 // source.volume = 0.3;
             });
-
+*/
             // create the object
-            var analyser2Volume = new WebAudiox.Analyser2Volume(analyser);
+           // var analyser2Volume = new WebAudiox.Analyser2Volume(analyser);
 
             //var beatDetector= new WebAudiox.AnalyserBeatDetector(analyser, function(time){
             //  console.log("beat:"+time);
@@ -67,12 +70,14 @@ var Main = function () {
                 }
 
                 // get volume
-                var volume = analyser2Volume.rawValue();
+             //   var volume = analyser2Volume.rawValue();
+               /*
                 if(currentVolume === -1){
                     currentVolume = volume;
                 }
-
-                game.run_game(currentVolume);
+*/
+                game.run_game(0);
+  /*
                 nextVolume += volume;
                 counter++;
 
@@ -81,6 +86,7 @@ var Main = function () {
                     nextVolume = 0;
                     counter = 0;
                 }
+*/
             });
 
         });

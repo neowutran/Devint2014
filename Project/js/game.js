@@ -178,7 +178,6 @@ var Game = function (duration) {
     this.run_game = function (volume) {
         //console.log("debut frame: "+frame);
         calculate_frame();
-        show_frame();
         frame++;
        // console.log("fin frame: "+frame);
     };
