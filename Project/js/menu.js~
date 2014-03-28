@@ -62,11 +62,13 @@ var Menu = function () {
     }
 
     function lire_son(src) {
+	console.log("lire son");
         var sound = new Audio(src);
 	sound.play();
     }
 
     function selectionMenu(nomMenu){
+	console.log("selection menu");
 	for (i=0; i<menu.length; i++){
 			$("#" + menu[i]).attr("class", "btn btn-default btn-lg btn-block");
 	}
@@ -75,12 +77,13 @@ var Menu = function () {
     }
 
     function update(){
-
+	console.log("update");
         selectionMenu(getMenuSelectionne());
     }
 
     function getSoundAdress(){
-	return "music/menu/menu-" + getMenuSelectionne() + "2.ogg";
+	console.log("get sound adress");
+	return "music/menu/menu-" + getMenuSelectionne() + "1.ogg";
     }
 
     function re_read() {
@@ -89,41 +92,36 @@ var Menu = function () {
 
     function cancel() {
         console.log("cancel");
-	 $("#results").html("cancel");
     }
 
     function help() {
         console.log("help");
-	 $("#results").html("help");
     }
 
     function key_up() {
+	console.log("keyup");
 	index_selectionne--;
 	if (index_selectionne<0) {index_selectionne = menu.length-1;}
-        console.log("keyup: 1");
 	update();
     }
 
     function key_right() {
-        console.log("keyright: 2");
-	 $("#results").html("key right" + index_selectionne);
+        console.log("keyright");
     }
 
     function key_down() {
+        console.log("keydown");
 	index_selectionne++;
 	if (index_selectionne>=menu.length) {index_selectionne = 0;}
-        console.log("keydown: 3");
 	update();
     }
 
     function key_left() {
-        console.log("keyleft: 4");
-	 $("#results").html("key left" + index_selectionne);
+        console.log("keyleft");
     }
 
     function validate() {
         console.log("validate");
-	 $("#results").html("validate");
 	$(location).attr('href',$("#" + getMenuSelectionne()).attr("data-link"));
     }
 

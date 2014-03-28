@@ -50,12 +50,12 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="container">
         <div id="game">
-            <div id="menu" data-sound="mon_fichier">
+            <div id="menu">
 			    <button type="button" id="jouer" data-link="./jouer.html">Jouer</button>
 			    <button type="button" id="scores" data-link="./scores.html">Scores</button>
 			    <button type="button" id="preferences" data-link="./preferences.html">Preferences</button>
 			    <button type="button" id="regles" data-link="./regles.html">Regles</button>
-			    <button type="button" id="aide" data-link="./jouer.html">Aide</button>            
+			    <button type="button" id="aide" data-link="./aide.html">Aide</button>            
 	    </div>
         </div>
     <div id="results"></div>
@@ -68,5 +68,6 @@
         <script src="js/menu.js"></script>
         <script src="js/level_generation.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/config.js"></script>
     </body>
 </html>
