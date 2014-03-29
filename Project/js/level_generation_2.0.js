@@ -1,6 +1,4 @@
-
-
-    var LevelGeneration = function () {
+var LevelGeneration = function () {
     'use strict';
 
         //Singleton
@@ -12,7 +10,7 @@
     /*Attributs de classes*/
     var stringtmp,
         distance = 60,
-        pattern = [],
+        pattern = "",
         JSONlevel = "",
         id = 0,
         cmp = -1,//numero de la frame.
@@ -27,8 +25,9 @@
 
         this.generate = function(valeur) {
 
+            JSONlevel = "";
+
             //TODO traiter valeur.
-            cmp++;
             if (distance < 0) {
 
                 distance = computeDelay(60, 180);
@@ -51,7 +50,10 @@
                 "id": id					//time when the obstacle pop.
             };
 
-            pattern.push(item);
+            if(pattern !== "" ){
+                pattern += ",";
+            }
+            pattern += JSON.stringify(item);
 
             if(distance===tmp || distance===0){
 
@@ -59,9 +61,7 @@
                 if(JSONlevel !== ""){
                     stringtmp = ",";
                 }
-                stringtmp += '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
-
-
+                stringtmp += pattern;
                 JSONlevel = JSONlevel + stringtmp;
             }
 
@@ -69,7 +69,7 @@
 
             cmp++;
 
-            JSONlevel = "{" + JSONlevel + "}";
+            JSONlevel = "[" + JSONlevel + "]";
             console.log(JSONlevel);
             return JSONlevel;
         };

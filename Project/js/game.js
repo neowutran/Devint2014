@@ -106,7 +106,7 @@ var Game = function () {
         score++;
         $("#score").html(score);
 
-        if(!(level.hasOwnProperty(frame.toString()))){
+        if($.isEmptyObject(level)){
             return;
         }
 
