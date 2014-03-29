@@ -17,7 +17,8 @@ var Sound = function (music) {
         analyser,
         analyser2,
         javascriptNode,
-        volumeNode;
+        volumeNode,
+        currentVolume = 0;
 
     // get the context from the canvas to draw on
     var ctx = $("#canvas").get()[0].getContext("2d");
@@ -36,6 +37,10 @@ var Sound = function (music) {
         console.log("mute");
         sourceNode.buffer = null;
 
+    };
+
+    this.getVolume = function(){
+        return currentVolume;
     };
 
     function setupAudioNodes() {
@@ -168,6 +173,7 @@ var Sound = function (music) {
             average;
         analyser.getByteFrequencyData(array);
         average = getAverageVolume(array);
+        currentVolume = average;
 
         // get the average for the second channel
         /*

@@ -1,13 +1,13 @@
 
 
-    var level_generation_2 = function level_generation_2(valeur) {
+    var LevelGeneration = function () {
     'use strict';
 
         //Singleton
-        if(level_generation_2.prototype.instance){
-            return level_generation_2.prototype.instance;
+        if(LevelGeneration.prototype.instance){
+            return LevelGeneration.prototype.instance;
         }
-        level_generation_2.prototype.instance=this;
+        LevelGeneration.prototype.instance=this;
 
     /*Attributs de classes*/
     var stringtmp,
@@ -25,7 +25,7 @@
             return Math.floor(min + (Math.random() * (max - min)));
         }
 
-        function Generate(valeur) {
+        this.generate = function(valeur) {
 
             //TODO traiter valeur.
             cmp++;
@@ -37,8 +37,6 @@
                 rand = Math.floor((Math.random() * 4) + 1); // Random between 1 and 4 .
                 console.log(distance);
             }
-
-
 
             if(distance===tmp){
                 portee=1;
@@ -55,10 +53,7 @@
 
             pattern.push(item);
 
-
             if(distance===tmp || distance===0){
-
-
 
                 stringtmp = "";
                 if(JSONlevel !== ""){
@@ -74,13 +69,9 @@
 
             cmp++;
 
-
             JSONlevel = "{" + JSONlevel + "}";
-            //console.log(JSONlevel);
+            console.log(JSONlevel);
             return JSONlevel;
-        }
-
-
-
+        };
 
     };

@@ -1,5 +1,5 @@
 //@romain ceci est une classe avec pour constructeur un parametre "level"
-var Game = function (duration) {
+var Game = function () {
     "use strict";
 
     //Ceci est un singleton
@@ -11,7 +11,7 @@ var Game = function (duration) {
     //@romain Ce sont des attribut de classes en private
     var user_input = 0,
         frame = 0,
-        level = JSON.parse(generation_level(duration)),
+        level,
         current_delay = 0,
         obstacles = [],
         sound1 = new Audio(config.bip_1),
@@ -110,7 +110,7 @@ var Game = function (duration) {
             return;
         }
 
-        level[frame].forEach(function (element) {
+        level.forEach(function (element) {
             if (element.distance === config.frame_before_impact) {
                 console.log("dispo: "+element.direction);
                 obstacles.push(element);
@@ -177,6 +177,7 @@ var Game = function (duration) {
     //@romain, ceci est une methode en publique
     this.run_game = function (volume) {
         //console.log("debut frame: "+frame);
+        level = JSON.parse(LevelGeneration().generate(volume));
         calculate_frame();
         frame++;
        // console.log("fin frame: "+frame);
