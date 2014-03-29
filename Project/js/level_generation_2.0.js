@@ -1,95 +1,86 @@
-/**
- * Created by Buisson on 29/03/14.
- */
-function computeDelay(min, max) {
-    'use strict';
-    return Math.floor(min + (Math.random() * (max - min)));
 
-}
-//TODO ajouter des parammetres pour le traitement audio.
-function generation_level(distance,i,cmp,time) {
+
+    var level_generation_2 = function level_generation_2(valeur) {
     'use strict';
 
-   // console.log("time :"+ time);
-    /*INITIALISATION */
+        //Singleton
+        if(level_generation_2.prototype.instance){
+            return level_generation_2.prototype.instance;
+        }
+        level_generation_2.prototype.instance=this;
+
+    /*Attributs de classes*/
     var stringtmp,
+        distance = 60,
         pattern = [],
         JSONlevel = "",
-        //i = 0, TODO mettre dans game.js
         id = 0,
-        //cmp = 0, TODO mettre dans game.js
-        j,
+        cmp = -1,//numero de la frame.
         tmp=distance,
         rand = Math.floor((Math.random() * 4) + 1),
         portee=1,
         item;
-    //configuration;    //TODO pour le fichier de config.
-    /*$.getJSON("config.json", function(data ){
-     configuration = data;
-     console.log("test");
-     });*/
 
-    //TODO mettre la boucle for dans game.js.
-    for (j = 0; j < 40; j++) {						//40 frames per secondes.
-
-
-
-        /*      TODO A METTRE DANS game.js
-        if (distance < 0) {
-
-            distance = computeDelay(60, 180);
-            tmp = distance;
-            id++;
-            rand = Math.floor((Math.random() * 4) + 1); // Random between 1 and 4 .
-            console.log(distance);
-        }*/
-
-
-        if(distance===tmp){
-            portee=1;
-        }
-        else if(distance===0){
-            portee=0;
+        function computeDelay(min, max) {
+            return Math.floor(min + (Math.random() * (max - min)));
         }
 
-        item = {
-            "distance": portee,
-            "direction": rand,				//1 -> down  2-> up.
-            "id": id					//time when the obstacle pop.
-        };
+        function Generate(valeur) {
 
-        pattern.push(item);
+            //TODO traiter valeur.
+            cmp++;
+            if (distance < 0) {
 
-
-        if(distance===tmp || distance===0){
-
-            if (i >= time) {
-                stringtmp = '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
+                distance = computeDelay(60, 180);
+                tmp = distance;
+                id++;
+                rand = Math.floor((Math.random() * 4) + 1); // Random between 1 and 4 .
+                console.log(distance);
             }
-            else {
+
+
+
+            if(distance===tmp){
+                portee=1;
+            }
+            else if(distance===0){
+                portee=0;
+            }
+
+            item = {
+                "distance": portee,
+                "direction": rand,				//1 -> down  2-> up.
+                "id": id					//time when the obstacle pop.
+            };
+
+            pattern.push(item);
+
+
+            if(distance===tmp || distance===0){
+
+
+
                 stringtmp = "";
                 if(JSONlevel !== ""){
                     stringtmp = ",";
                 }
                 stringtmp += '"' + JSON.stringify(cmp) + '"' + ":" + JSON.stringify(pattern);
+
+
+                JSONlevel = JSONlevel + stringtmp;
             }
 
-            JSONlevel = JSONlevel + stringtmp;
+            distance--;
+
+            cmp++;
+
+
+            JSONlevel = "{" + JSONlevel + "}";
+            //console.log(JSONlevel);
+            return JSONlevel;
         }
 
-        pattern = [];
-
-        //distance--; // TODO mettre dans game.js
-        //cmp++;  TODO mettre dans game.js
-    }
-
-    i++;
 
 
 
-
-    JSONlevel = "{" + JSONlevel + "}";
-    //console.log(JSONlevel);
-    return JSONlevel;
-
-}
+    };
