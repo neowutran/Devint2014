@@ -22,8 +22,6 @@ var Game = function () {
         pv = config.max_pv,
         score = 0;
 
-    $("#log").html(JSON.stringify(level));
-
     function getObstacles(direction) {
         var newObstacles = [];
         obstacles.forEach(function (element) {
@@ -111,7 +109,7 @@ var Game = function () {
         }
 
         level.forEach(function (element) {
-            if (element.distance === config.frame_before_impact) {
+            if (element.distance === 1) {
                 console.log("dispo: "+element.direction);
                 obstacles.push(element);
                 switch (element.direction) {
