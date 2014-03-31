@@ -1,5 +1,5 @@
 //@romain ceci est une classe avec pour constructeur un parametre "level"
-var Game = function () {
+var Game = function (difficulte) {
     "use strict";
 
     //Ceci est un singleton
@@ -21,6 +21,8 @@ var Game = function () {
     //nombre de chance de collision avant echec de la partie
         pv = config.max_pv,
         score = 0;
+
+    LevelGeneration().setDifficulte(difficulte);
 
     function getObstacles(direction) {
         var newObstacles = [];

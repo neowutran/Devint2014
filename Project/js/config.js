@@ -7,6 +7,6 @@ var config = {
     "max_pv": 3,
     "bip_1": "js/sounds/do4.ogg",
     "bip_2": "js/sounds/fa3.ogg",
-    "bip_3": "js/sounds/fa3.ogg",
+    "bip_3": "js/sounds/la3.ogg",
     "bip_4": "js/sounds/do4.ogg"
 };
