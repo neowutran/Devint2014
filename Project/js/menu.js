@@ -47,10 +47,6 @@ var Menu = function () {
             case 13:
                 validate();
                 break;
-            //escape
-            case 27:
-                cancel();
-                break;
         }
 
     });
@@ -84,15 +80,23 @@ var Menu = function () {
 
     function getSoundAdress(){
 	console.log("get sound adress");
-	return "music/menu/menu-" + getMenuSelectionne() + "1.ogg";
+        //var nommenu = getMenuSelectionne();
+        //return configMenu.nommenu;
+        switch (getMenuSelectionne()){
+            //case "jouer" : return configMenu.jouer;
+            case "aide" : return configMenu.menu_aide1;
+            case "jouer" : return configMenu.menu_jouer1;
+            case "regles" : return configMenu.menu_regles1;
+            case "preferences" : return configMenu.menu_preferences1;
+            case "scores" : return configMenu.menu_scores1;
+            default : return "erreur";
+        }
+	//return "music/menu/menu-" + getMenuSelectionne() + "1.ogg";
     }
 
     function re_read() {
         console.log("re read");
-    }
-
-    function cancel() {
-        console.log("cancel");
+        update();
     }
 
     function help() {
