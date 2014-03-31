@@ -11,20 +11,15 @@ var Main = function () {
 
     this.launchGame = function () {
 
-
             var srcMusic = "music/RammsteinSonne.ogg";
             var difficulte = 1;
 
             if (localStorage.difficulte){
-
                 difficulte = localStorage.getItem("difficulte");
-
             }
 
             if(localStorage.music){
-
                 srcMusic = localStorage.getItem("music");
-
             }
 
             music = new Audio(srcMusic);
@@ -36,7 +31,6 @@ var Main = function () {
                 ended = 0,
                 sound = new Sound(music);
 
-
             // loop and update
             animFrame = requestAnimationFrame(function update() {
                 if (ended === 0) {
@@ -44,8 +38,6 @@ var Main = function () {
                 }
                 game.run_game(Sound().getVolume());
             });
-
-
 
     };
 
@@ -55,6 +47,6 @@ var Main = function () {
     };
 
 };
-
 var main = new Main();
+speak.play("bonjour");
 main.launchGame();

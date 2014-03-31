@@ -36,12 +36,9 @@ var Game = function (difficulte) {
 
     function removeListObstacles(listObstacles) {
         listObstacles.forEach(function (element) {
-            //console.log("suppression de "+JSON.stringify(element));
             var index = obstacles.indexOf(element);
             if( index !== -1){
-          //      console.log("obstacles:"+JSON.stringify(obstacles));
                 obstacles.splice(index, 1);
-            //    console.log("obstacles:"+JSON.stringify(obstacles));
             }
         });
     }
@@ -57,9 +54,7 @@ var Game = function (difficulte) {
     }
 
     function removeObstacles(direction) {
-        //console.log("Suppression obstacle");
         var listObstacles = getObstacles(direction);
-        //console.log("obstacle: "+JSON.stringify(listObstacles));
         if (listObstacles.length === 0) {
             current_delay = config.frame_delay_between_wrong_input;
             score -= 200;
@@ -140,10 +135,9 @@ var Game = function (difficulte) {
                         break;
                 }
             }
-            //console.log("list obstacles");
-            //console.log(JSON.stringify(obstacles));
+
             if (element.distance === 0 && inArray(element)) {
-                //console.log("impact: frame="+frame);
+
                 pv--;
                 score -= 200;
                 $("#pv").html(pv);
@@ -176,11 +170,9 @@ var Game = function (difficulte) {
 
     //@romain, ceci est une methode en publique
     this.run_game = function (volume) {
-        //console.log("debut frame: "+frame);
         level = JSON.parse(LevelGeneration().generate(volume));
         calculate_frame();
         frame++;
-       // console.log("fin frame: "+frame);
     };
 
     this.set_user_input = function (new_user_input) {

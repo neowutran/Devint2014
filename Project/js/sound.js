@@ -98,7 +98,7 @@ var Sound = function (music) {
 
     function playSound(buffer) {
         //Set the volume
-        volumeNode.gain.value = 0.1;
+        volumeNode.gain.value = 0.0;
         sourceNode.buffer = buffer;
         sourceNode.onended = function(){
           Main().endGame();
