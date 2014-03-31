@@ -63,7 +63,8 @@ var LevelGeneration = function () {
         var directionIterator,
             generateObstacle,
             distance,
-            direction = [];
+            direction = [],
+            iterator;
 
         direction[1] = false;
         direction[2] = false;
@@ -82,8 +83,8 @@ var LevelGeneration = function () {
         });
         removeObstacles();
 
-        for (directionIterator = 1; directionIterator < 5; directionIterator++) {
-
+        for (iterator = 1; iterator < 5; iterator++) {
+            directionIterator = Math.floor(Math.random() * 4) +1;
             if (availableDirection[directionIterator] === true && volume !== 0 && currentCooldown <= 0) {
 
                 generateObstacle = this.generateObstacle(volume);

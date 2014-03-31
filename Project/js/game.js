@@ -115,22 +115,22 @@ var Game = function () {
                 switch (element.direction) {
                     case 1:
                         $("#north").css("color","red");
-                        sound1 = new Audio(config.bip_1);
+                        sound1.currentTime = 0;
                         sound1.play();
                         break;
                     case 2:
                         $("#east").css("color","red");
-                        sound2 = new Audio(config.bip_2);
+                        sound2.currentTime = 0;
                         sound2.play();
                         break;
                     case 3:
                         $("#south").css("color","red");
-                        sound3 = new Audio(config.bip_3);
+                        sound3.currentTime = 0;
                         sound3.play();
                         break;
                     case 4:
                         $("#west").css("color","red");
-                        sound4 = new Audio(config.bip_4);
+                        sound4.currentTime = 0;
                         sound4.play();
                         break;
                     default :
