@@ -90,13 +90,19 @@ var LevelGeneration = function () {
             direction[obstacle.direction] = true;
         });
         removeObstacles();
+
+        console.log("diff:"+difficulte);
+        console.log("d0");
         if (difficulte === 1) {
+            console.log("d1");
             nbTouches = 3;
         }
         else if (difficulte === 2) {
+            console.log("d2");
             nbTouches = 4;
         }
         else if (difficulte === 3) {
+            console.log("d3");
             nbTouches = 5;
         }
         for (directionIterator = 1; directionIterator < nbTouches; directionIterator++) {

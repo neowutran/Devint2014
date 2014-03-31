@@ -29,7 +29,7 @@ function generation_level(time) {
 
     while (i <= time) {
 
-        for (j = 0; j < 40; j++) {						//40 frames per secondes.
+        for (j = 0; j < 60; j++) {						//40 frames per secondes.
 
 
 

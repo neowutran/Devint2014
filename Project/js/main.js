@@ -7,7 +7,7 @@ var Main = function () {
     }
     Main.prototype.instance = this;
 
-    var music,ended,animFrame;
+    var music,animFrame;
 
     this.launchGame = function () {
 
@@ -15,14 +15,14 @@ var Main = function () {
             var difficulte = 1;
 
             if (localStorage.difficulte){
-                difficulte = localStorage.getItem("difficulte");
+                difficulte = parseInt(localStorage.getItem("difficulte"));
             }
 
             if(localStorage.music){
                 srcMusic = localStorage.getItem("music");
             }
 
-            music = new Audio(srcMusic);
+        music = new Audio(srcMusic);
 
         //Creation du jeu
             //event.currentTarget.duration
@@ -48,5 +48,4 @@ var Main = function () {
 
 };
 var main = new Main();
-speak.play("bonjour");
 main.launchGame();
