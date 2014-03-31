@@ -13,29 +13,28 @@ var LevelGeneration = function () {
         maxDistance = 40,
         obstacles = [],
         availableDirection = [],
-        //Laisser un temps de repos entre 2 obstacle de 40 frame min
+    //Laisser un temps de repos entre 2 obstacle de 40 frame min
         cooldown = 40,
         currentCooldown = 0,
         nbTouches,
-        difficulte=1; //difficulte : 1=facile, 2 = normal et 3 = difficile.
+        difficulte = 1; //difficulte : 1=facile, 2 = normal et 3 = difficile.
 
     availableDirection[1] = true;
     availableDirection[2] = true;
     availableDirection[3] = true;
     availableDirection[4] = true;
 
-     this.generateObstacle = function (volume) {
+    this.generateObstacle = function (volume) {
 
         //TODO faire un truc mieux que ca
-        console.log("volume:"+volume);
+        console.log("volume:" + volume);
         var random = Math.random() * volume;
         return random > 30;
 
     };
 
-
-    this.setDifficulte=function(difficult){
-      difficulte=difficult;
+    this.setDifficulte = function (difficult) {
+        difficulte = difficult;
     };
 
     function getObstacles() {
@@ -91,14 +90,14 @@ var LevelGeneration = function () {
             direction[obstacle.direction] = true;
         });
         removeObstacles();
-        if(difficulte===1){
-            nbTouches=3;
+        if (difficulte === 1) {
+            nbTouches = 3;
         }
-        else if(difficulte===2){
-            nbTouches=4;
+        else if (difficulte === 2) {
+            nbTouches = 4;
         }
-        else if(difficulte===3){
-            nbTouches=5;
+        else if (difficulte === 3) {
+            nbTouches = 5;
         }
         for (directionIterator = 1; directionIterator < nbTouches; directionIterator++) {
 
@@ -107,20 +106,20 @@ var LevelGeneration = function () {
                 generateObstacle = this.generateObstacle(volume);
 
                 //TODO faire mieux que ca
-                if(difficulte===1){
-                    distance = computeDelay(160,200);
-                }else if(difficulte===2){
-                    distance = computeDelay(100,150);
-                }else if(difficulte===3){
-                    distance = computeDelay(60,80);
+                if (difficulte === 1) {
+                    distance = computeDelay(160, 200);
+                } else if (difficulte === 2) {
+                    distance = computeDelay(100, 150);
+                } else if (difficulte === 3) {
+                    distance = computeDelay(60, 80);
                 }
 
                 if (generateObstacle === true) {
                     obstacles.push(
                         {
-                            "distance": distance,
+                            "distance" : distance,
                             "direction": directionIterator,				//1 -> down  2-> up.
-                            "id": id					//time when the obstacle pop.
+                            "id"       : id					//time when the obstacle pop.
                         }
                     );
 
@@ -129,9 +128,9 @@ var LevelGeneration = function () {
                     }
 
                     JSONlevel += JSON.stringify({
-                        "distance": 1,
+                        "distance" : 1,
                         "direction": directionIterator,				//1 -> down  2-> up.
-                        "id": id					//time when the obstacle pop.
+                        "id"       : id					//time when the obstacle pop.
                     });
 
                     id++;
@@ -144,8 +143,8 @@ var LevelGeneration = function () {
             }
         }
 
-        for(directionIterator = 1; directionIterator < 5; directionIterator++){
-            if(direction[directionIterator] === true){
+        for (directionIterator = 1; directionIterator < 5; directionIterator++) {
+            if (direction[directionIterator] === true) {
                 availableDirection[directionIterator] = true;
             }
         }

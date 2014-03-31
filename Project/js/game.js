@@ -22,7 +22,7 @@ var Game = function (difficulte) {
         pv = config.max_pv,
         score = 0;
 
-    LevelGeneration().setDifficulte(difficulte);
+    new LevelGeneration().setDifficulte(difficulte);
 
     function getObstacles(direction) {
         var newObstacles = [];
