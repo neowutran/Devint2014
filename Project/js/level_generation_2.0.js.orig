@@ -1,0 +1,167 @@
+var LevelGeneration = function () {
+    'use strict';
+
+    //Singleton
+    if (LevelGeneration.prototype.instance) {
+        return LevelGeneration.prototype.instance;
+    }
+    LevelGeneration.prototype.instance = this;
+
+    /*Attributs de classes*/
+    var JSONlevel = "",
+        id = 0,
+        maxDistance = 40,
+        obstacles = [],
+        availableDirection = [],
+        //Laisser un temps de repos entre 2 obstacle de 40 frame min
+        cooldown = 40,
+        currentCooldown = 0,
+        nbTouches,
+        difficulte=1; //difficulte : 1=facile, 2 = normal et 3 = difficile.
+
+    availableDirection[1] = true;
+    availableDirection[2] = true;
+    availableDirection[3] = true;
+    availableDirection[4] = true;
+
+     this.generateObstacle = function (volume) {
+
+        //TODO faire un truc mieux que ca
+        console.log("volume:"+volume);
+        var random = Math.random() * volume;
+        return random > 30;
+
+    };
+
+
+    this.setDifficulte=function(difficult){
+      difficulte=difficult;
+    };
+
+    function getObstacles() {
+        var newObstacles = [];
+        obstacles.forEach(function (element) {
+            if (element.distance <= 0) {
+                newObstacles.push(element);
+            }
+        });
+        return newObstacles;
+    }
+
+    function computeDelay(min, max) {
+        return Math.floor(min + (Math.random() * (max - min)));
+    }
+
+    function removeListObstacles(listObstacles) {
+        listObstacles.forEach(function (element) {
+            var index = obstacles.indexOf(element);
+            if (index !== -1) {
+                obstacles.splice(index, 1);
+            }
+        });
+    }
+
+    function removeObstacles() {
+        var listObstacles = getObstacles();
+        removeListObstacles(listObstacles);
+    }
+
+    this.generate = function (volume) {
+
+        JSONlevel = "";
+
+        var directionIterator,
+            generateObstacle,
+            distance,
+            direction = [],
+            iterator;
+
+        direction[1] = false;
+        direction[2] = false;
+        direction[3] = false;
+        direction[4] = false;
+
+        obstacles.forEach(function (obstacle) {
+            obstacle.distance--;
+            if (obstacle.distance === 0) {
+                if (JSONlevel !== "") {
+                    JSONlevel += ",";
+                }
+                JSONlevel += JSON.stringify(obstacle);
+            }
+            direction[obstacle.direction] = true;
+        });
+        removeObstacles();
+<<<<<<< HEAD
+        if(difficulte===1){
+            nbTouches=3;
+        }
+        else if(difficulte===2){
+            nbTouches=4;
+        }
+        else if(difficulte===3){
+            nbTouches=5;
+        }
+        for (directionIterator = 1; directionIterator < nbTouches; directionIterator++) {
+
+=======
+
+        for (iterator = 1; iterator < 5; iterator++) {
+            directionIterator = Math.floor(Math.random() * 4) +1;
+>>>>>>> bc97176ea914b10c028a832d6e8f8d59814ba93c
+            if (availableDirection[directionIterator] === true && volume !== 0 && currentCooldown <= 0) {
+
+                generateObstacle = this.generateObstacle(volume);
+
+                //TODO faire mieux que ca
+                if(difficulte===1){
+                    distance = computeDelay(160,200);
+                }else if(difficulte===2){
+                    distance = computeDelay(100,150);
+                }else if(difficulte===3){
+                    distance = computeDelay(60,80);
+                }
+
+                if (generateObstacle === true) {
+                    obstacles.push(
+                        {
+                            "distance": distance,
+                            "direction": directionIterator,				//1 -> down  2-> up.
+                            "id": id					//time when the obstacle pop.
+                        }
+                    );
+
+                    if (JSONlevel !== "") {
+                        JSONlevel += ",";
+                    }
+
+                    JSONlevel += JSON.stringify({
+                        "distance": 1,
+                        "direction": directionIterator,				//1 -> down  2-> up.
+                        "id": id					//time when the obstacle pop.
+                    });
+
+                    id++;
+                    availableDirection[directionIterator] = false;
+
+                    currentCooldown = cooldown;
+                    //Ne pas generer plus de 1 obstacle par frame
+                    break;
+                }
+            }
+        }
+
+        for(directionIterator = 1; directionIterator < 5; directionIterator++){
+            if(direction[directionIterator] === true){
+                availableDirection[directionIterator] = true;
+            }
+        }
+
+        currentCooldown--;
+
+        JSONlevel = "[" + JSONlevel + "]";
+        console.log(JSONlevel);
+        return JSONlevel;
+    };
+
+};
