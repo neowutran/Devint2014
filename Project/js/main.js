@@ -11,16 +11,31 @@ var Main = function () {
 
     this.launchGame = function () {
 
-           //console.log(event.currentTarget.duration);
-            music = new Audio("music/RammsteinSonne.ogg");
 
-            //Creation du jeu
+            var srcMusic = "music/RammsteinSonne.ogg";
+            var difficulte = 1;
+
+            if (localStorage.difficulte){
+
+                difficulte = localStorage.getItem("difficulte");
+
+            }
+
+            if(localStorage.music){
+
+                srcMusic = localStorage.getItem("music");
+
+            }
+
+            music = new Audio(srcMusic);
+
+        //Creation du jeu
             //event.currentTarget.duration
-            var game = new Game(),
-                level = new LevelGeneration(),
+            var game = new Game(difficulte),
                 keyEvent = new KeyPressed(),
                 ended = 0,
                 sound = new Sound(music);
+
 
             // loop and update
             animFrame = requestAnimationFrame(function update() {
