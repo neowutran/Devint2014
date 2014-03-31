@@ -16,6 +16,7 @@ var LevelGeneration = function () {
         //Laisser un temps de repos entre 2 obstacle de 40 frame min
         cooldown = 40,
         currentCooldown = 0,
+        nbTouches,
         difficulte=1; //difficulte : 1=facile, 2 = normal et 3 = difficile.
 
     availableDirection[1] = true;
@@ -90,8 +91,16 @@ var LevelGeneration = function () {
             direction[obstacle.direction] = true;
         });
         removeObstacles();
-
-        for (directionIterator = 1; directionIterator < 5; directionIterator++) {
+        if(difficulte===1){
+            nbTouches=3;
+        }
+        else if(difficulte===2){
+            nbTouches=4;
+        }
+        else if(difficulte===3){
+            nbTouches=5;
+        }
+        for (directionIterator = 1; directionIterator < nbTouches; directionIterator++) {
 
             if (availableDirection[directionIterator] === true && volume !== 0 && currentCooldown <= 0) {
 
