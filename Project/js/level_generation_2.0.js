@@ -15,7 +15,8 @@ var LevelGeneration = function () {
         availableDirection = [],
         //Laisser un temps de repos entre 2 obstacle de 40 frame min
         cooldown = 40,
-        currentCooldown = 0;
+        currentCooldown = 0,
+        difficulte=1; //difficulte : 1=facile, 2 = normal et 3 = difficile.
 
     availableDirection[1] = true;
     availableDirection[2] = true;
@@ -32,6 +33,10 @@ var LevelGeneration = function () {
     };
 
 
+    this.setDifficulte=function(difficult){
+      difficulte=difficult;
+    };
+
     function getObstacles() {
         var newObstacles = [];
         obstacles.forEach(function (element) {
@@ -40,6 +45,10 @@ var LevelGeneration = function () {
             }
         });
         return newObstacles;
+    }
+
+    function computeDelay(min, max) {
+        return Math.floor(min + (Math.random() * (max - min)));
     }
 
     function removeListObstacles(listObstacles) {
@@ -89,7 +98,13 @@ var LevelGeneration = function () {
                 generateObstacle = this.generateObstacle(volume);
 
                 //TODO faire mieux que ca
-                distance = maxDistance;
+                if(difficulte===1){
+                    distance = computeDelay(160,200);
+                }else if(difficulte===2){
+                    distance = computeDelay(100,150);
+                }else if(difficulte===3){
+                    distance = computeDelay(60,80);
+                }
 
                 if (generateObstacle === true) {
                     obstacles.push(
