@@ -155,7 +155,7 @@ var MenuJouer = function () {
                 break;
         }
         localStorage.setItem("difficulte", difficulte);
-        $(location).attr('href', "./jouer.html");
+        $(location).attr('href', "./select_music.html");
     }
 
 };

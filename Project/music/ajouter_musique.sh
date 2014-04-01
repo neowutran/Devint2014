@@ -1,12 +1,12 @@
 #!/bin/sh
 
 folder=ls
-file="./music.json"
+file="./music.js"
 chaine=""
 first=1
 for music in *
-do	
-	extension=$(echo $music | sed 's/\(^.*\)\(....\)$/\2/') 
+do
+	extension=$(echo $music | sed 's/\(^.*\)\(....\)$/\2/')
 	if [ "$extension" = ".ogg" ]; then
 		if [ $first -eq 0 ]; then
 			chaine="$chaine ,"
@@ -19,7 +19,7 @@ do
 done
 
 cat <<EOM >$file
-[
+var music_list = [
 	${chaine}
-]
+];
 EOM
