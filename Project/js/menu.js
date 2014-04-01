@@ -3,11 +3,12 @@
 
 /* classe menu */
 var Menu = function () {
-    
+    "use strict";
+
     /* variables */
-    var menu = new Array("jouer", "scores", "preferences", "regles", "aide");
-    var index_selectionne = 0; 
-    
+    var menu = ["jouer", "scores", "preferences", "regles", "aide"],
+        index_selectionne = 0;
+
     /* singleton */
     if (Menu.prototype.instance) {
         return Menu.prototype.instance;
@@ -16,82 +17,86 @@ var Menu = function () {
 
     /* constructeur */
     selectionMenu(getMenuSelectionne());
-    
 
     $("body").keypress(function (event) {
         switch (event.keyCode) {
             //F1
             case 112:
+                event.preventDefault();
                 help();
                 break;
             case 113:
+                event.preventDefault();
                 re_read();
                 break;
             //key up
             case 38:
+                event.preventDefault();
                 key_up();
-                break;
-            //key right
-            case 39:
-                key_right();
                 break;
             //key down
             case 40:
+                event.preventDefault();
                 key_down();
-                break;
-            //key left
-            case 37:
-                key_left();
                 break;
             //enter
             case 13:
+                event.preventDefault();
                 validate();
                 break;
+
         }
 
     });
 
     /* fonctions */
 
-    function getMenuSelectionne(){
-	console.log("get menu selectionne");
-	return menu[index_selectionne];
+    function getMenuSelectionne() {
+        console.log("get menu selectionne");
+        return menu[index_selectionne];
     }
 
     function lire_son(src) {
-	console.log("lire son");
+        console.log("lire son");
         var sound = new Audio(src);
-	sound.play();
+        sound.play();
     }
 
-    function selectionMenu(nomMenu){
-	console.log("selection menu");
-	for (i=0; i<menu.length; i++){
-			$("#" + menu[i]).attr("class", "btn btn-default btn-lg btn-block");
-	}
-	$("#" + nomMenu).attr("class", "btn btn-primary btn-lg btn-block");
-	lire_son(getSoundAdress()); 
+    function selectionMenu(nomMenu) {
+        console.log("selection menu");
+        var i;
+        for (i = 0; i < menu.length; i++) {
+            $("#" + menu[i]).attr("class", "btn btn-default btn-lg btn-block");
+        }
+        $("#" + nomMenu).attr("class", "btn btn-primary btn-lg btn-block");
+        lire_son(getSoundAdress());
     }
 
-    function update(){
-	console.log("update");
+    function update() {
+        console.log("update");
         selectionMenu(getMenuSelectionne());
     }
 
-    function getSoundAdress(){
-	console.log("get sound adress");
+    function getSoundAdress() {
+        console.log("get sound adress");
         //var nommenu = getMenuSelectionne();
         //return configMenu.nommenu;
-        switch (getMenuSelectionne()){
+        switch (getMenuSelectionne()) {
             //case "jouer" : return configMenu.jouer;
-            case "aide" : return configMenu.menu_aide1;
-            case "jouer" : return configMenu.menu_jouer1;
-            case "regles" : return configMenu.menu_regles1;
-            case "preferences" : return configMenu.menu_preferences1;
-            case "scores" : return configMenu.menu_scores1;
-            default : return "erreur";
+            case "aide" :
+                return configMenu.menu_aide1;
+            case "jouer" :
+                return configMenu.menu_jouer1;
+            case "regles" :
+                return configMenu.menu_regles1;
+            case "preferences" :
+                return configMenu.menu_preferences1;
+            case "scores" :
+                return configMenu.menu_scores1;
+            default :
+                return "erreur";
         }
-	//return "music/menu/menu-" + getMenuSelectionne() + "1.ogg";
+        //return "music/menu/menu-" + getMenuSelectionne() + "1.ogg";
     }
 
     function re_read() {
@@ -104,30 +109,26 @@ var Menu = function () {
     }
 
     function key_up() {
-	console.log("keyup");
-	index_selectionne--;
-	if (index_selectionne<0) {index_selectionne = menu.length-1;}
-	update();
-    }
-
-    function key_right() {
-        console.log("keyright");
+        console.log("keyup");
+        index_selectionne--;
+        if (index_selectionne < 0) {
+            index_selectionne = menu.length - 1;
+        }
+        update();
     }
 
     function key_down() {
         console.log("keydown");
-	index_selectionne++;
-	if (index_selectionne>=menu.length) {index_selectionne = 0;}
-	update();
-    }
-
-    function key_left() {
-        console.log("keyleft");
+        index_selectionne++;
+        if (index_selectionne >= menu.length) {
+            index_selectionne = 0;
+        }
+        update();
     }
 
     function validate() {
         console.log("validate");
-	$(location).attr('href',$("#" + getMenuSelectionne()).attr("data-link"));
+        $(location).attr('href', $("#" + getMenuSelectionne()).attr("data-link"));
     }
 
 };

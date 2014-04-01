@@ -11,13 +11,13 @@ var Tutoriel = function () {
     }
     Tutoriel.prototype.instance = this;
 
-    this.main = function(){
+    this.main = function () {
         // son : Bienvenue dans le tutoriel de argyros
         // but du jeu.
 
         // le tutoriel commence :
 
-        while (!press_left){
+        while (!press_left) {
             // Quand vous entendez ce son appuyez sur la touche haut du clavier
             sleep(1000);
             sound1 = new Audio(config.bip_4);
@@ -28,7 +28,7 @@ var Tutoriel = function () {
         }
 
         set_press_false();
-        while (!press_right){
+        while (!press_right) {
             // Quand vous entendez ce son appuyez sur la touche haut du clavier
             sleep(1000);
             sound1 = new Audio(config.bip_2);
@@ -39,7 +39,7 @@ var Tutoriel = function () {
         }
 
         set_press_false();
-        while (!press_up){
+        while (!press_up) {
             // Quand vous entendez ce son appuyez sur la touche haut du clavier
             sleep(1000);
             sound1 = new Audio(config.bip_1);
@@ -50,7 +50,7 @@ var Tutoriel = function () {
         }
 
         set_press_false();
-        while (!press_down){
+        while (!press_down) {
             // Quand vous entendez ce son appuyez sur la touche haut du clavier
             sleep(1000);
             sound1 = new Audio(config.bip_3);
@@ -60,38 +60,34 @@ var Tutoriel = function () {
             sleep(5000);
         }
 
-
-
     }
 
-    function key_left(){
+    function key_left() {
         press_left = true;
     }
 
-    function key_right(){
+    function key_right() {
         press_right = true;
     }
 
-    function key_down(){
+    function key_down() {
         press_up = true;
     }
 
-    function key_up(){
+    function key_up() {
         press_up = true;
     }
 
-    function set_press_false(){
+    function set_press_false() {
         press_down = false;
         press_right = false;
         press_down = false;
         press_up = false;
     }
 
-    function cancel(){
-        $(location).attr('href',"./menu-jouer.html");
+    function cancel() {
+        $(location).attr('href', "./menu-jouer.html");
     }
-
-
 
     $("body").keypress(function (event) {
         switch (event.keyCode) {

@@ -15,6 +15,7 @@ var KeyPressed = function () {
 
     function cancel() {
         console.log("cancel");
+        $(location).attr('href', "./select_music.html");
     }
 
     function help() {
@@ -90,6 +91,5 @@ var KeyPressed = function () {
         // console.log(event.keyCode);
 
     });
-
 
 };

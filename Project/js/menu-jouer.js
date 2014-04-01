@@ -22,31 +22,33 @@ var MenuJouer = function () {
         switch (event.keyCode) {
             //F1
             case 112:
+                event.preventDefault();
                 help();
                 break;
             //F2
             case 113:
+                event.preventDefault();
                 re_read();
                 break;
             //key up
             case 38:
+                event.preventDefault();
                 key_up();
-                break;
-            //key right
-            case 39:
-                key_right();
                 break;
             //key down
             case 40:
+                event.preventDefault();
                 key_down();
-                break;
-            //key left
-            case 37:
-                key_left();
                 break;
             //enter
             case 13:
+                event.preventDefault();
                 validate();
+                break;
+            //escape
+            case 27:
+                event.preventDefault();
+                cancel();
                 break;
         }
 
@@ -105,6 +107,8 @@ var MenuJouer = function () {
 
     function cancel() {
         console.log("cancel");
+        $(location).attr('href', "./index.html");
+
     }
 
     function help() {
@@ -120,10 +124,6 @@ var MenuJouer = function () {
         update();
     }
 
-    function key_right() {
-        console.log("keyright");
-    }
-
     function key_down() {
         console.log("keydown");
         index_selectionne++;
@@ -133,14 +133,10 @@ var MenuJouer = function () {
         update();
     }
 
-    function key_left() {
-        console.log("keyleft");
-    }
-
     function validate() {
         console.log("validate");
         var difficulte = 1;
-        switch(getMenuSelectionne()){
+        switch (getMenuSelectionne()) {
             case "facile":
                 difficulte = 1;
                 break;

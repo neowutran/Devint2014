@@ -15,7 +15,6 @@ setTimeout(function () {
         refresh = refresh + 1;
     }
 
-
 }, 1000);
 
 function sleep(milliseconds) {

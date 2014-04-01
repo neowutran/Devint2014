@@ -9,70 +9,79 @@ var SelectMusic = function () {
     "use strict";
 
     /* variables */
-    var index_selectionne = 0;
+    var index_selectionne = 0,
+        music_src;
 
     /* singleton */
     if (SelectMusic.prototype.instance) {
         return SelectMusic.prototype.instance;
     }
     SelectMusic.prototype.instance = this;
-
     display_music();
+
     $("body").keypress(function (event) {
         switch (event.keyCode) {
             //F1
             case 112:
+                event.preventDefault();
                 help();
                 break;
             //F2
             case 113:
+                event.preventDefault();
                 re_read();
                 break;
             //key up
             case 38:
+                event.preventDefault();
                 key_up();
-                break;
-            //key right
-            case 39:
-                key_right();
                 break;
             //key down
             case 40:
+                event.preventDefault();
                 key_down();
-                break;
-            //key left
-            case 37:
-                key_left();
                 break;
             //enter
             case 13:
+                event.preventDefault();
                 validate();
+                break;
+            //escape
+            case 27:
+                event.preventDefault();
+                cancel();
                 break;
         }
 
     });
 
-    function display_music(){
+    function display_music() {
         var first = 1;
-        music_list.forEach(function(music){
-            if(first === 1){
-                $("#music").append("<button type='button' class='btn btn-primary btn-lg btn-block'>"+music.file+"</button>");
+        music_list.forEach(function (music) {
+            if (first === 1) {
+                $("#music").append("<button type='button' class='music btn btn-primary btn-lg btn-block'>" + music.file + "</button>");
                 first = 0;
-            }else{
-                $("#music").append("<button type='button' class='btn btn-default btn-lg btn-block'>"+music.file+"</button>");
+                music_src = music.file;
+                speak.play(music.file);
+
+            } else {
+                $("#music").append("<button type='button' class='music btn btn-default btn-lg btn-block'>" + music.file + "</button>");
             }
         });
     }
 
-    function update(){
+    function update() {
 
-        $('#music').each(function(index,element) {
-            console.log($( this).text());
-            if(index === index_selectionne){
-                $("#music").get(index).attr("class", "btn btn-primary btn-lg btn-block");
-            }else{
-                $("#music").get(index).attr("class", "btn btn-default btn-lg btn-block");
+        $('.music').each(function (index, element) {
+            console.log($(this).text());
+            if (index === index_selectionne) {
+                speak.play($(this).text());
+                music_src = $(this).text();
+                $(element).attr("class", "music btn btn-primary btn-lg btn-block");
+            } else {
+                $(element).attr("class", "music btn btn-default btn-lg btn-block");
             }
+
         });
 
     }
@@ -84,6 +93,8 @@ var SelectMusic = function () {
 
     function cancel() {
         console.log("cancel");
+        $(location).attr('href', "./menu-jouer.html");
+
     }
 
     function help() {
@@ -99,10 +110,6 @@ var SelectMusic = function () {
         update();
     }
 
-    function key_right() {
-        console.log("keyright");
-    }
-
     function key_down() {
         console.log("keydown");
         index_selectionne++;
@@ -112,12 +119,9 @@ var SelectMusic = function () {
         update();
     }
 
-    function key_left() {
-        console.log("keyleft");
-    }
-
     function validate() {
-
+        localStorage.setItem("music", "music/" + music_src);
+        $(location).attr('href', "./jouer.html");
     }
 
 };

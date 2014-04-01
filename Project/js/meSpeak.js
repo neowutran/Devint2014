@@ -10,13 +10,13 @@ var MeSpeak = function () {
     }
     MeSpeak.prototype.instance = this;
 
-    this.play = function(message){
+    this.play = function (message) {
         meSpeak.speak(message, {
             amplitude: 100,
-            wordgap: 0,
-            pitch: 45,
-            speed: 34,
-            variant: ''
+            wordgap  : 0,
+            pitch    : 45,
+            speed    : 34,
+            variant  : ''
         });
     };
 

@@ -9,6 +9,7 @@ var Sound = function (music) {
         return Sound.prototype.instance;
     }
     Sound.prototype.instance = this;
+    window.AudioContext = window.AudioContext||window.webkitAudioContext;
 
     var context = new AudioContext(),
         audioBuffer,
@@ -26,20 +27,24 @@ var Sound = function (music) {
     // create a gradient for the fill. Note the strange
     // offset, since the gradient is calculated based on
     // the canvas, not the specific element we draw
-    var gradient = ctx.createLinearGradient(0,0,0,130);
-    gradient.addColorStop(1,'#000000');
-    gradient.addColorStop(0.75,'#ff0000');
-    gradient.addColorStop(0.25,'#ffff00');
-    gradient.addColorStop(0,'#ffffff');
+    var gradient = ctx.createLinearGradient(0, 0, 0, 130);
+    gradient.addColorStop(1, '#000000');
+    gradient.addColorStop(0.75, '#ff0000');
+    gradient.addColorStop(0.25, '#ffff00');
+    gradient.addColorStop(0, '#ffffff');
 
-    this.pause = function (){
+    this.stop = function () {
 
         console.log("mute");
+        if (!sourceNode.stop){
+            sourceNode.stop = sourceNode.noteOff;
+        }
+        sourceNode.stop(0);
         sourceNode.buffer = null;
 
     };
 
-    this.getVolume = function(){
+    this.getVolume = function () {
         return currentVolume;
     };
 
@@ -50,58 +55,52 @@ var Sound = function (music) {
         // connect to destination, else it isn't called
         javascriptNode.connect(context.destination);
 
-
         // setup a analyzer
         analyser = context.createAnalyser();
         analyser.smoothingTimeConstant = 0.0;
         analyser.fftSize = 1024;
 
-        /*
-        analyser2 = context.createAnalyser();
-        analyser2.smoothingTimeConstant = 0.0;
-        analyser2.fftSize = 2048;
-*/
-
         // create a buffer source node
         sourceNode = context.createBufferSource();
-        //splitter = context.createChannelSplitter();
 
         // connect the source to the analyser and the splitter
         //sourceNode.connect(splitter);
         sourceNode.connect(analyser);
-
-
-        // connect one of the outputs from the splitter to
-        // the analyser
-        /*
-        splitter.connect(analyser,0,0);
-        splitter.connect(analyser2,1,0);
-        */
 
         // connect the splitter to the javascriptnode
         // we use the javascript node to draw at a
         // specific interval.
         analyser.connect(javascriptNode);
 
-//        splitter.connect(context.destination,0,0);
-//        splitter.connect(context.destination,0,1);
-
         // and connect to destination
+        if (!context.createGain){
+            context.createGain = context.createGainNode;
+        }
         volumeNode = context.createGain();
-        volumeNode.connect(context.destination);
-
         sourceNode.connect(volumeNode);
-
-
+        volumeNode.connect(context.destination);
         sourceNode.connect(context.destination);
     }
 
+    this.mute = function(){
+        //console.log("mute");
+        volumeNode.gain.value = -1;
+    };
+
+    this.unmute = function(){
+        //console.log("unmute");
+        volumeNode.gain.value = 0.2;
+    };
+
     function playSound(buffer) {
         //Set the volume
-        volumeNode.gain.value = 0.0;
+        volumeNode.gain.value = 0.2;
         sourceNode.buffer = buffer;
-        sourceNode.onended = function(){
-          Main().endGame();
+        if (!sourceNode.start){
+            sourceNode.start = sourceNode.noteOn;
+        }
+        sourceNode.onended = function () {
+            Main().endGame();
         };
         sourceNode.start(0);
     }
@@ -118,10 +117,10 @@ var Sound = function (music) {
         request.responseType = 'arraybuffer';
 
         // When loaded decode the data
-        request.onload = function() {
+        request.onload = function () {
 
             // decode the data
-            context.decodeAudioData(request.response, function(buffer) {
+            context.decodeAudioData(request.response, function (buffer) {
                 // when the audio is decoded play the sound
                 playSound(buffer);
             }, onError);
@@ -143,17 +142,6 @@ var Sound = function (music) {
         return average;
     }
 
-    function getTime() {
-        return music.duration;
-    }
-
-    this.musicToLevel = function () {
-        //music est un string qui contient l'addresse de la musique accessible par le navigateur
-        return generation_level(getTime());
-
-    };
-
-
     // load the sound
     setupAudioNodes();
     loadSound(music.src);
@@ -162,35 +150,25 @@ var Sound = function (music) {
     // we use information from the analyzer node
     // to draw the volume
 
-    javascriptNode.onaudioprocess = function() {
+    javascriptNode.onaudioprocess = function () {
 
 
         // get the average for the first channel
-        var array =  new Uint8Array(analyser.frequencyBinCount),
+        var array = new Uint8Array(analyser.frequencyBinCount),
             average;
         analyser.getByteFrequencyData(array);
         average = getAverageVolume(array);
         currentVolume = average;
 
-        // get the average for the second channel
-        /*
-         var array2 =  new Uint8Array(analyser2.frequencyBinCount);
-         analyser2.getByteFrequencyData(array2);
-         var average2 = getAverageVolume(array2);
-         */
-
-        //console.log("volume1="+average);
-        //console.log("volume2="+average2);
         // clear the current state
         ctx.clearRect(0, 0, 60, 130);
 
         // set the fill style
-        ctx.fillStyle=gradient;
+        ctx.fillStyle = gradient;
 
         // create the meters
-        ctx.fillRect(0,130-average,25,130);
+        ctx.fillRect(0, 130 - average, 25, 130);
         //ctx.fillRect(30,130-average2,25,130);
     };
-
 
 };

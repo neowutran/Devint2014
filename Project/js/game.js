@@ -18,6 +18,8 @@ var Game = function (difficulte) {
         sound2 = new Audio(config.bip_2),
         sound3 = new Audio(config.bip_3),
         sound4 = new Audio(config.bip_4),
+        damage = new Audio(config.damage),
+        explosion = new Audio(config.explosion),
     //nombre de chance de collision avant echec de la partie
         pv = config.max_pv,
         score = 0;
@@ -37,18 +39,18 @@ var Game = function (difficulte) {
     function removeListObstacles(listObstacles) {
         listObstacles.forEach(function (element) {
             var index = obstacles.indexOf(element);
-            if( index !== -1){
+            if (index !== -1) {
                 obstacles.splice(index, 1);
             }
         });
     }
 
-    function inArray(element){
+    function inArray(element) {
         var isInArray = false;
-        obstacles.forEach(function(elem){
-           if(element.id === elem.id){
-               isInArray = true;
-           }
+        obstacles.forEach(function (elem) {
+            if (element.id === elem.id) {
+                isInArray = true;
+            }
         });
         return isInArray;
     }
@@ -58,6 +60,7 @@ var Game = function (difficulte) {
         if (listObstacles.length === 0) {
             current_delay = config.frame_delay_between_wrong_input;
             score -= 200;
+            Sound().mute();
         }
         removeListObstacles(listObstacles);
     }
@@ -70,63 +73,66 @@ var Game = function (difficulte) {
                     //Pas d'input, ne rien faire
                     break;
                 case 1:
-                    $("#north").css("color","black");
+                    $("#north").css("color", "black");
                     removeObstacles(1);
                     user_input = 0;	//Pourquoi ?
                     break;
                 case 2:
-                    $("#east").css("color","black");
+                    $("#east").css("color", "black");
                     removeObstacles(2);
                     user_input = 0;
                     break;
                 case 3:
-                    $("#south").css("color","black");
+                    $("#south").css("color", "black");
                     removeObstacles(3);
                     user_input = 0;
                     break;
                 case 4:
-                    $("#west").css("color","black");
+                    $("#west").css("color", "black");
                     removeObstacles(4);
                     user_input = 0;
                     break;
                 default :
                     //Impossible
-					console.log("bug?" + user_input);
+                    console.log("bug?" + user_input);
                     break;
             }
         } else {
             current_delay--;
+            if(current_delay === 0){
+                Sound().unmute();
+            }
         }
 
         score++;
         $("#score").html(score);
 
-        if($.isEmptyObject(level)){
+        if ($.isEmptyObject(level)) {
             return;
         }
 
         level.forEach(function (element) {
             if (element.distance === 1) {
-                console.log("dispo: "+element.direction);
+                console.log("dispo: " + element.direction);
                 obstacles.push(element);
                 switch (element.direction) {
                     case 1:
-                        $("#north").css("color","red");
+                        $("#north").css("color", "red");
                         sound1.currentTime = 0;
                         sound1.play();
                         break;
                     case 2:
-                        $("#east").css("color","red");
+                        $("#east").css("color", "red");
                         sound2.currentTime = 0;
                         sound2.play();
                         break;
                     case 3:
-                        $("#south").css("color","red");
+                        $("#south").css("color", "red");
                         sound3.currentTime = 0;
                         sound3.play();
                         break;
                     case 4:
-                        $("#west").css("color","red");
+                        $("#west").css("color", "red");
                         sound4.currentTime = 0;
                         sound4.play();
                         break;
@@ -140,19 +146,21 @@ var Game = function (difficulte) {
 
                 pv--;
                 score -= 200;
+                $("#score").html(score);
+
                 $("#pv").html(pv);
-                switch(element.direction){
+                switch (element.direction) {
                     case 1:
-                        $("#north").css("color","black");
+                        $("#north").css("color", "black");
                         break;
                     case 2:
-                        $("#east").css("color","black");
+                        $("#east").css("color", "black");
                         break;
                     case 3:
-                        $("#south").css("color","black");
+                        $("#south").css("color", "black");
                         break;
                     case 4:
-                        $("#west").css("color","black");
+                        $("#west").css("color", "black");
                         break;
                     default :
                         console.log("impossible");
@@ -160,9 +168,14 @@ var Game = function (difficulte) {
                 }
                 removeObstacles(element.direction);
                 if (pv === 0) {
-                    $("#player").css("color","red");
+                    $("#player").css("color", "red");
                     console.log("PERDU");
+                    explosion.currentTime = 0;
+                    explosion.play();
                     Main().endGame();
+                }else{
+                    damage.currentTime = 0;
+                    damage.play();
                 }
             }
         });
@@ -177,6 +190,10 @@ var Game = function (difficulte) {
 
     this.set_user_input = function (new_user_input) {
         user_input = new_user_input;
+    };
+
+    this.getScore = function () {
+        return score;
     };
 
 };
