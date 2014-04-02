@@ -10,7 +10,6 @@ var LevelGeneration = function () {
     /*Attributs de classes*/
     var JSONlevel = "",
         id = 0,
-        maxDistance = 40,
         obstacles = [],
         availableDirection = [],
     //Laisser un temps de repos entre 2 obstacle de 40 frame min
@@ -29,7 +28,7 @@ var LevelGeneration = function () {
         //TODO faire un truc mieux que ca
         //console.log("volume:" + volume);
         var random = Math.random() * volume;
-        return random > 30;
+        return random > (100 - (difficulte * 10));
 
     };
 
@@ -65,52 +64,98 @@ var LevelGeneration = function () {
         removeListObstacles(listObstacles);
     }
 
-    this.generate = function (volume) {
+    function removeObstaclesByDirection(direction){
+        var listObstacles = getObstaclesByDirection(direction);
+        removeListObstacles(listObstacles);
+    }
+
+    function getObstaclesByDirection(direction){
+        var newObstacles = [];
+        obstacles.forEach(function (element) {
+            if (element.direction === direction) {
+                newObstacles.push(element);
+            }
+        });
+        return newObstacles;
+    }
+
+    this.generate = function (volume,game_obstacles) {
 
         JSONlevel = "";
 
         var directionIterator,
             generateObstacle,
             distance,
-            direction = [];
+            game_obstacle,
+            tobe_removed = [];
 
-        direction[1] = false;
-        direction[2] = false;
-        direction[3] = false;
-        direction[4] = false;
+        availableDirection[1] = true;
+        availableDirection[2] = true;
+        availableDirection[3] = true;
+        availableDirection[4] = true;
+
+        tobe_removed[1] = false;
+        tobe_removed[2] = false;
+        tobe_removed[3] = false;
+        tobe_removed[4] = false;
 
         obstacles.forEach(function (obstacle) {
+            //Rapprochement de l'obstacle du joueur
             obstacle.distance--;
+
+            //Notifier l'impact de l'obstacle
             if (obstacle.distance === 0) {
                 if (JSONlevel !== "") {
                     JSONlevel += ",";
                 }
                 JSONlevel += JSON.stringify(obstacle);
+
+            }else{
+                //On compare notre liste d'obstacle a celle du joueur, si il y a des element de differences (obstacles evité par le joueur, alors on lui
+                // attribue des points et on met a jour notre liste d'obstacle)
+                availableDirection[obstacle.direction] = false;
+                game_obstacle = $.grep(game_obstacles, function(element){
+                    return element.id === obstacle.id;
+                });
+                if(game_obstacle.length === 0){
+                    availableDirection[obstacle.direction] = true;
+                    tobe_removed[obstacle.direction] = true;
+                    Game().setScore(Game().getScore() + obstacle.distance * 50);
+                }
             }
-            direction[obstacle.direction] = true;
         });
+        for(directionIterator = 1; directionIterator < 5 ; directionIterator++){
+            if(tobe_removed[directionIterator] === true){
+                removeObstaclesByDirection(directionIterator);
+            }
+        }
+
+        //On supprime de notre liste d'obstacles les obstacles ayant une distance <= 0
         removeObstacles();
 
-        // console.log("diff:"+difficulte);
-        // console.log("d0");
+        //On defini le nombre de touche + 1 qui vont etre utilisé
         if (difficulte === 1) {
-            //    console.log("d1");
+            //2 touche (3-1)
             nbTouches = 3;
         }
         else if (difficulte === 2) {
-            //  console.log("d2");
+            //3 touches (4-1)
             nbTouches = 4;
         }
         else if (difficulte === 3) {
-            //  console.log("d3");
+            //4 touches (5-1)
             nbTouches = 5;
         }
+
         for (directionIterator = 1; directionIterator < nbTouches; directionIterator++) {
 
+            //si il est autorisé de generer un obstacle
             if (availableDirection[directionIterator] === true && volume !== 0 && currentCooldown <= 0) {
 
+                //on lance une change de generation d'un obstacle
                 generateObstacle = this.generateObstacle(volume);
 
+                //on defini la distance de l'obstacle par rapport au joueur
                 //TODO faire mieux que ca
                 if (difficulte === 1) {
                     distance = computeDelay(160, 200);
@@ -120,6 +165,7 @@ var LevelGeneration = function () {
                     distance = computeDelay(60, 80);
                 }
 
+                //on notifie le jeu de l'obstacle si il y en a un
                 if (generateObstacle === true) {
                     obstacles.push(
                         {
@@ -146,12 +192,6 @@ var LevelGeneration = function () {
                     //Ne pas generer plus de 1 obstacle par frame
                     break;
                 }
-            }
-        }
-
-        for (directionIterator = 1; directionIterator < 5; directionIterator++) {
-            if (direction[directionIterator] === true) {
-                availableDirection[directionIterator] = true;
             }
         }
 

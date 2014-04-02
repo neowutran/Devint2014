@@ -47,7 +47,7 @@ var Main = function () {
         if(Game().getScore() > 0){
             score = Game().getScore();
         }
-        speak.play("score: " + score + " points");
+        speak.play(config.score.replace("%d", score));
     };
 
 };

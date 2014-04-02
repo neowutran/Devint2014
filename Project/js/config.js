@@ -23,5 +23,7 @@ var config = {
     "bip_3"                          : "js/sounds/la3.ogg",
     "bip_4"                          : "js/sounds/do4.ogg",
     "damage": "js/sounds/damage.ogg",
-    "explosion": "js/sounds/explosion.ogg"
+    "explosion": "js/sounds/explosion.ogg",
+    "pv_lost": 200,
+    "score": "Votre score est de %d points"
 };

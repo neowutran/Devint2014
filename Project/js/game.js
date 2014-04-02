@@ -59,7 +59,7 @@ var Game = function (difficulte) {
         var listObstacles = getObstacles(direction);
         if (listObstacles.length === 0) {
             current_delay = config.frame_delay_between_wrong_input;
-            score -= 200;
+            score -= config.pv_lost;
             Sound().mute();
         }
         removeListObstacles(listObstacles);
@@ -145,7 +145,7 @@ var Game = function (difficulte) {
             if (element.distance === 0 && inArray(element)) {
 
                 pv--;
-                score -= 200;
+                score -= config.pv_lost;
                 $("#score").html(score);
 
                 $("#pv").html(pv);
@@ -183,7 +183,7 @@ var Game = function (difficulte) {
 
     //@romain, ceci est une methode en publique
     this.run_game = function (volume) {
-        level = JSON.parse(LevelGeneration().generate(volume));
+        level = JSON.parse(LevelGeneration().generate(volume, obstacles));
         calculate_frame();
         frame++;
     };
@@ -194,6 +194,10 @@ var Game = function (difficulte) {
 
     this.getScore = function () {
         return score;
+    };
+
+    this.setScore = function(new_score){
+        score = new_score;
     };
 
 };
