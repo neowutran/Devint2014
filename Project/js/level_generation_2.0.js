@@ -13,7 +13,7 @@ var LevelGeneration = function () {
         obstacles = [],
         availableDirection = [],
     //Laisser un temps de repos entre 2 obstacle de 40 frame min
-        cooldown = 40,
+        cooldown = config.cooldown,
         currentCooldown = 0,
         nbTouches,
         difficulte = 1; //difficulte : 1=facile, 2 = normal et 3 = difficile.

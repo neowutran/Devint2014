@@ -62,7 +62,7 @@ var SelectMusic = function () {
                 $("#music").append("<button type='button' class='music btn btn-primary btn-lg btn-block'>" + music.file + "</button>");
                 first = 0;
                 music_src = music.file;
-                speak.play(music.file);
+                speak.play(music.file.replace(".ogg", ""));
 
             } else {
                 $("#music").append("<button type='button' class='music btn btn-default btn-lg btn-block'>" + music.file + "</button>");
@@ -75,7 +75,7 @@ var SelectMusic = function () {
         $('.music').each(function (index, element) {
             console.log($(this).text());
             if (index === index_selectionne) {
-                speak.play($(this).text());
+                speak.play($(this).text().replace(".ogg",""));
                 music_src = $(this).text();
                 $(element).attr("class", "music btn btn-primary btn-lg btn-block");
             } else {

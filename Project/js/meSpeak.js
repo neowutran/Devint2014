@@ -11,6 +11,18 @@ var MeSpeak = function () {
     MeSpeak.prototype.instance = this;
 
     this.play = function (message) {
+        meSpeak.loadVoice("js/mespeak/voices/en/en.json");
+        meSpeak.speak(message, {
+            amplitude: 100,
+            wordgap  : 0,
+            pitch    : 45,
+            speed    : 34,
+            variant  : ''
+        });
+    };
+
+    this.jouer = function(message){
+        meSpeak.loadVoice("js/mespeak/voices/fr.json");
         meSpeak.speak(message, {
             amplitude: 100,
             wordgap  : 0,
@@ -23,5 +35,4 @@ var MeSpeak = function () {
 };
 
 meSpeak.loadConfig("js/mespeak/mespeak_config.json");
-meSpeak.loadVoice("js/mespeak/voices/fr.json");
 var speak = new MeSpeak();

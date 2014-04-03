@@ -25,5 +25,6 @@ var config = {
     "damage": "js/sounds/damage.ogg",
     "explosion": "js/sounds/explosion.ogg",
     "pv_lost": 200,
-    "score": "Votre score est de %d points"
+    "score": "Votre score est de %d points",
+    "cooldown": 40
 };
