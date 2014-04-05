@@ -36,6 +36,8 @@ var Main = function () {
             $(location).attr('href', "./menu-jouer.html");
         }
 
+        console.log(srcMusic);
+
 
         music = new Audio(srcMusic);
 

@@ -93,13 +93,8 @@ var SelectMusic = function () {
         var first = 1;
         music_list.forEach(function (music) {
 
-            console.log(currentDirectory);
             if(music.file.lastIndexOf(currentDirectory, 0) !== 0){
                 return;
-            }
-
-            if(currentDirectory !== ""){
-                console.log(music.file);
             }
 
             var splice = music.file.split("/"),
@@ -119,11 +114,11 @@ var SelectMusic = function () {
 
             }
 
-            music_src = data_file;
-            music_type = data_type;
 
             if (first === 1) {
 
+                music_src = data_file;
+                music_type = data_type;
                 buttonType = "btn-primary";
                 first = 0;
                 speak.play(data_file);

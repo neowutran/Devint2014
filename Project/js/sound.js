@@ -115,15 +115,15 @@ var Sound = function (music) {
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
         request.responseType = 'arraybuffer';
+        request.onload=function(e)
+        {
+            console.log(e);
+                // decode the data
+                context.decodeAudioData(request.response, function (buffer) {
+                    // when the audio is decoded play the sound
+                    playSound(buffer);
+                }, onError);
 
-        // When loaded decode the data
-        request.onload = function () {
-
-            // decode the data
-            context.decodeAudioData(request.response, function (buffer) {
-                // when the audio is decoded play the sound
-                playSound(buffer);
-            }, onError);
         };
         request.send();
     }
