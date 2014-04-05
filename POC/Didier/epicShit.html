@@ -11,6 +11,16 @@
         console.log('Reeeejected!', e);
     };
 
+    navigator.getUserMedia  = navigator.getUserMedia ||
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia;
+
+    window.AudioContext = window.AudioContext ||
+            window.webkitAudioContext;
+
+    var context = new AudioContext();
+
     // Not showing vendor prefixes.
     navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
         var video = document.querySelector('video');
@@ -20,6 +30,12 @@
         // See crbug.com/110938.
         video.onloadedmetadata = function(e) {
             // Ready to go. Do some stuff.
+            var microphone = context.createMediaStreamSource(stream);
+            var filter = context.createBiquadFilter();
+
+            // microphone -> filter -> destination.
+            microphone.connect(filter);
+            filter.connect(context.destination);
         };
     }, errorCallback);
 </script>
