@@ -5,12 +5,25 @@
 /*global $, jQuery, alert*/
 
 /* classe menu */
+if (typeof String.prototype.startsWith !== 'function') {
+    String.prototype.startsWith = function (str){
+        "use strict";
+        return this.slice(0, str.length) === str;
+    };
+}
+
 var SelectMusic = function () {
     "use strict";
 
     /* variables */
     var index_selectionne = 0,
-        music_src;
+        music_src,
+        music_type,
+        currentDirectory = localStorage.getItem("directory");
+
+    if( currentDirectory === null){
+        currentDirectory = "";
+    }
 
     /* singleton */
     if (SelectMusic.prototype.instance) {
@@ -55,28 +68,83 @@ var SelectMusic = function () {
 
     });
 
+    function occurrences(string, subString, allowOverlapping){
+
+        string+=""; subString+="";
+        if(subString.length<=0){
+            return string.length+1;
+        }
+
+        var n=0,
+            pos= 0,
+            step=allowOverlapping?(1):(subString.length);
+
+        while(true){
+            pos=string.indexOf(subString,pos);
+            if(pos>=0){ n++; pos+=step; } else{
+                break;
+            }
+        }
+        return n;
+    }
+
     function display_music() {
+        $("#music").html("");
         var first = 1;
         music_list.forEach(function (music) {
+
+            console.log(currentDirectory);
+            if(music.file.lastIndexOf(currentDirectory, 0) !== 0){
+                return;
+            }
+
+            if(currentDirectory !== ""){
+                console.log(music.file);
+            }
+
+            var splice = music.file.split("/"),
+                data_type,
+                data_file,
+                buttonType;
+
+            if(splice.length === occurrences(currentDirectory, "/") +1){
+
+                data_type = "file";
+                data_file = splice.join("/");
+
+            }else{
+
+                data_type = "folder";
+                data_file = splice[0]+"/";
+
+            }
+
+            music_src = data_file;
+            music_type = data_type;
+
             if (first === 1) {
-                $("#music").append("<button type='button' class='music btn btn-primary btn-lg btn-block'>" + music.file + "</button>");
+
+                buttonType = "btn-primary";
                 first = 0;
-                music_src = music.file;
-                speak.play(music.file.replace(".ogg", ""));
+                speak.play(data_file);
 
             } else {
-                $("#music").append("<button type='button' class='music btn btn-default btn-lg btn-block'>" + music.file + "</button>");
+                buttonType = "btn-default";
             }
+
+            $("#music").append("<button type='button' class='music btn "+buttonType+" btn-lg btn-block' data-type='"+data_type+"'  data-file='"+data_file+"'>" + data_file + "</button>");
+
         });
     }
 
     function update() {
 
         $('.music').each(function (index, element) {
-            console.log($(this).text());
             if (index === index_selectionne) {
-                speak.play($(this).text().replace(".ogg",""));
-                music_src = $(this).text();
+
+                speak.play($(this).text());
+                music_src = $(this).data("file");
+                music_type = $(this).data("type");
                 $(element).attr("class", "music btn btn-primary btn-lg btn-block");
             } else {
                 $(element).attr("class", "music btn btn-default btn-lg btn-block");
@@ -92,9 +160,23 @@ var SelectMusic = function () {
     }
 
     function cancel() {
-        console.log("cancel");
-        $(location).attr('href', "./menu-jouer.html");
+        if(occurrences(currentDirectory, "/") === 0){
 
+            console.log("cancel");
+            $(location).attr('href', "./menu-jouer.html");
+
+        }else{
+
+            currentDirectory = currentDirectory.substring(0, currentDirectory.length-1);
+
+            var index = currentDirectory.indexOf("/");
+            currentDirectory = currentDirectory.substring(0, index !== -1 ? index : currentDirectory.length);
+            if(index === -1){
+                currentDirectory = "";
+            }
+            localStorage.setItem("directory", currentDirectory);
+            display_music();
+        }
     }
 
     function help() {
@@ -120,8 +202,22 @@ var SelectMusic = function () {
     }
 
     function validate() {
-        localStorage.setItem("music", "music/" + music_src);
-        $(location).attr('href', "./jouer.html");
+
+        if(music_type === "folder"){
+
+            currentDirectory += music_src;
+            localStorage.setItem("directory", currentDirectory);
+            display_music();
+
+        }else{
+
+            localStorage.setItem("music", "music/" + music_src);
+            localStorage.setItem("directory", currentDirectory);
+            $(location).attr('href', "./jouer.html");
+
+        }
+
+
     }
 
 };

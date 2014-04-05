@@ -10,8 +10,14 @@ var MeSpeak = function () {
     }
     MeSpeak.prototype.instance = this;
 
+    meSpeak.loadVoice("js/mespeak/voices/en/en.json");
+    var config = 1;
+
     this.play = function (message) {
-        meSpeak.loadVoice("js/mespeak/voices/en/en.json");
+        if(config !== 1){
+            meSpeak.loadVoice("js/mespeak/voices/en/en.json");
+            config = 1;
+        }
         meSpeak.speak(message, {
             amplitude: 100,
             wordgap  : 0,
@@ -22,7 +28,10 @@ var MeSpeak = function () {
     };
 
     this.jouer = function(message){
-        meSpeak.loadVoice("js/mespeak/voices/fr.json");
+        if(config !== 0){
+            meSpeak.loadVoice("js/mespeak/voices/fr.json");
+            config = 0;
+        }
         meSpeak.speak(message, {
             amplitude: 100,
             wordgap  : 0,

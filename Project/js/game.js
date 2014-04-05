@@ -75,7 +75,7 @@ var Game = function (difficulte) {
                 case 1:
                     $("#north").css("color", "black");
                     removeObstacles(1);
-                    user_input = 0;	//Pourquoi ?
+                    user_input = 0;
                     break;
                 case 2:
                     $("#east").css("color", "black");

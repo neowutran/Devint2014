@@ -89,12 +89,12 @@ var Sound = function (music) {
 
     this.unmute = function(){
         //console.log("unmute");
-        volumeNode.gain.value = 0.2;
+        volumeNode.gain.value = 0.1;
     };
 
     function playSound(buffer) {
         //Set the volume
-        volumeNode.gain.value = 0.2;
+        volumeNode.gain.value = 0.1;
         sourceNode.buffer = buffer;
         if (!sourceNode.start){
             sourceNode.start = sourceNode.noteOn;

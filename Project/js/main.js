@@ -11,16 +11,31 @@ var Main = function () {
 
     this.launchGame = function () {
 
-        var srcMusic;
-        var difficulte;
+        var srcMusic = localStorage.getItem("music"),
+            difficulte = localStorage.getItem("difficulte");
 
-        if (localStorage.difficulte) {
-            difficulte = parseInt(localStorage.getItem("difficulte"), 10);
+        switch(difficulte){
+            case "0":
+                difficulte = difficulteEnum.TUTORIAL;
+                break;
+            case "1":
+                difficulte = difficulteEnum.FACILE;
+                break;
+            case "2":
+                difficulte = difficulteEnum.NORMAL;
+                break;
+            case "3":
+                difficulte = difficulteEnum.DIFFICILE;
+                break;
+            default:
+                $(location).attr('href', "./menu-jouer.html");
+                break;
         }
 
-        if (localStorage.music) {
-            srcMusic = localStorage.getItem("music");
+        if(srcMusic === null){
+            $(location).attr('href', "./menu-jouer.html");
         }
+
 
         music = new Audio(srcMusic);
 

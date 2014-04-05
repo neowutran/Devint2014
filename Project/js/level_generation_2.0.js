@@ -34,6 +34,10 @@ var LevelGeneration = function () {
 
     this.setDifficulte = function (difficult) {
         difficulte = difficult;
+        if(difficulte === null){
+            throw new ArgyrosException("Null pointer exception", "you cannot set difficulte to null");
+        }
+
     };
 
     function getObstacles() {
@@ -134,15 +138,15 @@ var LevelGeneration = function () {
         removeObstacles();
 
         //On defini le nombre de touche + 1 qui vont etre utilisé
-        if (difficulte === 1) {
+        if (difficulte === difficulteEnum.FACILE) {
             //2 touche (3-1)
             nbTouches = 3;
         }
-        else if (difficulte === 2) {
+        else if (difficulte === difficulteEnum.NORMAL) {
             //3 touches (4-1)
             nbTouches = 4;
         }
-        else if (difficulte === 3) {
+        else if (difficulte === difficulteEnum.DIFFICILE) {
             //4 touches (5-1)
             nbTouches = 5;
         }
@@ -157,11 +161,11 @@ var LevelGeneration = function () {
 
                 //on defini la distance de l'obstacle par rapport au joueur
                 //TODO faire mieux que ca
-                if (difficulte === 1) {
+                if (difficulte === difficulteEnum.FACILE) {
                     distance = computeDelay(160, 200);
-                } else if (difficulte === 2) {
+                } else if (difficulte === difficulteEnum.NORMAL) {
                     distance = computeDelay(100, 150);
-                } else if (difficulte === 3) {
+                } else if (difficulte === difficulteEnum.DIFFICILE) {
                     distance = computeDelay(60, 80);
                 }
 
