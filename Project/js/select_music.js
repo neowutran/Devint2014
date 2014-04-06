@@ -90,7 +90,9 @@ var SelectMusic = function () {
 
     function display_music() {
         $("#music").html("");
-        var first = 1;
+        var first = 1,
+        folder=[];
+
         music_list.forEach(function (music) {
 
             if(music.file.lastIndexOf(currentDirectory, 0) !== 0){
@@ -111,7 +113,10 @@ var SelectMusic = function () {
 
                 data_type = "folder";
                 data_file = splice[0]+"/";
-
+                if($.inArray(data_file, folder) !== -1){
+                    return;
+                }
+                folder = folder.concat(data_file);
             }
 
 

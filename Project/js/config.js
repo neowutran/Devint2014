@@ -28,3 +28,5 @@ var config = {
     "score": "Votre score est de %d points",
     "cooldown": 40
 };
+Object.freeze(config);
+Object.freeze(configMenu);
