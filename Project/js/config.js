@@ -22,11 +22,12 @@ var config = {
     "bip_2"                          : "sounds/right.wav",
     "bip_3"                          : "sounds/down.wav",
     "bip_4"                          : "sounds/left.wav",
+    "fanfare"                        : "sounds/crwin.ogg",
     "damage": "sounds/damage.ogg",
     "explosion": "sounds/explosion.ogg",
     "pv_lost": 200,
     "score": "Votre score est de %d points",
-    "cooldown": 40
+    "cooldown": 30
 };
 Object.freeze(config);
 Object.freeze(configMenu);

@@ -100,7 +100,7 @@ var Sound = function (music) {
             sourceNode.start = sourceNode.noteOn;
         }
         sourceNode.onended = function () {
-            Main().endGame();
+            Main().endGame(1);
         };
         sourceNode.start(0);
     }

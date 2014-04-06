@@ -7,7 +7,9 @@ var Main = function () {
     }
     Main.prototype.instance = this;
 
-    var music, animFrame;
+    var music,
+        fanfare = new Audio(config.fanfare),
+        animFrame;
 
     this.launchGame = function () {
 
@@ -57,14 +59,29 @@ var Main = function () {
 
     };
 
-    this.endGame = function () {
+    this.endGame = function (victory) {
         cancelAnimationFrame(animFrame);
         Sound().stop();
         var score = 0;
         if(Game().getScore() > 0){
             score = Game().getScore();
         }
-        speak.jouer(config.score.replace("%d", score));
+
+        /*
+        var delay = fanfare.duration, // durée de fanfare
+            now = new Date(),
+            desiredTime = new Date().setSeconds(now.getSeconds() + delay);
+
+        while (now < desiredTime) {
+            now = new Date(); // update the current time
+        }*/
+        if(victory===1){
+            fanfare.play();
+            setTimeout(function(){console.log(fanfare.duration);speak.jouer(config.score.replace("%d", score));},(fanfare.duration)*1000);
+
+        }else{
+            speak.jouer(config.score.replace("%d", score));
+        }
     };
 
 };

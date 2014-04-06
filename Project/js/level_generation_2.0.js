@@ -10,6 +10,7 @@ var LevelGeneration = function () {
     /*Attributs de classes*/
     var JSONlevel = "",
         id = 0,
+        cmp = 0,
         obstacles = [],
         availableDirection = [],
     //Laisser un temps de repos entre 2 obstacle de 40 frame min
@@ -26,8 +27,12 @@ var LevelGeneration = function () {
     this.generateObstacle = function (volume) {
 
         //TODO faire un truc mieux que ca
-        //console.log("volume:" + volume);
-        var random = Math.random() * volume;
+        console.log("volume:" + volume);
+        var random = volume - computeDelay(25,30) ;
+        console.log(random);
+        if(difficulte===difficulteEnum.FACILE){
+            return false;
+        }
         return random > (100 - (difficulte * 10));
 
     };
@@ -162,21 +167,25 @@ var LevelGeneration = function () {
                 //on defini la distance de l'obstacle par rapport au joueur
                 //TODO faire mieux que ca
                 if (difficulte === difficulteEnum.FACILE) {
-                    distance = computeDelay(160, 200);
+                    distance = computeDelay(70, 100);
                 } else if (difficulte === difficulteEnum.NORMAL) {
-                    distance = computeDelay(100, 150);
+                    distance = computeDelay(50, 70);
                 } else if (difficulte === difficulteEnum.DIFFICILE) {
-                    distance = computeDelay(60, 80);
+                    distance = computeDelay(30, 50);
                 }
-
+                cmp++;
                 //on notifie le jeu de l'obstacle si il y en a un
-                if (generateObstacle === true) {
+                if (generateObstacle === true || (cmp===160 && difficulteEnum.FACILE)) {
+                    var tmp = directionIterator;
+                    directionIterator=computeDelay(1,3);
+                    console.log(directionIterator);
                     obstacles.push(
                         {
                             "distance" : distance,
                             "direction": directionIterator,				//1 -> down  2-> up.
                             "id"       : id					//time when the obstacle pop.
                         }
+
                     );
 
                     if (JSONlevel !== "") {
@@ -188,15 +197,17 @@ var LevelGeneration = function () {
                         "direction": directionIterator,				//1 -> down  2-> up.
                         "id"       : id					//time when the obstacle pop.
                     });
-
+                    directionIterator=tmp;
                     id++;
                     availableDirection[directionIterator] = false;
 
                     currentCooldown = cooldown;
                     //Ne pas generer plus de 1 obstacle par frame
+                    cmp=0;
                     break;
                 }
             }
+
         }
 
         currentCooldown--;
