@@ -5,11 +5,139 @@ var Tutoriel = function () {
         press_up = false,
         press_down = false;
 
+    var sound1;
+
     //Ceci est un singleton
     if (Tutoriel.prototype.instance) {
         return Tutoriel.prototype.instance;
     }
     Tutoriel.prototype.instance = this;
+
+    function doNothing(){}
+    function sleep(milliSeconds){
+        var startTime = new Date().getTime();
+        while (new Date().getTime() < startTime + milliSeconds);
+    }
+
+    function press_leftF(){
+        if (!press_left){
+
+
+            // Quand vous entendez ce son appuyez sur la touche gauche du clavier
+            sound1 = new Audio(configTuto.q_v_e_c_s);
+            sound1.play();
+
+            setTimeout(function(){
+                sound1 = new Audio(config.bip_4);
+                sound1.play();
+            }, 2500);
+
+            setTimeout(function(){
+                sound1 = new Audio(configTuto.fleche_gauche);
+                sound1.play();
+            }, 3500);
+
+            setTimeout(function(){
+                sound1 = new Audio(config.bip_4);
+                sound1.play();
+            }, 8500);
+
+            setTimeout(press_leftF, 15000);
+
+        } else {
+            set_press_false();
+            setTimeout(press_rightF, 2000);
+        }
+    }
+
+    function press_rightF(){
+        if (!press_right){
+
+            // Quand vous entendez ce son appuyez sur la touche droite du clavier
+            sound1 = new Audio(configTuto.q_v_e_c_s);
+            sound1.play();
+
+            setTimeout(function(){
+                sound1 = new Audio(config.bip_2);
+                sound1.play();
+            }, 2500);
+
+            setTimeout(function(){
+                sound1 = new Audio(configTuto.fleche_droite);
+                sound1.play();
+            }, 3500);
+
+            setTimeout(function(){
+                sound1 = new Audio(config.bip_2);
+                sound1.play();
+            }, 8500);
+
+            setTimeout(press_rightF, 15000);
+
+        } else {
+            set_press_false();
+            setTimeout(press_upF, 2000);
+        }
+    }
+
+    function press_upF(){
+        if (!press_up){
+
+            // Quand vous entendez ce son appuyez sur la touche haut du clavier
+            sound1 = new Audio(configTuto.q_v_e_c_s);
+            sound1.play();
+
+            setTimeout(function(){
+                sound1 = new Audio(config.bip_1);
+                sound1.play();
+            }, 2500);
+
+            setTimeout(function(){
+                sound1 = new Audio(configTuto.fleche_haut);
+                sound1.play();
+            }, 3500);
+
+            setTimeout(function(){
+                sound1 = new Audio(config.bip_1);
+                sound1.play();
+            }, 8500);
+
+            setTimeout(press_upF, 15000);
+        } else {
+            set_press_false();
+            setTimeout(press_downF, 2000);
+        }
+    }
+
+    function press_downF(){
+        if (!press_up){
+
+            // Quand vous entendez ce son appuyez sur la touche gauche du clavier
+            sound1 = new Audio(configTuto.q_v_e_c_s);
+            sound1.play();
+
+            setTimeout(function(){
+                sound1 = new Audio(config.bip_3);
+                sound1.play();
+            }, 2500);
+
+            setTimeout(function(){
+                sound1 = new Audio(configTuto.fleche_bas);
+                sound1.play();
+            }, 3500);
+
+            setTimeout(function(){
+                sound1 = new Audio(config.bip_3);
+                sound1.play();
+            }, 8500);
+
+            setTimeout(press_downF, 15000);
+
+        } else {
+            set_press_false();
+            /*setTimeout(press_downF, 2000);*/
+        }
+    }
 
     this.main = function () {
         // son : Bienvenue dans le tutoriel de argyros
@@ -17,48 +145,7 @@ var Tutoriel = function () {
 
         // le tutoriel commence :
 
-        while (!press_left) {
-            // Quand vous entendez ce son appuyez sur la touche haut du clavier
-            sleep(1000);
-            sound1 = new Audio(config.bip_4);
-            sound1.play();
-            sleep(1000);
-            // appuyez dessus
-            sleep(5000);
-        }
-
-        set_press_false();
-        while (!press_right) {
-            // Quand vous entendez ce son appuyez sur la touche haut du clavier
-            sleep(1000);
-            sound1 = new Audio(config.bip_2);
-            sound1.play();
-            sleep(1000);
-            // appuyez dessus
-            sleep(5000);
-        }
-
-        set_press_false();
-        while (!press_up) {
-            // Quand vous entendez ce son appuyez sur la touche haut du clavier
-            sleep(1000);
-            sound1 = new Audio(config.bip_1);
-            sound1.play();
-            sleep(1000);
-            // appuyez dessus
-            sleep(5000);
-        }
-
-        set_press_false();
-        while (!press_down) {
-            // Quand vous entendez ce son appuyez sur la touche haut du clavier
-            sleep(1000);
-            sound1 = new Audio(config.bip_3);
-            sound1.play();
-            sleep(1000);
-            // appuyez dessus
-            sleep(5000);
-        }
+        setTimeout(press_leftF, 1000);
 
     }
 
@@ -95,6 +182,7 @@ var Tutoriel = function () {
             case 112:
                 help();
                 break;
+            //F2è
             case 113:
                 re_read();
                 break;

@@ -15,6 +15,14 @@ var configMenu = {
     "menu_retour1"     : "sounds/menu/menu-retour1.ogg"
 };
 
+var configTuto = {
+    "q_v_e_c_s"         : "sounds/tuto/tuto_quand_vous_entendrez_ce_son.ogg",
+    "fleche_droite"         : "sounds/tuto/tuto_fleche_droite.ogg",
+    "fleche_gauche"         : "sounds/tuto/tuto_fleche_gauche.ogg",
+    "fleche_haut"         : "sounds/tuto/tuto_fleche_haut.ogg",
+    "fleche_bas"         : "sounds/tuto/tuto_fleche_bas.ogg"
+};
+
 var config = {
     "frame_delay_between_wrong_input": 70,
     "max_pv"                         : 3,
