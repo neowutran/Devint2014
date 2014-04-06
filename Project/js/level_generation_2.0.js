@@ -176,6 +176,9 @@ var LevelGeneration = function () {
                 cmp++;
                 //on notifie le jeu de l'obstacle si il y en a un
                 if (generateObstacle === true || (cmp===160 && difficulteEnum.FACILE)) {
+                    var tmp = directionIterator;
+                    directionIterator=computeDelay(1,3);
+                    console.log(directionIterator);
                     obstacles.push(
                         {
                             "distance" : distance,
@@ -194,6 +197,7 @@ var LevelGeneration = function () {
                         "direction": directionIterator,				//1 -> down  2-> up.
                         "id"       : id					//time when the obstacle pop.
                     });
+                    directionIterator=tmp;
                     id++;
                     availableDirection[directionIterator] = false;
 

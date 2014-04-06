@@ -172,7 +172,7 @@ var Game = function (difficulte) {
                     console.log("PERDU");
                     explosion.currentTime = 0;
                     explosion.play();
-                    Main().endGame();
+                    Main().endGame(0);
                 }else{
                     damage.currentTime = 0;
                     damage.play();
