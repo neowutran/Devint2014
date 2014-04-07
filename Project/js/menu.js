@@ -7,6 +7,7 @@ var Menu = function () {
 
     /* variables */
     var menu = ["jouer", "scores", "preferences", "regles", "aide"],
+        sound,
         index_selectionne = 0;
 
     /* singleton */
@@ -57,8 +58,12 @@ var Menu = function () {
     }
 
     function lire_son(src) {
+        if(sound!=null){
+            sound.pause();
+            sound.currentTime = 0;
+        }
         console.log("lire son");
-        var sound = new Audio(src);
+        sound = new Audio(src);
         sound.play();
     }
 
