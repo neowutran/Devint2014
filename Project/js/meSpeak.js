@@ -10,26 +10,21 @@ var MeSpeak = function () {
     }
     MeSpeak.prototype.instance = this;
 
-    meSpeak.loadVoice("js/mespeak/voices/en/en.json");
-    var config = 1;
+    var init = 0;
 
-    this.play = function (message) {
-        if(config !== 1){
-            meSpeak.loadVoice("js/mespeak/voices/en/en.json");
-            config = 1;
+    this.play = function (message, lang) {
+
+        if(init === 0){
+
+            if(lang === "fr"){
+                meSpeak.loadVoice("js/mespeak/voices/fr.json");
+            }else{
+                meSpeak.loadVoice("js/mespeak/voices/en/en.json");
+            }
+            meSpeak.loadConfig("js/mespeak/mespeak_config.json");
+            init = 1;
         }
-        meSpeak.speak(message, {
-            amplitude: 100,
-            wordgap  : 0,
-            pitch    : 45,
-            speed    : 34,
-            variant  : ''
-        });
-    };
 
-    this.jouer = function(message){
-
-        meSpeak.loadVoice("js/mespeak/voices/fr.json");
         meSpeak.speak(message, {
             amplitude: 100,
             wordgap  : 0,
@@ -41,5 +36,4 @@ var MeSpeak = function () {
 
 };
 
-meSpeak.loadConfig("js/mespeak/mespeak_config.json");
 var speak = new MeSpeak();

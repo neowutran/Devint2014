@@ -77,10 +77,13 @@ var Main = function () {
         }*/
         if(victory===1){
             fanfare.play();
-            setTimeout(function(){console.log(fanfare.duration);speak.jouer(config.score.replace("%d", score));},(fanfare.duration)*1000);
+            setTimeout(function(){
+                console.log(fanfare.duration);
+                speak.play(config.score.replace("%d", score), "fr");
+            },(fanfare.duration)*1000);
 
         }else{
-            speak.jouer(config.score.replace("%d", score));
+            speak.play(config.score.replace("%d", score), "fr");
         }
     };
 
