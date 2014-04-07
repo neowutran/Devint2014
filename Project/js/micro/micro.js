@@ -71,14 +71,9 @@ var Micro = function(){
         audioInput = realAudioInput;
         audioInput.connect(inputPoint);
 
-        var analyserNode, zeroGain;
-
-        analyserNode = audioContext.createAnalyser();
-        analyserNode.fftSize = 2048;
-        inputPoint.connect( analyserNode );
+        var zeroGain;
 
         audioRecorder = new Recorder( inputPoint );
-
         zeroGain = audioContext.createGain();
         zeroGain.gain.value = 0.0;
         inputPoint.connect( zeroGain );
