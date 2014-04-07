@@ -66,14 +66,6 @@ function exportWAV(type){
   this.postMessage(audioBlob);
 }
 
-function exportMonoWAV(type){
-  var bufferL = mergeBuffers(recBuffersL, recLength);
-  var dataview = encodeWAV(bufferL, true);
-  var audioBlob = new Blob([dataview], { type: type });
-
-  this.postMessage(audioBlob);
-}
-
 function getBuffers() {
   var buffers = [];
   buffers.push( mergeBuffers(recBuffersL, recLength) );

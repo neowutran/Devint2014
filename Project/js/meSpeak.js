@@ -25,6 +25,7 @@ var MeSpeak = function () {
             init = 1;
         }
 
+        meSpeak.stop();
         meSpeak.speak(message, {
             amplitude: 100,
             wordgap  : 0,

@@ -1,4 +1,5 @@
 function drawBuffer( width, height, context, data ) {
+
     var step = Math.ceil( data.length / width );
     var amp = height / 2;
     context.fillStyle = "silver";
@@ -6,7 +7,7 @@ function drawBuffer( width, height, context, data ) {
         var min = 1.0;
         var max = -1.0;
         for (j=0; j<step; j++) {
-            var datum = data[(i*step)+j]; 
+            var datum = data[(i*step)+j];
             if (datum < min)
                 min = datum;
             if (datum > max)
