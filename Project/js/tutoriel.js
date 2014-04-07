@@ -1,11 +1,11 @@
 var Tutoriel = function () {
+    'use strict';
 
     var press_right = false,
         press_left = false,
         press_up = false,
-        press_down = false;
-
-    var sound1;
+        press_down = false,
+        sound1;
 
     //Ceci est un singleton
     if (Tutoriel.prototype.instance) {
@@ -129,7 +129,7 @@ var Tutoriel = function () {
 
         } else {
             set_press_false();
-            
+
         }
     }
 
@@ -141,7 +141,7 @@ var Tutoriel = function () {
 
         setTimeout(press_leftF, 1000);
 
-    }
+    };
 
     function key_left() {
         press_left = true;
@@ -152,7 +152,7 @@ var Tutoriel = function () {
     }
 
     function key_down() {
-        press_up = true;
+        press_down = true;
     }
 
     function key_up() {
@@ -172,36 +172,29 @@ var Tutoriel = function () {
 
     $("body").keypress(function (event) {
         switch (event.keyCode) {
-            //F1
-            case 112:
-                help();
-                break;
-            //F2è
-            case 113:
-                re_read();
-                break;
             //key up
             case 38:
+                event.preventDefault();
                 key_up();
                 break;
             //key right
             case 39:
+                event.preventDefault();
                 key_right();
                 break;
             //key down
             case 40:
+                event.preventDefault();
                 key_down();
                 break;
             //key left
             case 37:
+                event.preventDefault();
                 key_left();
-                break;
-            //enter
-            case 13:
-                validate();
                 break;
             //escape
             case 27:
+                event.preventDefault();
                 cancel();
                 break;
         }

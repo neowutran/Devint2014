@@ -28,10 +28,8 @@ var MeSpeak = function () {
     };
 
     this.jouer = function(message){
-        if(config !== 0){
-            meSpeak.loadVoice("js/mespeak/voices/fr.json");
-            config = 0;
-        }
+
+        meSpeak.loadVoice("js/mespeak/voices/fr.json");
         meSpeak.speak(message, {
             amplitude: 100,
             wordgap  : 0,
