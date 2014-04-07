@@ -104,7 +104,7 @@ var Game = function (difficulte) {
             }
         }
 
-        score++;
+        //score++;
         $("#score").html(score);
 
         if ($.isEmptyObject(level)) {
