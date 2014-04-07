@@ -86,7 +86,7 @@ var MenuJouer = function () {
         switch (getMenuSelectionne()) {
             //TODO changer le tutoriel
             case "tutoriel" :
-                return configMenu.menu_tutoriel1;
+                return configMenu.menu_facile1;
             case "facile" :
                 return configMenu.menu_facile1;
             case "normal" :

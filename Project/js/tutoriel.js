@@ -13,12 +13,6 @@ var Tutoriel = function () {
     }
     Tutoriel.prototype.instance = this;
 
-    function doNothing(){}
-    function sleep(milliSeconds){
-        var startTime = new Date().getTime();
-        while (new Date().getTime() < startTime + milliSeconds);
-    }
-
     function press_leftF(){
         if (!press_left){
 
@@ -135,7 +129,7 @@ var Tutoriel = function () {
 
         } else {
             set_press_false();
-            /*setTimeout(press_downF, 2000);*/
+            
         }
     }
 

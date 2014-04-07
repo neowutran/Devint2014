@@ -16,11 +16,11 @@ var configMenu = {
 };
 
 var configTuto = {
-    "q_v_e_c_s"         : "music/tuto/tuto_quand_vous_entendrez_ce_son.ogg",
-    "fleche_droite"         : "music/tuto/tuto_fleche_droite.ogg",
-    "fleche_gauche"         : "music/tuto/tuto_fleche_gauche.ogg",
-    "fleche_haut"         : "music/tuto/tuto_fleche_haut.ogg",
-    "fleche_bas"         : "music/tuto/tuto_fleche_bas.ogg"
+    "q_v_e_c_s"         : "sounds/tuto/tuto_quand_vous_entendrez_ce_son.ogg",
+    "fleche_droite"         : "sounds/tuto/tuto_fleche_droite.ogg",
+    "fleche_gauche"         : "sounds/tuto/tuto_fleche_gauche.ogg",
+    "fleche_haut"         : "sounds/tuto/tuto_fleche_haut.ogg",
+    "fleche_bas"         : "sounds/tuto/tuto_fleche_bas.ogg"
 };
 
 var config = {

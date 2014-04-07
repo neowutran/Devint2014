@@ -12,7 +12,8 @@ var configMenu = {
     "menu_facile1"     : "sounds/menu/menu-facile1.ogg",
     "menu_normal1"     : "sounds/menu/menu-normal1.ogg",
     "menu_difficile1"  : "sounds/menu/menu-difficile1.ogg",
-    "menu_retour1"     : "sounds/menu/menu-retour1.ogg"
+    "menu_retour1"     : "sounds/menu/menu-retour1.ogg",
+    "menu_tutoriel1"   : "sounds/menu/menu-tutoriel1.ogg"
 };
 
 var configTuto = {
