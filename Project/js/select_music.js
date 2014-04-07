@@ -143,6 +143,7 @@ var SelectMusic = function () {
             if (index === index_selectionne) {
 
                 speak.play($(this).text());
+
                 music_src = $(this).data("file");
                 music_type = $(this).data("type");
                 $(element).attr("class", "music btn btn-primary btn-lg btn-block");
