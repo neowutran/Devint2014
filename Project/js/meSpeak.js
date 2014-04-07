@@ -24,7 +24,7 @@ var MeSpeak = function () {
             meSpeak.loadConfig("js/mespeak/mespeak_config.json");
             init = 1;
         }
-
+        meSpeak.stop();
         meSpeak.speak(message, {
             amplitude: 100,
             wordgap  : 0,
