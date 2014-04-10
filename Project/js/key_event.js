@@ -75,6 +75,9 @@ var KeyPressed = function () {
             //key left
             case 37:
                 event.preventDefault();
+                //TODO remove after
+                key_up();
+
                 key_left();
                 break;
             //enter
