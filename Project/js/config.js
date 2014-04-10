@@ -26,7 +26,7 @@ var configTuto = {
 
 var config = {
     "frame_delay_between_wrong_input": 70,
-    "max_pv"                         : 3,
+    "max_pv"                         : 8,
     "bip_1"                          : "sounds/jump.wav",
     "bip_2"                          : "sounds/right.wav",
     "bip_3"                          : "sounds/down.wav",
@@ -36,7 +36,7 @@ var config = {
     "explosion": "sounds/explosion.ogg",
     "pv_lost": 50,
     "score": "Votre score est de %d points",
-    "cooldown": 30
+    "cooldown": 50
 };
 Object.freeze(config);
 Object.freeze(configMenu);
