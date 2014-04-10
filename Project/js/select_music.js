@@ -19,7 +19,8 @@ var SelectMusic = function () {
     var index_selectionne = 0,
         music_src,
         music_type,
-        currentDirectory = localStorage.getItem("directory");
+        currentDirectory = localStorage.getItem("directory"),
+        music_play;
 
     if( currentDirectory === null){
         currentDirectory = "";
@@ -126,7 +127,12 @@ var SelectMusic = function () {
                 music_type = data_type;
                 buttonType = "btn-primary";
                 first = 0;
-                speak.play(data_file);
+                if(music_type === "folder"){
+                    speak.play(music_src);
+                }else{
+                    music_play = new Audio("music/"+music_src);
+                    music_play.play();
+                }
 
             } else {
                 buttonType = "btn-default";
@@ -142,10 +148,19 @@ var SelectMusic = function () {
         $('.music').each(function (index, element) {
             if (index === index_selectionne) {
 
-                speak.play($(this).text());
-
+                if(music_play !==  null && music_play !== undefined){
+                    music_play.pause();
+                //    music_play.currentTime = 0;
+                }
                 music_src = $(this).data("file");
                 music_type = $(this).data("type");
+                if(music_type === "folder" ){
+                    speak.play($(this).text());
+                }else{
+                    music_play = new Audio("music/"+music_src);
+                    music_play.play();
+                }
+
                 $(element).attr("class", "music btn btn-primary btn-lg btn-block");
             } else {
                 $(element).attr("class", "music btn btn-default btn-lg btn-block");
@@ -161,6 +176,10 @@ var SelectMusic = function () {
     }
 
     function cancel() {
+        if(music_play !==  null && music_play !== undefined){
+            music_play.pause();
+            //    music_play.currentTime = 0;
+        }
         if(occurrences(currentDirectory, "/") === 0){
 
             console.log("cancel");
