@@ -129,7 +129,7 @@ var LevelGeneration = function () {
                 if(game_obstacle.length === 0){
                     availableDirection[obstacle.direction] = true;
                     tobe_removed[obstacle.direction] = true;
-                    Game().setScore(Game().getScore() + obstacle.distance * 50);
+                    Game().setScore(Game().getScore() + obstacle.distance);
                 }
             }
         });

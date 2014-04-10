@@ -34,7 +34,7 @@ var config = {
     "fanfare"                        : "sounds/crwin.ogg",
     "damage": "sounds/damage.ogg",
     "explosion": "sounds/explosion.ogg",
-    "pv_lost": 200,
+    "pv_lost": 50,
     "score": "Votre score est de %d points",
     "cooldown": 30
 };
