@@ -36,7 +36,7 @@ var config = {
     "explosion": "sounds/explosion.ogg",
     "pv_lost": 50,
     "score": "Votre score est de %d points",
-    "cooldown": 50
+    "cooldown": 60
 };
 Object.freeze(config);
 Object.freeze(configMenu);
