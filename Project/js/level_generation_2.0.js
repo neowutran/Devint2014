@@ -167,7 +167,7 @@ var LevelGeneration = function () {
                 //on defini la distance de l'obstacle par rapport au joueur
                 //TODO faire mieux que ca
                 if (difficulte === difficulteEnum.FACILE) {
-                    distance = computeDelay(110, 150);
+                    distance = computeDelay(170, 220);
                 } else if (difficulte === difficulteEnum.NORMAL) {
                     distance = computeDelay(50, 70);
                 } else if (difficulte === difficulteEnum.DIFFICILE) {
