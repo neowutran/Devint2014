@@ -7,7 +7,8 @@ list_music(){
             cd "$music"
             list_music ${music}"/"
             cd ".."
-        fi
+	else
+        
 	    extension=$(echo $music | sed 's/\(^.*\)\(....\)$/\2/')
 	    if [ "$extension" = ".ogg" ]; then
 		    if [ $first -eq 0 ]; then
@@ -18,6 +19,7 @@ list_music(){
 		    fi
 		    chaine="$chaine {\"file\":\"${1}${music}\"}"
 	    fi
+	fi
     done
 }
 
