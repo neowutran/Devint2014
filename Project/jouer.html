@@ -50,16 +50,24 @@
     <div id="log">
     </div>
     <div id="game">
-        <!-- TODO menu generique lu a partir d'un fichier JSON -->
-        <audio id="music" preload="auto" src="music/isick.ogg"></audio>
-        <canvas width="60" height="130" style="display: block;" id="canvas"></canvas>
-        <div id="affichage">
-            -<span id="north">#</span>-<br>
-            <span id="west">#</span><span id="player">#</span><span id="east">#</span><br>
-            -<span id="south">#</span>-<br>
-        </div>
+        <table id="display">
+            <tr>
+                <td onclick="mouse(1)"><video src="" width="100%" height="100%"></video></td>
+                <td onclick="mouse(2)"></td>
+                <td onclick="mouse(3)"></td>
+            </tr>
+            <tr>
+                <td onclick="mouse(4)"></td>
+                <td onclick="mouse(5)"></td>
+                <td onclick="mouse(6)"></td>
+            </tr>
+            <tr>
+                <td onclick="mouse(7)"></td>
+                <td onclick="mouse(8)"></td>
+                <td onclick="mouse(9)"></td>
+            </tr>
+        </table>
         <br>
-        pv: <span id="pv"></span>
         score: <span id="score"></span>
     </div>
 </div> <!-- /container -->
