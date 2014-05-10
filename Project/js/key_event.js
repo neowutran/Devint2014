@@ -13,6 +13,10 @@ var KeyPressed = function () {
         console.log("re read");
     }
 
+    function mouse(id){
+        alert("Test");
+    }
+
     function cancel() {
         console.log("cancel");
         $(location).attr('href', "./select_music.html");
