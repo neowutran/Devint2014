@@ -14,8 +14,24 @@ var KeyPressed = function () {
     }
 
     this.mouse = function(id){
-        console.log("Click detecter")
+
+        if(id===1){
+            alert("GG");
+        }
     };
+
+
+
+    function sleep(milliseconds) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds){
+                break;
+            }
+        }
+    }
+
+
 
     function cancel() {
         console.log("cancel");

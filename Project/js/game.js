@@ -16,6 +16,9 @@ var Game = function (difficulte) {
     //nombre de chance de collision avant echec de la partie
         score = 0;
 
+    var tab = new Array();
+    var tabActif = new Array(); //Tableau qui indique si un taupiqueur est sortit ou non.
+
     new LevelGeneration().setDifficulte(difficulte);
 
     function getObstacles(direction) {
@@ -185,6 +188,53 @@ var Game = function (difficulte) {
 
     this.setScore = function(new_score){
         score = new_score;
+    };
+
+    this.play = function(){
+        //Initialisation.
+
+        var video = document.getElementById("test");
+        var i = 1;
+        for(i=1;i<10;i++){
+            var video = document.getElementById("taupi"+i);
+            tab[i]=video;
+        }
+
+        var j=0;
+
+        for(j=1;j<tab.length;j++){
+            tab[j].currentTime=0;//play();
+            tab[j].pause();
+        }
+
+
+
+        var rand = Math.floor((Math.random() * 9) + 1);
+
+        tab[rand].play();
+        tabActif[rand]=true;
+
+
+
+    };
+
+    this.bam = function(id){
+        var rand = Math.floor((Math.random() * 9) + 1);
+        if(tabActif[id]===true){
+            var video = document.getElementById("taupi"+id);
+            video.currentTime=0;
+            video.pause();
+            tabActif[id]=false;
+            var newtaupi = document.getElementById("taupi"+rand);
+            newtaupi.play();
+            tabActif[rand]=true;
+            var score = document.getElementById("score");
+            var tmp = parseInt(score.innerHTML);
+            tmp++;
+            //console.log(tmp+1);
+            score.innerHTML=tmp;//.toString();
+        }
+
     };
 
 };
