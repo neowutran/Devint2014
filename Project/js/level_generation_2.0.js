@@ -27,9 +27,9 @@ var LevelGeneration = function () {
     this.generateObstacle = function (volume) {
 
         //TODO faire un truc mieux que ca
-        console.log("volume:" + volume);
+        //console.log("volume:" + volume);
         var random = volume - computeDelay(25,30) ;
-        console.log(random);
+        //console.log(random);
         if(difficulte===difficulteEnum.FACILE){
             return false;
         }

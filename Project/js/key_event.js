@@ -13,9 +13,9 @@ var KeyPressed = function () {
         console.log("re read");
     }
 
-    function mouse(id){
-        alert("Test");
-    }
+    this.mouse = function(id){
+        console.log("Click detecter")
+    };
 
     function cancel() {
         console.log("cancel");
