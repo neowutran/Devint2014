@@ -1,3 +1,5 @@
+var fini = false;
+
 var LevelGeneration = function () {
     'use strict';
 

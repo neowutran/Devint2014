@@ -13,6 +13,7 @@ var Game = function (difficulte) {
         frame = 0,
         level,
         obstacles = [],
+        fini=false,
     //nombre de chance de collision avant echec de la partie
         score = 0;
 
@@ -220,7 +221,11 @@ var Game = function (difficulte) {
 
     this.bam = function(id){
         var rand = Math.floor((Math.random() * 9) + 1);
-        if(tabActif[id]===true){
+
+        if(tabActif[id]===true && fini===false){
+            if(id===100){
+                fini=true;
+            }else{
             var video = document.getElementById("taupi"+id);
             video.currentTime=0;
             video.pause();
@@ -233,8 +238,11 @@ var Game = function (difficulte) {
             tmp++;
             //console.log(tmp+1);
             score.innerHTML=tmp;//.toString();
+            }
         }
 
     };
+
+
 
 };

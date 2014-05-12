@@ -76,6 +76,7 @@ var Main = function () {
             now = new Date(); // update the current time
         }*/
         if(victory===1){
+            fini=true;
             fanfare.play();
             setTimeout(function(){
                 console.log(fanfare.duration);
