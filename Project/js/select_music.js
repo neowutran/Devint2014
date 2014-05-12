@@ -90,7 +90,7 @@ var SelectMusic = function () {
     }
 
     function display_music() {
-        $("#music").html("");
+        $("#tmenu").html("");
         var first = 1,
         folder=[];
 
@@ -125,7 +125,7 @@ var SelectMusic = function () {
 
                 music_src = data_file;
                 music_type = data_type;
-                buttonType = "btn-primary";
+                buttonType = "selectionne";
                 first = 0;
                 if(music_type === "folder"){
                     speak.play(music_src);
@@ -135,12 +135,13 @@ var SelectMusic = function () {
                 }
 
             } else {
-                buttonType = "btn-default";
+                buttonType = "nselectionne";
             }
 
-            $("#music").append("<button type='button' class='music btn "+buttonType+" btn-lg btn-block' data-type='"+data_type+"'  data-file='"+data_file+"'>" + data_file + "</button>");
+            $("#tmenu").append("<tr><td class='music " + buttonType + "' data-type='"+data_type+"'  data-file='"+data_file+"'>" + data_file + "</button>");
 
         });
+
     }
 
     function update() {
@@ -161,9 +162,9 @@ var SelectMusic = function () {
                     music_play.play();
                 }
 
-                $(element).attr("class", "music btn btn-primary btn-lg btn-block");
+                $(element).attr("class", "music selectionne");
             } else {
-                $(element).attr("class", "music btn btn-default btn-lg btn-block");
+                $(element).attr("class", "music nselectionne");
             }
 
         });

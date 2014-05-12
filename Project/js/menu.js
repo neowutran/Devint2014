@@ -6,7 +6,7 @@ var Menu = function () {
     "use strict";
 
     /* variables */
-    var menu = ["jouer", "scores", "preferences", "regles", "aide"],
+    var menu = ["jouer", "scores"],
         sound,
         index_selectionne = 0;
 
@@ -71,9 +71,9 @@ var Menu = function () {
         console.log("selection menu");
         var i;
         for (i = 0; i < menu.length; i++) {
-            $("#" + menu[i]).attr("class", "btn btn-default btn-lg btn-block");
+            $("#" + menu[i]).attr("class", "nselectionne");
         }
-        $("#" + nomMenu).attr("class", "btn btn-primary btn-lg btn-block");
+        $("#" + nomMenu).attr("class", "selectionne");
         lire_son(getSoundAdress());
     }
 
