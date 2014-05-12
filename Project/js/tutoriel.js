@@ -29,18 +29,18 @@ var Tutoriel = function () {
             setTimeout(function(){
                 sound1 = new Audio(configTuto.fleche_gauche);
                 sound1.play();
-            }, 3500);
+            }, 2500);
 
             setTimeout(function(){
                 sound1 = new Audio(config.bip_4);
                 sound1.play();
-            }, 8500);
+            }, 6500);
 
-            setTimeout(press_leftF, 15000);
+            setTimeout(press_leftF, 13000);
 
         } else {
             set_press_false();
-            setTimeout(press_rightF, 2000);
+            setTimeout(press_rightF, 0);
         }
     }
 
@@ -59,18 +59,18 @@ var Tutoriel = function () {
             setTimeout(function(){
                 sound1 = new Audio(configTuto.fleche_droite);
                 sound1.play();
-            }, 3500);
+            }, 2500);
 
             setTimeout(function(){
                 sound1 = new Audio(config.bip_2);
                 sound1.play();
-            }, 8500);
+            }, 6500);
 
-            setTimeout(press_rightF, 15000);
+            setTimeout(press_rightF, 12000);
 
         } else {
             set_press_false();
-            setTimeout(press_upF, 2000);
+            setTimeout(press_upF, 0);
         }
     }
 
@@ -89,17 +89,18 @@ var Tutoriel = function () {
             setTimeout(function(){
                 sound1 = new Audio(configTuto.fleche_haut);
                 sound1.play();
-            }, 3500);
+            }, 2500);
 
             setTimeout(function(){
                 sound1 = new Audio(config.bip_1);
                 sound1.play();
-            }, 8500);
+            }, 6500);
 
-            setTimeout(press_upF, 15000);
+            setTimeout(press_upF, 12000);
         } else {
             set_press_false();
-            setTimeout(press_downF, 2000);
+            //setTimeout(press_downF, 0);
+            $(location).attr('href', "./menu-jouer.html");
         }
     }
 
@@ -118,14 +119,14 @@ var Tutoriel = function () {
             setTimeout(function(){
                 sound1 = new Audio(configTuto.fleche_bas);
                 sound1.play();
-            }, 3500);
+            }, 2500);
 
             setTimeout(function(){
                 sound1 = new Audio(config.bip_3);
                 sound1.play();
-            }, 8500);
+            }, 6500);
 
-            setTimeout(press_downF, 15000);
+            setTimeout(press_downF, 12000);
 
         } else {
             set_press_false();
@@ -139,23 +140,31 @@ var Tutoriel = function () {
 
         // le tutoriel commence :
 
-        setTimeout(press_leftF, 1000);
+        setTimeout(press_rightF, 1000);
 
     };
 
     function key_left() {
         press_left = true;
+       // sound1 = new Audio(config.bip_4);
+        sound1.play();
     }
 
     function key_right() {
         press_right = true;
+        sound1 = new Audio(config.bip_2);
+        sound1.play();
     }
 
     function key_down() {
+        sound1 = new Audio(config.bip_3);
+      //  sound1.play();
         press_down = true;
     }
 
     function key_up() {
+        sound1 = new Audio(config.bip_1);
+        sound1.play();
         press_up = true;
     }
 
