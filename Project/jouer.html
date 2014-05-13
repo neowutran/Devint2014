@@ -14,10 +14,21 @@
     <link rel="stylesheet" href="css/main.css">
 
     <style>
+        h1{
+            text-align: center;
+            color : orangered;
+            font-size: 70px;
+        }
         body {
             padding-top: 50px;
             padding-bottom: 20px;
+            background-color: black;
         }
+        #game{
+            width: 700px;
+            height: 50px;
+        }
+
     </style>
     <link rel="stylesheet" href="library/bootstrap-3.1.1/css/bootstrap-theme.min.css">
     <!--<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
@@ -26,33 +37,14 @@
 <!--[if lt IE 7]>
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 <![endif]-->
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Argyros</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Argyros</a></li>
-            </ul>
-        </div><!--/.navbar-collapse -->
-    </div>
-</div>
-<!-- <button onclick="new Game().play()">JOUER</button> -->
 
-
-<!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="container">
     <div id="log">
     </div>
-    <!-- ATTENTION LE CODE QUI SUIT PEUT PIQUER LES YEUX (les OnClick)-->
+    <!-- ATTENTION LE CODE QUI SUIT PEUT PIQUER LES YEUX ET DONNER ENVIE DE VOMIR (les OnClick)-->
+    <!-- D'AILLEURS SA Y EST J'AI LA GERBE -->
     <div id="game">
-        <table id="display" width="100%" height="100%">
+        <table>
             <tr>
                 <td onclick="if(fini===false){new Game().bam(1)}"><video id="taupi1" src="Image/taupe.webm" autoplay
                                                                 width="100%"
@@ -82,7 +74,7 @@
         <br>
         score: <span id="score">0</span>
     </div>
-</div> <!-- /container -->
+</div>
 <script src="library/jquery-2.1.0.min.js"></script>
 <script src="library/bootstrap-3.1.1/js/bootstrap.min.js"></script>
 <script src="library/jQuery.jPlayer.2.5.0/jquery.jplayer.min.js"></script>

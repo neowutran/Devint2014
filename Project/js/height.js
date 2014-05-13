@@ -9,5 +9,5 @@ function height(bloc){
 	document.getElementById(bloc).style.width = hauteur*0.72+"px";
 }
 
-window.onload = function(){ height("display") };
-window.onresize = function(){ height("display") };
+window.onload = function(){ height("game") };
+window.onresize = function(){ height("game") };
