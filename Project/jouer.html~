@@ -14,10 +14,21 @@
     <link rel="stylesheet" href="css/main.css">
 
     <style>
+        h1{
+            text-align: center;
+            color : orangered;
+            font-size: 70px;
+        }
         body {
             padding-top: 50px;
             padding-bottom: 20px;
+            background-color: black;
         }
+        #game{
+            width: 700px;
+            height: 50px;
+        }
+
     </style>
     <link rel="stylesheet" href="library/bootstrap-3.1.1/css/bootstrap-theme.min.css">
     <!--<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
@@ -26,51 +37,44 @@
 <!--[if lt IE 7]>
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 <![endif]-->
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Argyros</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Argyros</a></li>
-            </ul>
-        </div><!--/.navbar-collapse -->
-    </div>
-</div>
 
-
-<!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="container">
     <div id="log">
     </div>
+    <!-- ATTENTION LE CODE QUI SUIT PEUT PIQUER LES YEUX ET DONNER ENVIE DE VOMIR (les OnClick)-->
+    <!-- D'AILLEURS SA Y EST J'AI LA GERBE -->
     <div id="game">
-        <table id="display" width="100%" height="100%">
+        <table>
             <tr>
-                <td onclick="mouse(1)"><video src="Image/taupe.webm" autoplay width="100%" height="100%"></video></td>
-                <td onclick="mouse(2)"><video src="Image/taupe.webm" autoplay width="100%" height="100%"></video></td>
-                <td onclick="mouse(3)"><video src="Image/taupe.webm" autoplay width="100%" height="100%"></video></td>
+                <td onclick="if(fini===false){new Game().bam(1)}"><video id="taupi1" src="Image/taupe.webm" autoplay
+                                                                width="100%"
+                                                     height="100%"></video></td>
+                <td onclick="if(fini===false)new Game().bam(2)"><video id="taupi2" src="Image/taupe.webm" autoplay
+                                                               width="100%" height="100%"></video></td>
+                <td onclick="if(fini===false)new Game().bam(3)"><video id="taupi3" src="Image/taupe.webm" autoplay
+                                                               width="100%" height="100%"></video></td>
             </tr>
             <tr>
-                <td onclick="mouse(4)"><video src="Image/taupe.webm" autoplay width="100%" height="100%"></video></td>
-                <td onclick="mouse(5)"><video src="Image/taupe.webm" autoplay width="100%" height="100%"></video></td>
-                <td onclick="mouse(6)"><video src="Image/taupe.webm" autoplay width="100%" height="100%"></video></td>
+                <td onclick="if(fini===false)new Game().bam(4)"><video id="taupi4" src="Image/taupe.webm" autoplay width="100%
+                " height="100%"></video></td>
+                <td onclick="if(fini===false)new Game().bam(5)"><video id="taupi5" src="Image/taupe.webm" autoplay
+                                                               width="100%" height="100%"></video></td>
+                <td onclick="if(fini===false)new Game().bam(6)"><video id="taupi6" src="Image/taupe.webm" autoplay
+                                                               width="100%" height="100%"></video></td>
             </tr>
             <tr>
-                <td onclick="mouse(7)"><video src="Image/taupe.webm" autoplay width="100%" height="100%"></video></td>
-                <td onclick="mouse(8)"><video src="Image/taupe.webm" autoplay width="100%" height="100%"></video></td>
-                <td onclick="mouse(9)"><video src="Image/taupe.webm" autoplay width="100%" height="100%"></video></td>
+                <td onclick="if(fini===false)new Game().bam(7)"><video id="taupi7" src="Image/taupe.webm" autoplay
+                                                               width="100%" height="100%"></video></td>
+                <td onclick="if(fini===false)new Game().bam(8)"><video id="taupi8" src="Image/taupe.webm" autoplay
+                                                               width="100%" height="100%"></video></td>
+                <td onclick="if(fini===false)new Game().bam(9)"><video id="taupi9" src="Image/taupe.webm" autoplay width="100%
+                " height="100%"></video></td>
             </tr>
         </table>
         <br>
-        score: <span id="score"></span>
+        score: <span id="score">0</span>
     </div>
-</div> <!-- /container -->
+</div>
 <script src="library/jquery-2.1.0.min.js"></script>
 <script src="library/bootstrap-3.1.1/js/bootstrap.min.js"></script>
 <script src="library/jQuery.jPlayer.2.5.0/jquery.jplayer.min.js"></script>
@@ -85,5 +89,7 @@
 <script src="js/level_generation_2.0.js"></script>
 <script src="js/main.js"></script>
 <script src="js/height.js"></script>
+
+<script>new Game().play();</script>
 </body>
 </html>
