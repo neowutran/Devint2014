@@ -80,6 +80,8 @@ var Main = function () {
             fanfare.play();
             setTimeout(function(){
                 console.log(fanfare.duration);
+                score=document.getElementById("score");
+                score = parseInt(score.innerHTML);
                 speak.play(config.score.replace("%d", score), "fr");
             },(fanfare.duration)*1000);
 
