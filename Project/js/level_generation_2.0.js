@@ -31,7 +31,7 @@ var LevelGeneration = function () {
     availableDirection[9] = true;
 
     this.generateObstacle = function (volume) {
-        return volume > (90 - (difficulte * 10));
+        return volume > (80 - (difficulte * 10));
     };
 
     this.setDifficulte = function (difficult) {
@@ -167,7 +167,7 @@ var LevelGeneration = function () {
                 if (difficulte === difficulteEnum.FACILE) {
                     distance = computeDelay(170, 220);
                 } else if (difficulte === difficulteEnum.NORMAL) {
-                    distance = computeDelay(50, 70);
+                    distance = computeDelay(130, 160);
                 } else if (difficulte === difficulteEnum.DIFFICILE) {
                     distance = computeDelay(100, 150);
                 }
