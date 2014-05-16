@@ -24,10 +24,14 @@ var LevelGeneration = function () {
     availableDirection[2] = true;
     availableDirection[3] = true;
     availableDirection[4] = true;
+    availableDirection[5] = true;
+    availableDirection[6] = true;
+    availableDirection[7] = true;
+    availableDirection[8] = true;
+    availableDirection[9] = true;
 
     this.generateObstacle = function (volume) {
-        var random = volume - computeDelay(25,30) ;
-        return random > (100 - (difficulte * 10));
+        return volume > (100 - (difficulte * 10));
     };
 
     this.setDifficulte = function (difficult) {
@@ -81,6 +85,10 @@ var LevelGeneration = function () {
         return newObstacles;
     }
 
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
     this.generate = function (volume,game_obstacles) {
 
         JSONlevel = "";
@@ -95,11 +103,21 @@ var LevelGeneration = function () {
         availableDirection[2] = true;
         availableDirection[3] = true;
         availableDirection[4] = true;
+        availableDirection[5] = true;
+        availableDirection[6] = true;
+        availableDirection[7] = true;
+        availableDirection[8] = true;
+        availableDirection[9] = true;
 
         tobe_removed[1] = false;
         tobe_removed[2] = false;
         tobe_removed[3] = false;
         tobe_removed[4] = false;
+        tobe_removed[5] = false;
+        tobe_removed[6] = false;
+        tobe_removed[7] = false;
+        tobe_removed[8] = false;
+        tobe_removed[9] = false;
 
         obstacles.forEach(function (obstacle) {
             //Rapprochement de l'obstacle du joueur
@@ -135,7 +153,8 @@ var LevelGeneration = function () {
         //On supprime de notre liste d'obstacles les obstacles ayant une distance <= 0
         removeObstacles();
 
-        for (directionIterator = 1; directionIterator < 9; directionIterator++) {
+        for(var nbTry = 0; nbTry < 3; nbTry++){
+            directionIterator = Math.ceil(getRandomArbitrary(1,9)) -1;
 
             //si il est autorisé de generer un obstacle
             if (availableDirection[directionIterator] === true && volume !== 0 && currentCooldown <= 0) {
@@ -150,13 +169,12 @@ var LevelGeneration = function () {
                 } else if (difficulte === difficulteEnum.NORMAL) {
                     distance = computeDelay(50, 70);
                 } else if (difficulte === difficulteEnum.DIFFICILE) {
-                    distance = computeDelay(30, 50);
+                    distance = computeDelay(100, 150);
                 }
-                cmp++;
                 //on notifie le jeu de l'obstacle si il y en a un
-                if (generateObstacle === true || cmp===160) {
+                if (generateObstacle === true) {
                     var tmp = directionIterator;
-                    directionIterator=computeDelay(1,3);
+                  //  directionIterator=computeDelay(1,3);
                     console.log(directionIterator);
                     obstacles.push(
                         {
@@ -182,12 +200,11 @@ var LevelGeneration = function () {
 
                     currentCooldown = cooldown;
                     //Ne pas generer plus de 1 obstacle par frame
-                    cmp=0;
                     break;
                 }
             }
-
         }
+
 
         currentCooldown--;
 

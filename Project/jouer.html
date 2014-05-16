@@ -48,33 +48,33 @@
     <div id="game">
         <table>
             <tr>
-                <td onclick="if(fini===false){new Game().bam(1)}"><video id="taupi1" src="Image/taupe.webm" autoplay
+                <td onclick="new Game().set_user_input(1)"><video id="taupi1" src="Image/taupe.webm"
                                                                 width="100%"
                                                      height="100%"></video></td>
-                <td onclick="if(fini===false)new Game().bam(2)"><video id="taupi2" src="Image/taupe.webm" autoplay
+                <td onclick="new Game().set_user_input(2)"><video id="taupi2" src="Image/taupe.webm"
                                                                width="100%" height="100%"></video></td>
-                <td onclick="if(fini===false)new Game().bam(3)"><video id="taupi3" src="Image/taupe.webm" autoplay
+                <td onclick="new Game().set_user_input(3)"><video id="taupi3" src="Image/taupe.webm"
                                                                width="100%" height="100%"></video></td>
             </tr>
             <tr>
-                <td onclick="if(fini===false)new Game().bam(4)"><video id="taupi4" src="Image/taupe.webm" autoplay width="100%
+                <td onclick="new Game().set_user_input(4)"><video id="taupi4" src="Image/taupe.webm" width="100%
                 " height="100%"></video></td>
-                <td onclick="if(fini===false)new Game().bam(5)"><video id="taupi5" src="Image/taupe.webm" autoplay
+                <td onclick="new Game().set_user_input(5)"><video id="taupi5" src="Image/taupe.webm"
                                                                width="100%" height="100%"></video></td>
-                <td onclick="if(fini===false)new Game().bam(6)"><video id="taupi6" src="Image/taupe.webm" autoplay
+                <td onclick="new Game().set_user_input(6)"><video id="taupi6" src="Image/taupe.webm"
                                                                width="100%" height="100%"></video></td>
             </tr>
             <tr>
-                <td onclick="if(fini===false)new Game().bam(7)"><video id="taupi7" src="Image/taupe.webm" autoplay
+                <td onclick="new Game().set_user_input(7)"><video id="taupi7" src="Image/taupe.webm"
                                                                width="100%" height="100%"></video></td>
-                <td onclick="if(fini===false)new Game().bam(8)"><video id="taupi8" src="Image/taupe.webm" autoplay
+                <td onclick="new Game().set_user_input(8)"><video id="taupi8" src="Image/taupe.webm"
                                                                width="100%" height="100%"></video></td>
-                <td onclick="if(fini===false)new Game().bam(9)"><video id="taupi9" src="Image/taupe.webm" autoplay width="100%
+                <td onclick="new Game().set_user_input(9)"><video id="taupi9" src="Image/taupe.webm" width="100%
                 " height="100%"></video></td>
             </tr>
         </table>
         <br>
-        score: <span id="score">0</span>
+        <span style="color:white;"> score: <span id="score">0</span></span>
     </div>
 </div>
 <script src="library/jquery-2.1.0.min.js"></script>
@@ -92,7 +92,5 @@
 <script src="js/main.js"></script>
 <script src="js/height.js"></script>
 <script src="js/best_scores.js"></script>
-
-<script>new Game().play();</script>
 </body>
 </html>
