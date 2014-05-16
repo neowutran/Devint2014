@@ -31,7 +31,7 @@ var LevelGeneration = function () {
     availableDirection[9] = true;
 
     this.generateObstacle = function (volume) {
-        return volume > (100 - (difficulte * 10));
+        return volume > (90 - (difficulte * 10));
     };
 
     this.setDifficulte = function (difficult) {
@@ -174,7 +174,6 @@ var LevelGeneration = function () {
                 //on notifie le jeu de l'obstacle si il y en a un
                 if (generateObstacle === true) {
                     var tmp = directionIterator;
-                  //  directionIterator=computeDelay(1,3);
                     console.log(directionIterator);
                     obstacles.push(
                         {
@@ -205,11 +204,8 @@ var LevelGeneration = function () {
             }
         }
 
-
         currentCooldown--;
-
         JSONlevel = "[" + JSONlevel + "]";
-        //console.log(JSONlevel);
         return JSONlevel;
     };
 
