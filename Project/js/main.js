@@ -8,7 +8,6 @@ var Main = function () {
     Main.prototype.instance = this;
 
     var music,
-        fanfare = new Audio(config.fanfare),
         animFrame;
 
     this.launchGame = function () {
@@ -46,9 +45,10 @@ var Main = function () {
         //Creation du jeu
         var game = new Game(difficulte),
             keyEvent = new KeyPressed(),
-            ended = 0,
-            sound = new Sound(music);
+            ended = 0;
 
+        new Sound(music);
+        music.play();
         // loop and update
         animFrame = requestAnimationFrame(function update() {
             if (ended === 0) {
@@ -59,35 +59,15 @@ var Main = function () {
 
     };
 
-    this.endGame = function (victory) {
+    this.endGame = function () {
         cancelAnimationFrame(animFrame);
         Sound().stop();
         var score = 0;
         if(Game().getScore() > 0){
             score = Game().getScore();
         }
+        speak.play(config.score.replace("%d", score), "fr");
 
-        /*
-        var delay = fanfare.duration, // durée de fanfare
-            now = new Date(),
-            desiredTime = new Date().setSeconds(now.getSeconds() + delay);
-
-        while (now < desiredTime) {
-            now = new Date(); // update the current time
-        }*/
-        if(victory===1){
-            fini=true;
-            fanfare.play();
-            setTimeout(function(){
-                console.log(fanfare.duration);
-                score=document.getElementById("score");
-                score = parseInt(score.innerHTML);
-                speak.play(config.score.replace("%d", score), "fr");
-            },(fanfare.duration)*1000);
-
-        }else{
-            speak.play(config.score.replace("%d", score), "fr");
-        }
     };
 
 };
