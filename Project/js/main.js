@@ -63,6 +63,7 @@ var Main = function () {
         cancelAnimationFrame(animFrame);
         Sound().stop();
         var score = 0;
+
         if(Game().getScore() > 0){
             score = Game().getScore();
         }
@@ -77,11 +78,14 @@ var Main = function () {
         }*/
         if(victory===1){
             fini=true;
+            score=document.getElementById("score");
+            score = parseInt(score.innerHTML);
+            addScore(score);
+            updateScores();
             fanfare.play();
             setTimeout(function(){
                 console.log(fanfare.duration);
-                score=document.getElementById("score");
-                score = parseInt(score.innerHTML);
+
                 speak.play(config.score.replace("%d", score), "fr");
             },(fanfare.duration)*1000);
 
