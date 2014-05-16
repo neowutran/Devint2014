@@ -51,30 +51,23 @@ var Game = function (difficulte) {
         var listObstacles = getObstacles(direction);
         removeListObstacles(listObstacles);
         popdown_taupiqueur(direction);
-
     }
 
-    function popup_taupiqueur(id){
-
-        var video = $("#taupi"+id);
-            video.get(0).currentTime=0;
-            video.get(0).play();
-        
-
+    function popup_taupiqueur(id) {
+        var video = $("#taupi" + id);
+        video.get(0).currentTime = 0;
+        video.get(0).play();
     }
 
-    function popdown_taupiqueur(id){
-
-        console.log("id="+id);
-        var video = $("#taupi"+id);
-            video.get(0).pause();
-            video.get(0).currentTime=0;
-
+    function popdown_taupiqueur(id) {
+        var video = $("#taupi" + id);
+        video.get(0).pause();
+        video.get(0).currentTime = 0;
     }
 
     //@romain ceci est une methode en private
     function calculate_frame() {
-        if(user_input !== 0){
+        if (user_input !== 0) {
             removeObstacles(user_input);
         }
 
@@ -93,7 +86,7 @@ var Game = function (difficulte) {
             if (element.distance === 0 && inArray(element)) {
                 removeObstacles(element.direction);
             }
-            if(element.distance === 0){
+            if (element.distance === 0) {
                 popdown_taupiqueur(element.direction);
             }
         });
@@ -114,7 +107,7 @@ var Game = function (difficulte) {
         return score;
     };
 
-    this.setScore = function(new_score){
+    this.setScore = function (new_score) {
         score = new_score;
         $("#score").html(score);
     };

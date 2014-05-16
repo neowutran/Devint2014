@@ -99,8 +99,6 @@ var MenuJouer = function () {
                 return configMenu.menu_normal1;
             case "difficile" :
                 return configMenu.menu_difficile1;
-            case "retour" :
-                return configMenu.menu_retour1;
             default :
                 return "erreur";
         }
