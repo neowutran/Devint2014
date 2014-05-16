@@ -18,7 +18,6 @@ var LevelGeneration = function () {
     //Laisser un temps de repos entre 2 obstacle de 40 frame min
         cooldown = config.cooldown,
         currentCooldown = 0,
-        nbTouches,
         difficulte = 1; //difficulte : 1=facile, 2 = normal et 3 = difficile.
 
     availableDirection[1] = true;
@@ -27,16 +26,8 @@ var LevelGeneration = function () {
     availableDirection[4] = true;
 
     this.generateObstacle = function (volume) {
-
-        //TODO faire un truc mieux que ca
-        //console.log("volume:" + volume);
         var random = volume - computeDelay(25,30) ;
-        //console.log(random);
-        if(difficulte===difficulteEnum.FACILE){
-            return false;
-        }
         return random > (100 - (difficulte * 10));
-
     };
 
     this.setDifficulte = function (difficult) {
@@ -135,7 +126,7 @@ var LevelGeneration = function () {
                 }
             }
         });
-        for(directionIterator = 1; directionIterator < 5 ; directionIterator++){
+        for(directionIterator = 1; directionIterator < 9 ; directionIterator++){
             if(tobe_removed[directionIterator] === true){
                 removeObstaclesByDirection(directionIterator);
             }
@@ -144,21 +135,7 @@ var LevelGeneration = function () {
         //On supprime de notre liste d'obstacles les obstacles ayant une distance <= 0
         removeObstacles();
 
-        //On defini le nombre de touche + 1 qui vont etre utilisé
-        if (difficulte === difficulteEnum.FACILE) {
-            //2 touche (3-1)
-            nbTouches = 3;
-        }
-        else if (difficulte === difficulteEnum.NORMAL) {
-            //3 touches (4-1)
-            nbTouches = 4;
-        }
-        else if (difficulte === difficulteEnum.DIFFICILE) {
-            //4 touches (5-1)
-            nbTouches = 5;
-        }
-
-        for (directionIterator = 1; directionIterator < nbTouches; directionIterator++) {
+        for (directionIterator = 1; directionIterator < 9; directionIterator++) {
 
             //si il est autorisé de generer un obstacle
             if (availableDirection[directionIterator] === true && volume !== 0 && currentCooldown <= 0) {
@@ -177,7 +154,7 @@ var LevelGeneration = function () {
                 }
                 cmp++;
                 //on notifie le jeu de l'obstacle si il y en a un
-                if (generateObstacle === true || (cmp===160 && difficulteEnum.FACILE)) {
+                if (generateObstacle === true || cmp===160) {
                     var tmp = directionIterator;
                     directionIterator=computeDelay(1,3);
                     console.log(directionIterator);
