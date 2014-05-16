@@ -82,6 +82,7 @@ var Game = function (difficulte) {
                 console.log("dispo: " + element.direction);
                 obstacles.push(element);
                 popup_taupiqueur(element.direction);
+                //TODO lire direction audio pour aveugle
             }
             if (element.distance === 0 && inArray(element)) {
                 removeObstacles(element.direction);

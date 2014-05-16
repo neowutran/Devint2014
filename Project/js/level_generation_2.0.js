@@ -12,7 +12,6 @@ var LevelGeneration = function () {
     /*Attributs de classes*/
     var JSONlevel = "",
         id = 0,
-        cmp = 0,
         obstacles = [],
         availableDirection = [],
     //Laisser un temps de repos entre 2 obstacle de 40 frame min
