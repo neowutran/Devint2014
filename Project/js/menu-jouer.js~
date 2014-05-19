@@ -6,7 +6,8 @@ var MenuJouer = function () {
     "use strict";
 
     /* variables */
-    var menu = ["tutoriel", "facile", "normal", "difficile", "retour"],
+    var menu = ["facile", "normal", "difficile"],
+        sound,
         index_selectionne = 0;
 
     /* singleton */
@@ -62,18 +63,23 @@ var MenuJouer = function () {
     }
 
     function lire_son(src) {
+        if(sound!=null){
+            sound.pause();
+            sound.currentTime = 0;
+        }
         console.log("lire son");
-        var sound = new Audio(src);
+        sound = new Audio(src);
         sound.play();
+
     }
 
     function selectionMenu(nomMenu) {
         console.log("selection menu");
         var i;
         for (i = 0; i < menu.length; i++) {
-            $("#" + menu[i]).attr("class", "btn btn-default btn-lg btn-block");
+            $("#" + menu[i]).attr("class", "nselectionne");
         }
-        $("#" + nomMenu).attr("class", "btn btn-primary btn-lg btn-block");
+        $("#" + nomMenu).attr("class", "selectionne");
         lire_son(getSoundAdress());
     }
 
@@ -84,17 +90,12 @@ var MenuJouer = function () {
 
     function getSoundAdress() {
         switch (getMenuSelectionne()) {
-            //TODO changer le tutoriel
-            case "tutoriel" :
-                return configMenu.menu_facile1;
             case "facile" :
                 return configMenu.menu_facile1;
             case "normal" :
                 return configMenu.menu_normal1;
             case "difficile" :
                 return configMenu.menu_difficile1;
-            case "retour" :
-                return configMenu.menu_retour1;
             default :
                 return "erreur";
         }
