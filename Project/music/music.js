@@ -1,3 +1,7 @@
 var music_list = [
-	 {"file":"Alchimie_-_Femmes_sans_visages.ogg"} , {"file":"bat.ogg"} , {"file":"chu.ogg"} , {"file":"earis.ogg"} , {"file":"fa3.ogg"} , {"file":"test/InShape_-_Engine.ogg"}
+	 {"file":"olive_et_tom.ogg"} , 
+{"file":"pokemon_generique.mp3"} ,
+{"file":"simpsons.mp3"} ,
+	{"file":"test/InShape_-_Engine.ogg"}
+
 ];
