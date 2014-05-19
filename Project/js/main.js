@@ -12,6 +12,7 @@ var Main = function () {
 
     this.launchGame = function () {
 
+        console.log("Launch game");
         var srcMusic = localStorage.getItem("music"),
             difficulte = localStorage.getItem("difficulte");
 
@@ -48,7 +49,7 @@ var Main = function () {
             ended = 0;
 
         new Sound(music);
-        music.play();
+
         // loop and update
         animFrame = requestAnimationFrame(function update() {
             if (ended === 0) {
