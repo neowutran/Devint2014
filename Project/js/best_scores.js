@@ -1,12 +1,10 @@
 
-<<<<<<< HEAD
-    function addScore(score,srcMusic){
-=======
     function addScore(score, music){
->>>>>>> 9115174b2d7f8eeeb86ebe08741ad76c8484f316
 
         score = parseInt(score);
-	console.log(srcMusic);
+		music = music.split('/')[1];
+		music = music.split('.')[0];
+
         if (localStorage){
             if (localStorage.scores2)
             {
@@ -14,15 +12,15 @@
                 var val = JSON.parse(data);
 
                 for (var i=0; i<=config.nbscores-1; i++){
-                    val[i][0] = parseInt(val[i][0]);
-                    if (score>=val[i][0]){
+                    val[i].score = parseInt(val[i].score);
+                    if (score>=val[i].score){
                         alert("Nouveau top score !!");
                         for (var j=config.nbscores-1; j>i; j--){
-                            val[j][0] = val[j-1][0];
-							val[j][1] = val[j-1][1];
+                            val[j].score = val[j-1].score;
+							val[j].music = val[j-1].music;
                         }
-                        val[i][0] = score;
-						val[i][1] = music;
+                        val[i].score = score;
+						val[i].music = music;
                         break;
                     }
                 }
@@ -40,9 +38,18 @@
 
     function setVariable()
     {
-        var data= [[0, ""], [0, ""], [0, ""], [0, ""], [0, ""],];
-        var val = JSON.stringify(data);
-        localStorage.setItem("scores2", val);
+        var val = [];
+
+        for (var i=0; i<=config.nbscores-1; i++){
+            var item = {
+				"score": 0,
+				"music": ""
+			};
+			val.push(item);
+        }
+
+        var data = JSON.stringify(val);
+        localStorage.setItem("scores2", data);
     }
 
     function testScore(){
@@ -59,7 +66,7 @@
                 var val = JSON.parse(data);
 				
 				
-                return val[nb][0];
+                return val[nb].score;
             }
             else
             {
@@ -77,7 +84,7 @@
                 var data = localStorage.getItem("scores2");
                 var val = JSON.parse(data);
 
-                return val[nb][1];
+                return val[nb].music;
             }
             else
             {
@@ -100,6 +107,7 @@
 
             for (var i=0; i<=config.nbscores-1; i++){
                 lignes[i+1].cells[1].innerHTML = getScore(i);
+				lignes[i+1].cells[2].innerHTML = getMusique(i);
             }
         } else {
 
@@ -130,14 +138,14 @@
 
     function reinitialiser(){
         if (localStorage){
-            if (localStorage.scores)
+            if (localStorage.scores2)
             {
                 var data = localStorage.getItem("scores2");
                 var val = JSON.parse(data);
 
                 for (var i=0; i<=config.nbscores-1; i++){
-                    val[i][0] = 0;
-					val[i][1] = "";
+                    val[i].score = 0;
+					val[i].music = "";
                 }
 
                 data = JSON.stringify(val);

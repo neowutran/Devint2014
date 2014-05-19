@@ -28,7 +28,7 @@ var config = {
     "fanfare"                        : "sounds/crwin.ogg",
     "score": "Votre score est de %d points",
     "cooldown": 30,
-    "nbscores": 5
+    "nbscores": 10
 };
 Object.freeze(config);
 Object.freeze(configMenu);
