@@ -1,27 +1,29 @@
 
-    function addScore(score){
+    function addScore(score, music){
 
         score = parseInt(score);
 
         if (localStorage){
-            if (localStorage.scores)
+            if (localStorage.scores2)
             {
-                var data = localStorage.getItem("scores");
+                var data = localStorage.getItem("scores2");
                 var val = JSON.parse(data);
 
                 for (var i=0; i<=config.nbscores-1; i++){
-                    val[i] = parseInt(val[i]);
-                    if (score>=val[i]){
+                    val[i][0] = parseInt(val[i][0]);
+                    if (score>=val[i][0]){
                         alert("Nouveau top score !!");
                         for (var j=config.nbscores-1; j>i; j--){
-                            val[j] = val[j-1];
+                            val[j][0] = val[j-1][0];
+							val[j][1] = val[j-1][1];
                         }
-                        val[i] = score;
+                        val[i][0] = score;
+						val[i][1] = music;
                         break;
                     }
                 }
                 data = JSON.stringify(val);
-                localStorage.setItem("scores", data);
+                localStorage.setItem("scores2", data);
             }
             else
             {
@@ -34,9 +36,9 @@
 
     function setVariable()
     {
-        var data= [0, 0, 0, 0, 0];
+        var data= [[0, ""], [0, ""], [0, ""], [0, ""], [0, ""],];
         var val = JSON.stringify(data);
-        localStorage.setItem("scores", val);
+        localStorage.setItem("scores2", val);
     }
 
     function testScore(){
@@ -47,12 +49,13 @@
 
     function getScore(nb){
         if (localStorage){
-            if (localStorage.scores)
+            if (localStorage.scores2)
             {
-                var data = localStorage.getItem("scores");
+                var data = localStorage.getItem("scores2");
                 var val = JSON.parse(data);
-
-                return val[nb];
+				
+				
+                return val[nb][0];
             }
             else
             {
@@ -62,6 +65,26 @@
             document.write("Sauvegarde des scores non supportée");
         }
     }
+
+	function getMusique(nb){
+        if (localStorage){
+            if (localStorage.scores2)
+            {
+                var data = localStorage.getItem("scores2");
+                var val = JSON.parse(data);
+
+                return val[nb][1];
+            }
+            else
+            {
+                setVariable();
+            }
+        } else {
+            document.write("Sauvegarde des scores non supportée");
+        }
+    }
+	
+	
 
     function updateScores(){
 
@@ -84,6 +107,8 @@
             colonne1.innerHTML = "Rang";
             var colonne2 = ligne.insertCell(1);
             colonne2.innerHTML = "Score";
+			var colonne3 = ligne.insertCell(2);
+            colonne3.innerHTML = "Musique";
 
             /* placer scores */
             for (var i=0; i<=config.nbscores-1; i++){
@@ -92,6 +117,8 @@
                 colonne1.innerHTML = i+1;
                 var colonne2 = ligne.insertCell(1);
                 colonne2.innerHTML = getScore(i);
+				var colonne3 = ligne.insertCell(2);
+                colonne3.innerHTML = getMusique(i);
             }
         }
 
@@ -101,15 +128,16 @@
         if (localStorage){
             if (localStorage.scores)
             {
-                var data = localStorage.getItem("scores");
+                var data = localStorage.getItem("scores2");
                 var val = JSON.parse(data);
 
                 for (var i=0; i<=config.nbscores-1; i++){
-                    val[i] = 0;
+                    val[i][0] = 0;
+					val[i][1] = "";
                 }
 
                 data = JSON.stringify(val);
-                localStorage.setItem("scores", data);
+                localStorage.setItem("scores2", data);
             }
             else
             {
