@@ -6,7 +6,7 @@ var MenuJouer = function () {
     "use strict";
 
     /* variables */
-    var menu = ["tutoriel", "facile", "normal", "difficile", "retour"],
+    var menu = ["facile", "normal", "difficile"],
         sound,
         index_selectionne = 0;
 
@@ -90,9 +90,6 @@ var MenuJouer = function () {
 
     function getSoundAdress() {
         switch (getMenuSelectionne()) {
-            //TODO changer le tutoriel
-            case "tutoriel" :
-                return configMenu.menu_tutoriel1;
             case "facile" :
                 return configMenu.menu_facile1;
             case "normal" :
