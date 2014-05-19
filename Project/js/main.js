@@ -14,7 +14,7 @@ var Main = function () {
     this.launchGame = function () {
 
         console.log("Launch game");
-        srcMusic  = localStorage.getItem("music"),
+        srcMusic  = localStorage.getItem("music");
         var    difficulte = localStorage.getItem("difficulte");
 
         switch(difficulte){

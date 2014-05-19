@@ -2,7 +2,7 @@
     function addScore(score,srcMusic){
 
         score = parseInt(score);
-	console.log(srcMusic);
+
         if (localStorage){
             if (localStorage.scores)
             {
