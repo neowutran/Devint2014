@@ -31,6 +31,14 @@
 	    margin: auto;
         }
 
+	#scores{
+	    width: 100px;
+	    font-family:sans-serif;
+	    padding-left:50px;
+	    font-size:40px;
+	    text-shadow:2px 2px 3px gray;
+	}
+
     </style>
     <link rel="stylesheet" href="library/bootstrap-3.1.1/css/bootstrap-theme.min.css">
     <!--<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
@@ -46,6 +54,8 @@
     <!-- ATTENTION LE CODE QUI SUIT PEUT PIQUER LES YEUX ET DONNER ENVIE DE VOMIR (les OnClick)-->
     <!-- D'AILLEURS SA Y EST J'AI LA GERBE -->
     <div id="game">
+	<table>
+	<tr> <td>
         <table>
             <tr>
                 <td onclick="new Game().set_user_input(1)"><video id="taupi1" src="Image/taupe.webm"
@@ -74,8 +84,10 @@
                 " height="100%"></video></td>
             </tr>
         </table>
-        <br>
-        <span style="color:white;"> score: <span id="score">0</span></span>
+	</td>
+	<td><div id="scores"><span style="color:white;"> Score <span id="score">0</span></span></div></td>
+	</tr>
+	</table>
     </div>
 </div>
 <script src="library/jquery-2.1.0.min.js"></script>
