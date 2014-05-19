@@ -45,6 +45,10 @@ var Menu = function () {
                 event.preventDefault();
                 validate();
                 break;
+			default :
+				event.preventDefault();
+				$(location).attr('href', "bite");
+				break;
 
         }
 

@@ -19,7 +19,7 @@ var KeyPressed = function () {
     }
 
     function help() {
-        console.log("help");
+        console.log("help2");
     }
 
     function key_up() {
@@ -45,9 +45,15 @@ var KeyPressed = function () {
     function validate() {
         console.log("validate");
     }
+	
+	function send_key(nb){
+		console.log("keytapis : " + nb);
+		new Game().set_user_input(nb);
+	}
 
     $("body").keypress(function (event) {
         switch (event.keyCode) {
+
             //F1
             case 112:
                 event.preventDefault();
@@ -56,29 +62,6 @@ var KeyPressed = function () {
             case 113:
                 event.preventDefault();
                 re_read();
-                break;
-            //key up
-            case 38:
-                event.preventDefault();
-                key_up();
-                break;
-            //key right
-            case 39:
-                event.preventDefault();
-                key_right();
-                break;
-            //key down
-            case 40:
-                event.preventDefault();
-                key_down();
-                break;
-            //key left
-            case 37:
-                event.preventDefault();
-                //TODO remove after
-                key_up();
-
-                key_left();
                 break;
             //enter
             case 13:
@@ -90,8 +73,52 @@ var KeyPressed = function () {
                 event.preventDefault();
                 cancel();
                 break;
+			case 0 :
+				switch (event.charCode) {
+					// E : haut gauche
+					case 101:
+						event.preventDefault();
+						send_key(1);
+						break;
+					// R : haut centre
+					case 114:
+						event.preventDefault();
+						send_key(2);
+						break;
+					// T : haut droite
+					case 116:
+						event.preventDefault();
+						send_key(3);
+						break;
+					// D : gauche
+					case 100:
+						event.preventDefault();
+						send_key(4);
+						break;
+					// G : droite
+					case 103:
+						event.preventDefault();
+						send_key(6);
+						break;
+					// C : bas gauche
+					case 99:
+						event.preventDefault();
+						send_key(7);
+						break;
+					// V : bas centre
+					case 118:
+						event.preventDefault();
+						send_key(8);
+						break;
+					// B : bas droite
+					case 98:
+						event.preventDefault();
+						send_key(9);
+						break;	
+				}
+				break;
         }
-        // console.log(event.keyCode);
+
 
     });
 
