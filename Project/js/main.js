@@ -67,6 +67,7 @@ var Main = function () {
         if(Game().getScore() > 0){
             score = Game().getScore();
         }
+        addScore(score);
         speak.play(config.score.replace("%d", score), "fr");
 
     };

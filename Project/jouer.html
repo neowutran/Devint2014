@@ -39,7 +39,14 @@
 <!--[if lt IE 7]>
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 <![endif]-->
+<aside style="font-size:larger;font-style:italic;color:green;float:right;width:35%;padding-left:5px;">
+    <span style="color:white; font-size: 110px" >
+        SCORE: <span id="score">0</span>
+    </span>
+    <br>
+    <a href="./jouer.html"><button value="RECOMMENCER">RECOMMENCER</button></a>
 
+</aside>
 <div class="container">
     <div id="log">
     </div>
@@ -47,6 +54,7 @@
     <!-- D'AILLEURS SA Y EST J'AI LA GERBE -->
     <div id="game">
         <table>
+
             <tr>
                 <td onclick="new Game().set_user_input(1)"><video id="taupi1" src="Image/taupe.webm"
                                                                 width="100%"
@@ -55,7 +63,9 @@
                                                                width="100%" height="100%"></video></td>
                 <td onclick="new Game().set_user_input(3)"><video id="taupi3" src="Image/taupe.webm"
                                                                width="100%" height="100%"></video></td>
+
             </tr>
+
             <tr>
                 <td onclick="new Game().set_user_input(4)"><video id="taupi4" src="Image/taupe.webm" width="100%
                 " height="100%"></video></td>
@@ -74,8 +84,9 @@
                 " height="100%"></video></td>
             </tr>
         </table>
+
         <br>
-        <span style="color:white;"> score: <span id="score">0</span></span>
+
     </div>
 </div>
 <script src="library/jquery-2.1.0.min.js"></script>
