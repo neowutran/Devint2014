@@ -6,7 +6,7 @@ var MenuJouer = function () {
     "use strict";
 
     /* variables */
-    var menu = ["tutoriel", "facile", "normal", "difficile", "retour"],
+    var menu = ["facile", "normal", "difficile"],
         sound,
         index_selectionne = 0;
 
