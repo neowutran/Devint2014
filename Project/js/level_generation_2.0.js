@@ -17,7 +17,9 @@ var LevelGeneration = function () {
     //Laisser un temps de repos entre 2 obstacle de 40 frame min
         cooldown = config.cooldown,
         currentCooldown = 0,
-        difficulte = 1; //difficulte : 1=facile, 2 = normal et 3 = difficile.
+        difficulte = 1,
+        timeBetween = 0,
+        volumeActivate = 85; //difficulte : 1=facile, 2 = normal et 3 = difficile.
 
     availableDirection[1] = true;
     availableDirection[2] = true;
@@ -29,7 +31,10 @@ var LevelGeneration = function () {
     availableDirection[8] = true;
 
     this.generateObstacle = function (volume) {
-        return volume > (80 - (difficulte * 15));
+        if(volumeActivate > 150){
+            return true;
+        }
+        return volume > (volumeActivate - (difficulte * 15));
     };
 
     this.setDifficulte = function (difficult) {
@@ -81,6 +86,10 @@ var LevelGeneration = function () {
             }
         });
         return newObstacles;
+    }
+
+    function numberOfObstacle(){
+        return obstacles.length;
     }
 
     function getRandomArbitrary(min, max) {
@@ -151,8 +160,44 @@ var LevelGeneration = function () {
 
             directionIterator = Math.ceil(getRandomArbitrary(1,8)) -1;
 
+        switch (difficulte){
+            case difficulteEnum.FACILE:
+                if(timeBetween > 120){
+                    volumeActivate -= 5;
+                    timeBetween = 0;
+                    console.log("ajustement lvl: + vite");
+                }
+                if(numberOfObstacle() > 1){
+                    console.log("ajustement lvl: - vite");
+                    volumeActivate += 1;
+                    timeBetween = 0;
+                }
+                break;
+            case difficulteEnum.NORMAL:
+                if(timeBetween > 100){
+                    volumeActivate -=5;
+                    timeBetween = 0;
+                }
+                if(numberOfObstacle() > 2){
+                    volumeActivate += 1;
+                    timeBetween = 0;
+                }
+                break;
+            case difficulteEnum.DIFFICILE:
+                if(timeBetween > 60){
+                    volumeActivate -= 5;
+                    timeBetween = 0;
+                }
+                if(numberOfObstacle() > 4){
+                    volumeActivate += 1;
+                    timeBetween = 0;
+                }
+                break;
+
+
+        }
             //si il est autorisé de generer un obstacle
-            if (availableDirection[directionIterator] === true && volume !== 0 && currentCooldown <= 0) {
+            if (availableDirection[directionIterator] === true && volume !== 0 && currentCooldown <= 0 && ((difficulte === 1 && numberOfObstacle() === 0) || (difficulte === 2 && numberOfObstacle() < 3 ) || (difficulte === 3 && numberOfObstacle() < 5))) {
 
                 //on lance une change de generation d'un obstacle
                 generateObstacle = this.generateObstacle(volume);
@@ -168,6 +213,7 @@ var LevelGeneration = function () {
                 }
                 //on notifie le jeu de l'obstacle si il y en a un
                 if (generateObstacle === true) {
+                    timeBetween = 0;
                     var tmp = directionIterator;
                     console.log(directionIterator);
                     obstacles.push(
@@ -194,7 +240,11 @@ var LevelGeneration = function () {
 
                     currentCooldown = cooldown;
                     //Ne pas generer plus de 1 obstacle par frame
+                }else{
+                    timeBetween++;
                 }
+            }else{
+                timeBetween++;
             }
 
 
