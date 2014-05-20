@@ -9,7 +9,7 @@ var Main = function () {
 
     var music,
         animFrame,
-	srcMusic;
+	srcMusic,
 	difficulte;
 
     this.launchGame = function () {

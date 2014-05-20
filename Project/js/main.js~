@@ -72,7 +72,7 @@ var Main = function () {
         if(Game().getScore() > 0){
             score = Game().getScore();
         }
-        addScore(score,srcMusic);
+        addScore(score,srcMusic,difficulte);
         speak.play(config.score.replace("%d", score), "fr");
 
     };
