@@ -10,12 +10,13 @@ var Main = function () {
     var music,
         animFrame,
 	srcMusic;
+	difficulte;
 
     this.launchGame = function () {
 
         console.log("Launch game");
-        srcMusic  = localStorage.getItem("music"),
-        var    difficulte = localStorage.getItem("difficulte");
+        srcMusic  = localStorage.getItem("music");
+        difficulte = localStorage.getItem("difficulte");
 
         switch(difficulte){
             case "0":
@@ -62,6 +63,9 @@ var Main = function () {
     };
 
     this.endGame = function () {
+        if(Game().getPause() === true){
+            return;
+        }
         cancelAnimationFrame(animFrame);
         Sound().stop();
         var score = 0;
