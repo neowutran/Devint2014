@@ -1,1 +1,1 @@
-firefox index.html
+start firefox.exe ./index.html

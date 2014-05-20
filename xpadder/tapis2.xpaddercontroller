@@ -1,0 +1,30 @@
+;-------------------------
+; Xpadder Controller File
+;-------------------------
+
+Version=5.3
+
+[Button Locations]
+Button5Location=212,160
+Button6Location=211,220
+Button7Location=270,161
+Button8Location=271,222
+DPadUpLocation=241,158
+DPadRightLocation=273,190
+DPadDownLocation=241,222
+DPadLeftLocation=209,190
+
+[Access]
+
+[Names]
+Button5Name=Button 5
+Button6Name=Button 6
+Button7Name=Button 7
+Button8Name=Button 8
+DPadName=DPad
+DPadUpName=Up
+DPadRightName=Right
+DPadDownName=Down
+DPadLeftName=Left
+
+[Image]
