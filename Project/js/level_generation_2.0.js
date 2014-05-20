@@ -139,7 +139,7 @@ var LevelGeneration = function () {
                 if(game_obstacle.length === 0){
                     availableDirection[obstacle.direction] = true;
                     tobe_removed[obstacle.direction] = true;
-                    Game().setScore(Game().getScore() + obstacle.distance);
+                    Game().setScore(Game().getScore() + obstacle.distance * difficulte * 10);
                 }
             }
         });
@@ -164,11 +164,11 @@ var LevelGeneration = function () {
                 //on defini la distance de l'obstacle par rapport au joueur
                 //TODO faire mieux que ca
                 if (difficulte === difficulteEnum.FACILE) {
-                    distance = computeDelay(170, 220);
+                    distance = computeDelay(190, 230);
                 } else if (difficulte === difficulteEnum.NORMAL) {
-                    distance = computeDelay(130, 160);
+                    distance = computeDelay(140, 180);
                 } else if (difficulte === difficulteEnum.DIFFICILE) {
-                    distance = computeDelay(100, 150);
+                    distance = computeDelay(100, 140);
                 }
                 //on notifie le jeu de l'obstacle si il y en a un
                 if (generateObstacle === true) {
