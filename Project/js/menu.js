@@ -135,6 +135,11 @@ var Menu = function () {
         console.log("validate");
         $(location).attr('href', $("#" + getMenuSelectionne()).attr("data-link"));
     }
+	
+	function clickOn(nom){
+		selectionMenu(nom);
+		validate();
+	}
 
 };
 

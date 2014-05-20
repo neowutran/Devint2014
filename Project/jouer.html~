@@ -24,7 +24,7 @@
             padding-bottom: 20px;
             background-color: black;
         }
-	
+
 	.bouton {
 		padding:6px 0 6px 0;
 		font:bold 13px Arial;
@@ -32,7 +32,7 @@
 		color:#555;
 		border-radius:2px;
 		width:200px;
-		heigth;50px;
+		height:50px;
 		font-size:30px;
 		border:1px solid #ccc;
 		box-shadow:1px 1px 3px #999;
@@ -59,7 +59,7 @@
 	    text-shadow:2px 2px 3px gray;
 	    vertical-align:top;
 	}
-	
+
 	#bouton{
 	    vertical-align:middle;
 	    padding-left:50px;
@@ -80,7 +80,7 @@
     <!-- D'AILLEURS SA Y EST J'AI LA GERBE -->
 	<div id="display">
 	<table>
-	<tr> 
+	<tr>
 		<td rowspan="2">
 			    <div id="game">
 			<table>
@@ -96,25 +96,23 @@
 				    <tr>
 					<td onclick="new Game().set_user_input(4)"><video id="taupi4" src="Image/taupe.webm" width="100%
 					" height="100%"></video></td>
-					<!-- <td onclick="new Game().set_user_input(5)"><video id="taupi5" src="Image/taupe.webm"
-						                                       width="100%" height="100%"></video></td> -->
 							<td><div width="850px" height="1005px"></div></td>
-					<td onclick="new Game().set_user_input(6)"><video id="taupi6" src="Image/taupe.webm"
+					<td onclick="new Game().set_user_input(5)"><video id="taupi5" src="Image/taupe.webm"
 						                                       width="100%" height="100%"></video></td>
 				    </tr>
 				    <tr>
+					<td onclick="new Game().set_user_input(6)"><video id="taupi6" src="Image/taupe.webm"
+						                                       width="100%" height="100%"></video></td>
 					<td onclick="new Game().set_user_input(7)"><video id="taupi7" src="Image/taupe.webm"
 						                                       width="100%" height="100%"></video></td>
-					<td onclick="new Game().set_user_input(8)"><video id="taupi8" src="Image/taupe.webm"
-						                                       width="100%" height="100%"></video></td>
-					<td onclick="new Game().set_user_input(9)"><video id="taupi9" src="Image/taupe.webm" width="100%
+					<td onclick="new Game().set_user_input(8)"><video id="taupi8" src="Image/taupe.webm" width="100%
 					" height="100%"></video></td>
 				    </tr>
 			</table>
 			    </div>
 		</td>
 		<td><div id="scores"><span style="color:white;"> Score <span id="score">0</span></span></div></td>
-		
+
 	</tr>
 	<tr>
 		<td><div id="bouton">
@@ -126,7 +124,12 @@
 			</tr>
 			<tr>
 				<td class="tdBouton">
-			<input type="button" class="bouton" id="boutonPause" OnClick="javascript:window.location.reload()" value="Pause">
+			<input type="button" class="bouton" id="boutonPause" OnClick="Game().pause()" value="Pause">
+				</td>
+			</tr>
+			<tr>
+				<td class="tdBouton">
+			<a href="scores.html"><input type="button" class="bouton" value="HighScore"></a>
 				</td>
 			</tr>
 			</table></div>
@@ -139,8 +142,8 @@
 <script src="library/bootstrap-3.1.1/js/bootstrap.min.js"></script>
 <script src="library/jQuery.jPlayer.2.5.0/jquery.jplayer.min.js"></script>
 <script src="js/config.js"></script>
-<script src="js/mespeak/mespeak.js"></script>
 <script src="js/meSpeak.js"></script>
+<script src="js/mespeak/mespeak.js"></script>
 <script src="js/argyrosException.js"></script>
 <script src="js/EDifficulte.js"></script>
 <script src="js/game.js"></script>

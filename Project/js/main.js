@@ -9,13 +9,14 @@ var Main = function () {
 
     var music,
         animFrame,
-	srcMusic;
+	srcMusic,
+	difficulte;
 
     this.launchGame = function () {
 
         console.log("Launch game");
         srcMusic  = localStorage.getItem("music");
-        var    difficulte = localStorage.getItem("difficulte");
+        difficulte = localStorage.getItem("difficulte");
 
         switch(difficulte){
             case "0":
@@ -71,7 +72,7 @@ var Main = function () {
         if(Game().getScore() > 0){
             score = Game().getScore();
         }
-        addScore(score,srcMusic);
+        addScore(score,srcMusic,difficulte);
         speak.play(config.score.replace("%d", score), "fr");
 
     };
