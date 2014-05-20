@@ -194,7 +194,6 @@ var LevelGeneration = function () {
 
                     currentCooldown = cooldown;
                     //Ne pas generer plus de 1 obstacle par frame
-                    break;
                 }
             }
 
