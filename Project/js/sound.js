@@ -96,7 +96,7 @@ var Sound = function (music) {
         volumeNode.gain.value = 0.1;
     };
 
-    function playSound(buffer, currentTime) {
+    function playSound(buffer) {
         //Set the volume
         currentBuffer = buffer;
         volumeNode.gain.value = 0.1;
@@ -107,15 +107,8 @@ var Sound = function (music) {
         sourceNode.onended = function () {
             Main().endGame(1);
         };
-        if(currentTime === false){
+
             sourceNode.start(0);
-
-
-        }else{
-
-
-        sourceNode.start(currentTime);
-        }
        }
 
     // log if an error occurs
@@ -124,7 +117,7 @@ var Sound = function (music) {
     }
 
     // load the specified sound
-    function loadSound(url,currentTime) {
+    function loadSound(url) {
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
         request.responseType = 'arraybuffer';
@@ -134,7 +127,7 @@ var Sound = function (music) {
                 // decode the data
                 context.decodeAudioData(request.response, function (buffer) {
                     // when the audio is decoded play the sound
-                    playSound(buffer, currentTime);
+                    playSound(buffer);
                 }, onError);
 
         };
@@ -157,7 +150,7 @@ var Sound = function (music) {
 
     // load the sound
     setupAudioNodes();
-    loadSound(music.src,0);
+    loadSound(music.src);
 
     // when the javascript node is called
     // we use information from the analyzer node
