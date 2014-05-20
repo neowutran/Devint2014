@@ -162,10 +162,16 @@ var SelectMusic = function () {
                     music_play.play();
                 }
 
+
                 $(element).attr("class", "music selectionne");
+                var $position = $(element).offset();
+                console.log($position.top+' '+$position.left);
+                scrollTo(0,$position.top);
             } else {
                 $(element).attr("class", "music nselectionne");
             }
+
+
 
         });
 
@@ -219,6 +225,8 @@ var SelectMusic = function () {
         if (index_selectionne >= music_list.length) {
             index_selectionne = 0;
         }
+
+
         update();
     }
 
