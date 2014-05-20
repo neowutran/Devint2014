@@ -1,5 +1,5 @@
 
-    function addScore(score, music){
+    function addScore(score, music, difficulte){
 
         score = parseInt(score);
 		music = music.split('/')[1];
@@ -18,9 +18,11 @@
                         for (var j=config.nbscores-1; j>i; j--){
                             val[j].score = val[j-1].score;
 							val[j].music = val[j-1].music;
+							val[j].difficulte = val[j-1].difficulte;
                         }
                         val[i].score = score;
 						val[i].music = music;
+						val[i].difficulte = difficulte;
                         break;
                     }
                 }
@@ -43,7 +45,8 @@
         for (var i=0; i<=config.nbscores-1; i++){
             var item = {
 				"score": 0,
-				"music": ""
+				"music": "",
+				"difficulte":"" 
 			};
 			val.push(item);
         }
@@ -95,6 +98,24 @@
         }
     }
 	
+	function getDifficulte(nb){
+        if (localStorage){
+            if (localStorage.scores2)
+            {
+                var data = localStorage.getItem("scores2");
+                var val = JSON.parse(data);
+
+                return val[nb].difficulte;
+            }
+            else
+            {
+                setVariable();
+            }
+        } else {
+            document.write("Sauvegarde des scores non supportée");
+        }
+    }
+	
 	
 
     function updateScores(){
@@ -108,6 +129,7 @@
             for (var i=0; i<=config.nbscores-1; i++){
                 lignes[i+1].cells[1].innerHTML = getScore(i);
 				lignes[i+1].cells[2].innerHTML = getMusique(i);
+				lignes[i+1].cells[3].innerHTML = getDifficulte(i);
             }
         } else {
 
@@ -121,6 +143,8 @@
             colonne2.innerHTML = "Score";
 			var colonne3 = ligne.insertCell(2);
             colonne3.innerHTML = "Musique";
+			var colonne4 = ligne.insertCell(3);
+            colonne4.innerHTML = "Difficulté";
 
             /* placer scores */
             for (var i=0; i<=config.nbscores-1; i++){
@@ -131,6 +155,8 @@
                 colonne2.innerHTML = getScore(i);
 				var colonne3 = ligne.insertCell(2);
                 colonne3.innerHTML = getMusique(i);
+				var colonne4 = ligne.insertCell(3);
+                colonne4.innerHTML = getDifficulte(i);
             }
         }
 
@@ -146,6 +172,7 @@
                 for (var i=0; i<=config.nbscores-1; i++){
                     val[i].score = 0;
 					val[i].music = "";
+					val[i].difficulte = "";
                 }
 
                 data = JSON.stringify(val);
