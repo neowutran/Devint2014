@@ -56,6 +56,10 @@ var Menu = function () {
         console.log("get menu selectionne");
         return menu[index_selectionne];
     }
+	
+	function getIndex(nomMenu){
+		return menu.indexOf(nomMenu);
+	}
 
     function lire_son(src) {
         if(sound!=null){
@@ -73,6 +77,7 @@ var Menu = function () {
         for (i = 0; i < menu.length; i++) {
             $("#" + menu[i]).attr("class", "nselectionne");
         }
+		index_selectionne = getIndex(nomMenu);
         $("#" + nomMenu).attr("class", "selectionne");
         lire_son(getSoundAdress());
     }
@@ -136,9 +141,15 @@ var Menu = function () {
         $(location).attr('href', $("#" + getMenuSelectionne()).attr("data-link"));
     }
 	
-	function clickOn(nom){
+	this.clickOn = function(nom){
+		console.log("click on" + nom);
 		selectionMenu(nom);
 		validate();
+	}
+	
+	this.mouseOn = function(nom){
+		console.log("mouse on" + nom);
+		selectionMenu(nom);
 	}
 
 };

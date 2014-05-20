@@ -72,6 +72,10 @@ var MenuJouer = function () {
         sound.play();
 
     }
+	
+	function getIndex(nomMenu){
+		return menu.indexOf(nomMenu);
+	}
 
     function selectionMenu(nomMenu) {
         console.log("selection menu");
@@ -79,6 +83,7 @@ var MenuJouer = function () {
         for (i = 0; i < menu.length; i++) {
             $("#" + menu[i]).attr("class", "nselectionne");
         }
+		index_selectionne = getIndex(nomMenu);
         $("#" + nomMenu).attr("class", "selectionne");
         lire_son(getSoundAdress());
     }
@@ -154,6 +159,17 @@ var MenuJouer = function () {
         localStorage.setItem("difficulte", difficulte);
         $(location).attr('href', $("#" + getMenuSelectionne()).attr("data-link"));
     }
+	
+	this.clickOn = function(nom){
+		console.log("click on" + nom);
+		selectionMenu(nom);
+		validate();
+	}
+	
+	this.mouseOn = function(nom){
+		console.log("mouse on" + nom);
+		selectionMenu(nom);
+	}
 
 };
 

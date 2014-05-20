@@ -2,7 +2,8 @@
     function addScore(score, music, difficulte){
 
         score = parseInt(score);
-		music = music.split('/')[1];
+		var tab = music.split('/');
+		music = tab[tab.length-1];
 		music = music.split('.')[0];
 
         if (localStorage){
