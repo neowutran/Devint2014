@@ -15,7 +15,6 @@
                 for (var i=0; i<=config.nbscores-1; i++){
                     val[i].score = parseInt(val[i].score);
                     if (score>=val[i].score){
-                        alert("Nouveau top score !!");
                         for (var j=config.nbscores-1; j>i; j--){
                             val[j].score = val[j-1].score;
 							val[j].music = val[j-1].music;
@@ -23,7 +22,21 @@
                         }
                         val[i].score = score;
 						val[i].music = music;
-						val[i].difficulte = difficulte;
+						
+						switch (difficulte){
+							case 1 : 
+								val[i].difficulte = "Facile";
+								break;
+							case 2 :
+								val[i].difficulte = "Normal";
+								break;
+							case 3 :
+								val[i].difficulte = "Difficile";
+								break;
+							default :
+								val[i].difficulte = "Inconnu";
+								break;
+						}
                         break;
                     }
                 }

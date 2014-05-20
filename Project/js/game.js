@@ -70,7 +70,6 @@ var Game = function (difficulte) {
         video.get(0).currentTime = 0;
     }
 
-    //@romain ceci est une methode en private
     function calculate_frame() {
         if (user_input !== 0) {
             removeObstacles(user_input);
@@ -119,7 +118,14 @@ var Game = function (difficulte) {
         score = new_score;
         $("#score").html(score);
     };
-
+	
+	this.setWinScore = function (nombre) {
+			var texte = "+" + nombre;
+			$('#nbwin').html(texte);
+			$('#nbwin').show();
+			$('#nbwin').delay(300).fadeOut("fast" ); 
+	}
+	
     this.pause = function (){
         if(paused === false){
           paused = true;

@@ -51,6 +51,30 @@ var MenuJouer = function () {
                 event.preventDefault();
                 cancel();
                 break;
+			case 0 :
+				switch (event.charCode) {
+					// R : haut centre
+					case 114:
+						event.preventDefault();
+						key_up();
+						break;
+					// D : gauche
+					case 100:
+						event.preventDefault();
+						cancel();
+						break;
+					// G : droite
+					case 103:
+						event.preventDefault();
+						validate();
+						break;
+					// V : bas centre
+					case 118:
+						event.preventDefault();
+						key_down();
+						break;
+				}
+				break;
         }
 
     });

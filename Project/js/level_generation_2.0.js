@@ -145,6 +145,7 @@ var LevelGeneration = function () {
                 if(game_obstacle.length === 0){
                     availableDirection[obstacle.direction] = true;
                     tobe_removed[obstacle.direction] = true;
+					Game().setWinScore(obstacle.distance * difficulte * 10);
                     Game().setScore(Game().getScore() + obstacle.distance * difficulte * 10);
                 }
             }
