@@ -29,7 +29,7 @@ var LevelGeneration = function () {
     availableDirection[8] = true;
 
     this.generateObstacle = function (volume) {
-        return volume > (80 - (difficulte * 10));
+        return volume > (90 - (difficulte * 10));
     };
 
     this.setDifficulte = function (difficult) {
