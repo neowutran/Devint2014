@@ -16,7 +16,10 @@ var Sound = function (music) {
         analyser,
         javascriptNode,
         volumeNode,
-        currentVolume = 0;
+        currentVolume = 0,
+        paused = false,
+        currentTime = 0,
+        currentBuffer;
 
     this.stop = function () {
 
@@ -26,6 +29,22 @@ var Sound = function (music) {
         }
         sourceNode.stop(0);
         sourceNode.buffer = null;
+
+    };
+
+    this.pause = function(){
+      if(paused === false){
+          paused=true;
+          currentTime = context.currentTime;
+          this.stop();
+
+          //TODO
+
+      }else{
+          paused=false;
+          setupAudioNodes();
+          loadSound(music.src, currentTime);
+      }
 
     };
 
@@ -77,8 +96,9 @@ var Sound = function (music) {
         volumeNode.gain.value = 0.1;
     };
 
-    function playSound(buffer) {
+    function playSound(buffer, currentTime) {
         //Set the volume
+        currentBuffer = buffer;
         volumeNode.gain.value = 0.1;
         sourceNode.buffer = buffer;
         if (!sourceNode.start){
@@ -87,8 +107,16 @@ var Sound = function (music) {
         sourceNode.onended = function () {
             Main().endGame(1);
         };
-        sourceNode.start(0);
-    }
+        if(currentTime === false){
+            sourceNode.start(0);
+
+
+        }else{
+
+
+        sourceNode.start(currentTime);
+        }
+       }
 
     // log if an error occurs
     function onError(e) {
@@ -96,7 +124,7 @@ var Sound = function (music) {
     }
 
     // load the specified sound
-    function loadSound(url) {
+    function loadSound(url,currentTime) {
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
         request.responseType = 'arraybuffer';
@@ -106,7 +134,7 @@ var Sound = function (music) {
                 // decode the data
                 context.decodeAudioData(request.response, function (buffer) {
                     // when the audio is decoded play the sound
-                    playSound(buffer);
+                    playSound(buffer, currentTime);
                 }, onError);
 
         };
@@ -129,7 +157,7 @@ var Sound = function (music) {
 
     // load the sound
     setupAudioNodes();
-    loadSound(music.src);
+    loadSound(music.src,0);
 
     // when the javascript node is called
     // we use information from the analyzer node

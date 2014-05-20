@@ -62,6 +62,9 @@ var Main = function () {
     };
 
     this.endGame = function () {
+        if(Game().getPause() === true){
+            return;
+        }
         cancelAnimationFrame(animFrame);
         Sound().stop();
         var score = 0;

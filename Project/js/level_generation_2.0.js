@@ -27,7 +27,6 @@ var LevelGeneration = function () {
     availableDirection[6] = true;
     availableDirection[7] = true;
     availableDirection[8] = true;
-    availableDirection[9] = true;
 
     this.generateObstacle = function (volume) {
         return volume > (80 - (difficulte * 10));
@@ -106,7 +105,6 @@ var LevelGeneration = function () {
         availableDirection[6] = true;
         availableDirection[7] = true;
         availableDirection[8] = true;
-        availableDirection[9] = true;
 
         tobe_removed[1] = false;
         tobe_removed[2] = false;
@@ -116,7 +114,6 @@ var LevelGeneration = function () {
         tobe_removed[6] = false;
         tobe_removed[7] = false;
         tobe_removed[8] = false;
-        tobe_removed[9] = false;
 
         obstacles.forEach(function (obstacle) {
             //Rapprochement de l'obstacle du joueur
@@ -143,7 +140,7 @@ var LevelGeneration = function () {
                 }
             }
         });
-        for(directionIterator = 1; directionIterator < 9 ; directionIterator++){
+        for(directionIterator = 1; directionIterator < 8 ; directionIterator++){
             if(tobe_removed[directionIterator] === true){
                 removeObstaclesByDirection(directionIterator);
             }
@@ -153,7 +150,7 @@ var LevelGeneration = function () {
         removeObstacles();
 
         for(var nbTry = 0; nbTry < 3; nbTry++){
-            directionIterator = Math.ceil(getRandomArbitrary(1,9)) -1;
+            directionIterator = Math.ceil(getRandomArbitrary(1,8)) -1;
 
             //si il est autorisé de generer un obstacle
             if (availableDirection[directionIterator] === true && volume !== 0 && currentCooldown <= 0) {

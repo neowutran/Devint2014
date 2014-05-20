@@ -14,7 +14,12 @@ var Game = function (difficulte) {
         level,
         obstacles = [],
     //nombre de chance de collision avant echec de la partie
-        score = 0;
+        score = 0,
+        paused = false;
+
+    this.getPause = function(){
+        return paused;
+    };
 
     new LevelGeneration().setDifficulte(difficulte);
 
@@ -95,9 +100,11 @@ var Game = function (difficulte) {
 
     //@romain, ceci est une methode en publique
     this.run_game = function (volume) {
-        level = JSON.parse(LevelGeneration().generate(volume, obstacles));
-        calculate_frame();
-        frame++;
+        if(paused === false){
+            level = JSON.parse(LevelGeneration().generate(volume, obstacles));
+            calculate_frame();
+            frame++;
+        }
     };
 
     this.set_user_input = function (new_user_input) {
@@ -111,6 +118,18 @@ var Game = function (difficulte) {
     this.setScore = function (new_score) {
         score = new_score;
         $("#score").html(score);
+    };
+
+    this.pause = function (){
+        if(paused === false){
+          paused = true;
+          $("#boutonPause").val("Reprendre");
+          Sound().pause();
+        }else{
+          paused = false;
+          $("#boutonPause").val("Pause");
+          Sound().pause();
+        }
     };
 
 };

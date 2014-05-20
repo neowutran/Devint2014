@@ -22,26 +22,6 @@ var KeyPressed = function () {
         console.log("help2");
     }
 
-    function key_up() {
-        console.log("keyup: 1");
-        Game().set_user_input(1);
-    }
-
-    function key_right() {
-        console.log("keyright: 2");
-        Game().set_user_input(2);
-    }
-
-    function key_down() {
-        console.log("keydown: 3");
-        Game().set_user_input(3);
-    }
-
-    function key_left() {
-        console.log("keyleft: 4");
-        Game().set_user_input(4);
-    }
-
     function validate() {
         console.log("validate");
     }
@@ -98,22 +78,22 @@ var KeyPressed = function () {
 					// G : droite
 					case 103:
 						event.preventDefault();
-						send_key(6);
+						send_key(5);
 						break;
 					// C : bas gauche
 					case 99:
 						event.preventDefault();
-						send_key(7);
+						send_key(6);
 						break;
 					// V : bas centre
 					case 118:
 						event.preventDefault();
-						send_key(8);
+						send_key(7);
 						break;
 					// B : bas droite
 					case 98:
 						event.preventDefault();
-						send_key(9);
+						send_key(8);
 						break;	
 				}
 				break;
