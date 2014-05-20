@@ -29,7 +29,7 @@ var LevelGeneration = function () {
     availableDirection[8] = true;
 
     this.generateObstacle = function (volume) {
-        return volume > (90 - (difficulte * 10));
+        return volume > (80 - (difficulte * 15));
     };
 
     this.setDifficulte = function (difficult) {
@@ -149,7 +149,6 @@ var LevelGeneration = function () {
         //On supprime de notre liste d'obstacles les obstacles ayant une distance <= 0
         removeObstacles();
 
-        for(var nbTry = 0; nbTry < 3; nbTry++){
             directionIterator = Math.ceil(getRandomArbitrary(1,8)) -1;
 
             //si il est autorisé de generer un obstacle
@@ -195,10 +194,9 @@ var LevelGeneration = function () {
 
                     currentCooldown = cooldown;
                     //Ne pas generer plus de 1 obstacle par frame
-                    break;
                 }
             }
-        }
+
 
         currentCooldown--;
         JSONlevel = "[" + JSONlevel + "]";
