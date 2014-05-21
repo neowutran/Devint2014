@@ -7,8 +7,10 @@
 		music = music.split('.')[0];
 
         if (localStorage){
-            if (localStorage.scores2)
-            {
+            if(!localStorage.scores2){
+                setVariable();
+            }
+
                 var data = localStorage.getItem("scores2");
                 var val = JSON.parse(data);
 
@@ -42,11 +44,7 @@
                 }
                 data = JSON.stringify(val);
                 localStorage.setItem("scores2", data);
-            }
-            else
-            {
-                setVariable();
-            }
+
         } else {
             document.write("Sauvegarde des scores non supportée");
         }
