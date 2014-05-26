@@ -19,7 +19,7 @@ var Scores = function () {
 		var url = window.location.href;
 		var splitted = url.split("?");
 		if(splitted.length === 1) {
-		   return {};
+		   return false;
 		}
 		var paramList = decodeURIComponent(splitted[1]).split("&");
 		var params = {};
