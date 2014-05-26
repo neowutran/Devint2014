@@ -68,11 +68,7 @@ var KeyPressed = function () {
 					// E : haut gauche
 					case 101:
 						event.preventDefault();
-						if (fini){
-							rejouer();
-						} else {
-							send_key(1);
-						}
+						send_key(1);
 						break;
 					// R : haut centre
 					case 114:
@@ -97,11 +93,7 @@ var KeyPressed = function () {
 					// C : bas gauche
 					case 99:
 						event.preventDefault();
-						if (fini){
-							scores();
-						} else {
-							send_key(6);
-						}
+						send_key(6);
 						break;
 					// V : bas centre
 					case 118:
