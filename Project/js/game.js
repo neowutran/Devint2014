@@ -1,4 +1,4 @@
-//@romain ceci est une classe avec pour constructeur un parametre "level"
+
 var Game = function (difficulte) {
     "use strict";
 
@@ -8,7 +8,6 @@ var Game = function (difficulte) {
     }
     Game.prototype.instance = this;
 
-    //@romain Ce sont des attribut de classes en private
     var user_input = 0,
         frame = 0,
         level,
@@ -97,7 +96,6 @@ var Game = function (difficulte) {
         });
     }
 
-    //@romain, ceci est une methode en publique
     this.run_game = function (volume) {
         if(paused === false){
             level = JSON.parse(LevelGeneration().generate(volume, obstacles));
