@@ -11,7 +11,8 @@ var Main = function () {
     animFrame,
 	srcMusic,
     fanfare = new Audio(config.fanfare),
-	difficulte;
+	difficulte,
+        ended = false;
 
     this.launchGame = function () {
 
@@ -76,6 +77,7 @@ var Main = function () {
         }
         addScore(score,srcMusic,difficulte);
 
+        ended = true;
         fanfare.play();
 
         setTimeout(function(){console.log(fanfare.duration);
@@ -84,6 +86,10 @@ var Main = function () {
 
 
     };
+
+    this.isEnded = function(){
+        return ended;
+    }
 
 };
 var main = new Main();
