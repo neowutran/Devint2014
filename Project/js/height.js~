@@ -6,7 +6,7 @@ function height(bloc){
 	else if( document.documentElement && document.documentElement.clientHeight )
 		hauteur = document.documentElement.clientHeight;
 	
-	document.getElementById("game").style.width = hauteur*0.75+"px";
+	document.getElementById("game").style.width = hauteur*075+"px";
 }
 
 window.onload = function(){ height("display") };
