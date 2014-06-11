@@ -10,7 +10,7 @@ list_music(){
 	else
         
 	    extension=$(echo $music | sed 's/\(^.*\)\(....\)$/\2/')
-	    if [ "$extension" = ".ogg" ]; then
+	    if [ "$extension" = ".ogg" -o "$extension" = ".mp3" ]; then
 		    if [ $first -eq 0 ]; then
 		    	chaine="$chaine ,"
 		    fi

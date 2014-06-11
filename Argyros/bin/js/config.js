@@ -25,7 +25,8 @@ var configTuto = {
 };
 
 var config = {
-    "fanfare"                        : "sounds/crwin.ogg",
+    //"fanfare"                        : "sounds/crwin.ogg",
+    "fanfare": "sounds/marioFanfare.mp3",
     "score": "Votre score est de %d points",
     "cooldown": 30,
     "nbscores": 10

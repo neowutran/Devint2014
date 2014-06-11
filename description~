@@ -1,9 +1,0 @@
-Voici le principe du jeu :
-Vous allez entendre une musique et sur cette musique nous allons jouer des
-petits sons (bip) qui suivent le rythme de la musique.
-Le but du jeu et d'être le plus réactif et d'appuyer sur des touches du clavier 
-en fonction du bip que entendu. A chaque différent bip correspond une 
-flèche directionnelle du clavier (voir dans le tutoriel).
-Votre score augmente selon votre réactivité.
-Si vous vous trompez de touche votre score diminue.
-Si vous avez fait 3 erreurs la musique s'arrête et vous avez perdu.

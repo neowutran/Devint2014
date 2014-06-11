@@ -8,9 +8,11 @@ var Main = function () {
     Main.prototype.instance = this;
 
     var music,
-        animFrame,
+    animFrame,
 	srcMusic,
-	difficulte;
+    fanfare = new Audio(config.fanfare),
+	difficulte,
+        ended = false;
 
     this.launchGame = function () {
 
@@ -63,6 +65,7 @@ var Main = function () {
     };
 
     this.endGame = function () {
+        //var delay = fanfare.duration();
         if(Game().getPause() === true){
             return;
         }
@@ -73,9 +76,20 @@ var Main = function () {
             score = Game().getScore();
         }
         addScore(score,srcMusic,difficulte);
-        speak.play(config.score.replace("%d", score), "fr");
+
+        ended = true;
+        fanfare.play();
+
+        setTimeout(function(){console.log(fanfare.duration);
+            speak.play(config.score.replace("%d", score), "fr");
+        },(fanfare.duration)*1000);
+
 
     };
+
+    this.isEnded = function(){
+        return ended;
+    }
 
 };
 var main = new Main();

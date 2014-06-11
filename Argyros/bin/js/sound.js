@@ -18,8 +18,13 @@ var Sound = function (music) {
         volumeNode,
         currentVolume = 0,
         paused = false,
+        duration = 0,
         currentTime = 0,
         currentBuffer;
+
+    this.duration = function(){
+      return duration;
+    };
 
     this.stop = function () {
 
@@ -101,6 +106,7 @@ var Sound = function (music) {
         currentBuffer = buffer;
         volumeNode.gain.value = 0.1;
         sourceNode.buffer = buffer;
+        duration = sourceNode.buffer.duration;
         if (!sourceNode.start){
             sourceNode.start = sourceNode.noteOn;
         }
